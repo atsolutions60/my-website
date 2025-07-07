@@ -1,0 +1,88 @@
+<!-- embedded.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Embedded Systems & IoT Engineering</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <style>
+    .card-bg {
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+    }
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+    }
+    .card-content {
+      position: relative;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body class="bg-gray-950 text-gray-100 font-sans">
+  <section class="max-w-6xl mx-auto py-16 px-6">
+    <h1 class="text-4xl font-bold text-indigo-400 mb-10 text-center">Embedded Systems & IoT Engineering</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <div data-aos="fade-up" class="card-bg bg-[url('assets/embedded-realtime.jpg')] shadow-md hover:shadow-indigo-500/50 transition">
+        <div class="card-overlay"></div>
+        <div class="card-content p-6">
+          <h3 class="text-xl font-semibold text-white mb-2">Real-Time Embedded Systems</h3>
+          <p class="text-gray-200">Engineering for latency-sensitive telecom, industrial automation, and IoT devices with system-level reliability.</p>
+        </div>
+      </div>
+
+      <div data-aos="fade-up" class="card-bg bg-[url('assets/protocol-stack.jpg')] shadow-md hover:shadow-indigo-500/50 transition">
+        <div class="card-overlay"></div>
+        <div class="card-content p-6">
+          <h3 class="text-xl font-semibold text-white mb-2">Protocol Stack Expertise</h3>
+          <p class="text-gray-200">End-to-end design with SIP, RTP, TFTP, SNMP, MQTT, TR069, STP, VLAN, QoS, and more.</p>
+        </div>
+      </div>
+
+      <div data-aos="fade-up" class="card-bg bg-[url('assets/provision.jpg')] shadow-md hover:shadow-indigo-500/50 transition">
+        <div class="card-overlay"></div>
+        <div class="card-content p-6">
+          <h3 class="text-xl font-semibold text-white mb-2">Auto Provisioning & Firmware</h3>
+          <p class="text-gray-200">Secure bootstrapping and TR-069/HTTP/FTP-based provisioning workflows with configuration hardening.</p>
+        </div>
+      </div>
+
+      <div data-aos="fade-up" class="card-bg bg-[url('assets/linux-shell.jpg')] shadow-md hover:shadow-indigo-500/50 transition">
+        <div class="card-overlay"></div>
+        <div class="card-content p-6">
+          <h3 class="text-xl font-semibold text-white mb-2">Linux Shell Automation</h3>
+          <p class="text-gray-200">Expert-level Bash scripting, kernel tuning, and automation for embedded platforms and gateways.</p>
+        </div>
+      </div>
+
+      <div data-aos="fade-up" class="card-bg bg-[url('assets/iot-gateway.jpg')] shadow-md hover:shadow-indigo-500/50 transition">
+        <div class="card-overlay"></div>
+        <div class="card-content p-6">
+          <h3 class="text-xl font-semibold text-white mb-2">IoT Gateway Integration</h3>
+          <p class="text-gray-200">Design of edge nodes with IPv6, VLAN, PPPoE, and real-time telemetry using GARP, MQTT, and SNMP.</p>
+        </div>
+      </div>
+
+      <div data-aos="fade-up" class="card-bg bg-[url('assets/system-validation.jpg')] shadow-md hover:shadow-indigo-500/50 transition">
+        <div class="card-overlay"></div>
+        <div class="card-content p-6">
+          <h3 class="text-xl font-semibold text-white mb-2">System Validation</h3>
+          <p class="text-gray-200">Field-level testing and validation across multiple hardware and protocol configurations for maximum reliability.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+</body>
+</html>

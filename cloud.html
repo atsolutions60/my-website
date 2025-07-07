@@ -1,0 +1,88 @@
+<!-- cloud.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud Architecture Services</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <style>
+    .card-bg {
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+    }
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+    }
+    .card-content {
+      position: relative;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body class="bg-gray-950 text-gray-100 font-sans">
+  <section class="max-w-6xl mx-auto py-16 px-6">
+    <h1 class="text-4xl font-bold text-indigo-400 mb-10 text-center">Cloud Architecture Services</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <div data-aos="fade-up" class="card-bg bg-[url('assets/cloud.jpg')] shadow-md hover:shadow-indigo-500/50 transition">
+        <div class="card-overlay"></div>
+        <div class="card-content p-6">
+          <h3 class="text-xl font-semibold text-white mb-2">Cloud Infrastructure Setup</h3>
+          <p class="text-gray-200">Deployment and configuration of EC2, EBS, S3, IAM roles, and Route 53 DNS routing.</p>
+        </div>
+      </div>
+
+      <div data-aos="fade-up" class="card-bg bg-[url('assets/network.jpg')] shadow-md hover:shadow-indigo-500/50 transition">
+        <div class="card-overlay"></div>
+        <div class="card-content p-6">
+          <h3 class="text-xl font-semibold text-white mb-2">VPC & Network Design</h3>
+          <p class="text-gray-200">Design of public/private VPCs, NAT gateways, and secure subnet routing rules.</p>
+        </div>
+      </div>
+
+      <div data-aos="fade-up" class="card-bg bg-[url('assets/firewall.jpg')] shadow-md hover:shadow-indigo-500/50 transition">
+        <div class="card-overlay"></div>
+        <div class="card-content p-6">
+          <h3 class="text-xl font-semibold text-white mb-2">Firewall & Security</h3>
+          <p class="text-gray-200">Configuration of firewalls, DMZ, port forwarding, and end-to-end Linux OS hardening.</p>
+        </div>
+      </div>
+
+      <div data-aos="fade-up" class="card-bg bg-[url('assets/redundancy.jpg')] shadow-md hover:shadow-indigo-500/50 transition">
+        <div class="card-overlay"></div>
+        <div class="card-content p-6">
+          <h3 class="text-xl font-semibold text-white mb-2">High Availability</h3>
+          <p class="text-gray-200">GARP/Virtual IP, Elastic IPs, and failover configurations for uptime assurance.</p>
+        </div>
+      </div>
+
+      <div data-aos="fade-up" class="card-bg bg-[url('assets/code.jpg')] shadow-md hover:shadow-indigo-500/50 transition">
+        <div class="card-overlay"></div>
+        <div class="card-content p-6">
+          <h3 class="text-xl font-semibold text-white mb-2">Automation & DevOps</h3>
+          <p class="text-gray-200">Python/Shell-based cloud automation with AWS SDKs and Infrastructure-as-Code tools.</p>
+        </div>
+      </div>
+
+      <div data-aos="fade-up" class="card-bg bg-[url('assets/monitor.jpg')] shadow-md hover:shadow-indigo-500/50 transition">
+        <div class="card-overlay"></div>
+        <div class="card-content p-6">
+          <h3 class="text-xl font-semibold text-white mb-2">Monitoring & Alerts</h3>
+          <p class="text-gray-200">Custom CloudWatch alarms, centralized logging, Kafka/RabbitMQ pipelines.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+</body>
+</html>

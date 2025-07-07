@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aatman Techno Solutions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background:
+        url('assets/image.jpg') no-repeat center center fixed,
+        radial-gradient(ellipse at top, #0f172a, #1e293b);
+      background-size: cover;
+      color: #f1f5f9;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    .neon-hover:hover {
+      box-shadow: 0 0 15px #6366f1, 0 0 30px #6366f1;
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+
+<body class="text-gray-100 font-[Segoe UI]">
+  <header class="sticky top-0 z-50 bg-gray-900 bg-opacity-80 backdrop-blur-sm shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl md:text-3xl font-extrabold text-indigo-400 tracking-wide">Aatman Techno Solutions</h1>
+      <nav class="space-x-6 text-sm font-medium hidden md:block">
+        <a href="#services" class="text-gray-300 hover:text-indigo-400 transition">Services</a>
+        <a href="#about" class="text-gray-300 hover:text-indigo-400 transition">About</a>
+        <a href="#certifications" class="text-gray-300 hover:text-indigo-400 transition">Certifications</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="text-center py-20 px-4 sm:py-28 sm:px-6 bg-transparent">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">Engineering Innovation for Tomorrow</h2>
+    <p class="text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-10">
+      Empowering businesses with tailored solutions in embedded systems, cloud architecture, and intelligent automation.
+    </p>
+  </section>
+
+  <section id="services" class="py-20 bg-transparent backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto px-6">
+      <h3 class="text-3xl font-bold text-center mb-16 text-white">Our Services</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
+        <div class="glass rounded-xl p-6 neon-hover transition duration-300">
+          <a href="embedded.html" class="text-xl font-semibold text-indigo-300 mb-3 block hover:underline">Embedded Systems</a>
+          <p class="text-gray-300">Custom real-time embedded solutions tailored to industrial and IoT applications.</p>
+        </div>
+        <div class="glass rounded-xl p-6 neon-hover transition duration-300">
+          <a href="cloud.html" class="text-xl font-semibold text-indigo-300 mb-3 block hover:underline">Cloud Architecture</a>
+          <p class="text-gray-300">Robust and scalable cloud infrastructure using AWS, Azure, and hybrid models.</p>
+        </div>
+        <div class="glass rounded-xl p-6 neon-hover transition duration-300">
+          <a href="automation.html" class="text-xl font-semibold text-indigo-300 mb-3 block hover:underline">Intelligent Automation</a>
+          <p class="text-gray-300">AI-driven process automation to boost efficiency, reduce cost, and scale rapidly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="py-20 bg-transparent backdrop-blur-sm">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <h3 class="text-3xl font-bold text-white mb-6">About Us</h3>
+      <p class="text-lg text-gray-300 max-w-3xl mx-auto mb-6">
+        At Aatman Techno Solutions, we thrive on solving complex technological challenges with elegance and innovation.
+        From real-time embedded engineering to futuristic automation and cloud-native architecture, our solutions are built to perform and scale.
+      </p>
+      <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+        With over <span class="text-indigo-400 font-semibold">20 years of rich industry experience</span>, we have consistently delivered cutting-edge solutions across diverse sectors.
+        Our journey has been one of deep technical growth, strong client partnerships, and a relentless pursuit of excellence.
+        Whether it's transforming legacy systems or architecting next-gen platforms, our seasoned team brings unmatched insight and execution capability to every project.
+      </p>
+    </div>
+  </section>
+
+<section id="certifications" class="py-20 bg-transparent backdrop-blur-sm">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <h3 class="text-3xl font-bold text-white mb-12">Our Certifications</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 justify-items-center">
+      
+      <!-- CCNA -->
+      <div class="glass p-4 rounded-lg hover:scale-105 transition-transform duration-300">
+        <img src="assets/certifications/ccna.jpg" alt="CCNA Certified" class="h-20 mx-auto rounded" />
+        <p class="text-sm text-gray-300 mt-2">CCNA Certified</p>
+      </div>
+
+      <!-- Microsoft C# -->
+      <div class="glass p-4 rounded-lg hover:scale-105 transition-transform duration-300">
+        <img src="assets/certifications/microsoft-csharp.jpg" alt="Microsoft Certified C# Developer" class="h-20 mx-auto rounded" />
+        <p class="text-sm text-gray-300 mt-2">Microsoft C# (70-483)</p>
+      </div>
+
+      <!-- Microsoft Python -->
+      <div class="glass p-4 rounded-lg hover:scale-105 transition-transform duration-300">
+        <img src="assets/certifications/microsoft-python.jpg" alt="Microsoft Certified Python Developer" class="h-20 mx-auto rounded" />
+        <p class="text-sm text-gray-300 mt-2">Microsoft Python (98-381)</p>
+      </div>
+
+      <!-- ISTQB -->
+      <div class="glass p-4 rounded-lg hover:scale-105 transition-transform duration-300">
+        <img src="assets/certifications/istqb.jpg" alt="ISTQB-FL Certified" class="h-20 mx-auto rounded" />
+        <p class="text-sm text-gray-300 mt-2">ISTQB-FL Certified</p>
+      </div>
+
+      <!-- AWS SAA -->
+      <div class="glass p-4 rounded-lg hover:scale-105 transition-transform duration-300">
+        <img src="assets/certifications/aws.jpg" alt="AWS Certified Solutions Architect Associate" class="h-20 mx-auto rounded" />
+        <p class="text-sm text-gray-300 mt-2">AWS SAA</p>
+      </div>
+
+      <!-- Scrum Master -->
+      <div class="glass p-4 rounded-lg hover:scale-105 transition-transform duration-300">
+        <img src="assets/certifications/scrum-master.jpg" alt="Certified Scrum Master" class="h-20 mx-auto rounded" />
+        <p class="text-sm text-gray-300 mt-2">Certified Scrum Master</p>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+
+  <footer class="text-center py-6 bg-gray-900 bg-opacity-70 text-gray-400 text-sm">
+    &copy; 2025 Aatman Techno Solutions. Crafted with purpose & passion.
+  </footer>
+
+  <!-- Floating Contact Buttons -->
+  <div class="fixed bottom-6 right-6 z-50 flex flex-col sm:flex-row gap-3 sm:gap-4">
+    <a href="mailto:info@aatmantech.in" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-full shadow-lg flex items-center gap-2">
+      📧 Email us
+    </a>
+    <a href="https://wa.me/919408755586" target="_blank" rel="noopener" class="bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-full shadow-lg flex items-center gap-2">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-5 h-5" />
+      Chat with us
+    </a>
+  </div>
+</body>
+</html>
