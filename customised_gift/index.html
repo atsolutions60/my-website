@@ -7,28 +7,70 @@
   <style>
     body {
       font-family: Arial, sans-serif;
+      background: #f9f9f9;
       margin: 0;
       padding: 0;
-      background: #f9f9f9;
       text-align: center;
     }
+
     header {
       background: #222;
       color: white;
-      padding: 1rem 0;
+      padding: 1rem;
       font-size: 1.5rem;
     }
+
     .container {
-      margin: 2rem auto;
       max-width: 800px;
+      margin: 2rem auto;
       padding: 0 1rem;
     }
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin-top: 1rem;
+
+    .product-title {
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: #333;
     }
+
+    .carousel {
+      position: relative;
+      margin-top: 20px;
+    }
+
+    .carousel img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: 2rem;
+      padding: 0.3rem 0.8rem;
+      cursor: pointer;
+      border-radius: 4px;
+      user-select: none;
+    }
+
+    .arrow:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .left-arrow {
+      left: 10px;
+    }
+
+    .right-arrow {
+      right: 10px;
+    }
+
     .form-link {
       display: inline-block;
       margin-top: 2rem;
@@ -40,14 +82,9 @@
       border-radius: 5px;
       transition: background 0.3s;
     }
+
     .form-link:hover {
       background: #0056b3;
-    }
-    .product-title {
-      font-size: 1.6rem;
-      font-weight: bold;
-      margin: 2rem 0 1rem 0;
-      color: #333;
     }
   </style>
 </head>
@@ -55,14 +92,41 @@
   <header>
     Welcome to Aatman Tech - Gift Store
   </header>
+
   <div class="container">
     <div class="product-title">
       Personalized Photo Frame with BeechWood Stand (LED Stand)
     </div>
-    <img src="sample.jpg" alt="Sample Photo Frame" />
+
+    <div class="carousel">
+      <span class="arrow left-arrow" onclick="prevImage()">&#10094;</span>
+      <img id="carousel-image" src="sample1.jpg" alt="Photo Frame Sample" />
+      <span class="arrow right-arrow" onclick="nextImage()">&#10095;</span>
+    </div>
+
     <a class="form-link" href="https://docs.google.com/forms/d/e/1FAIpQLSddTRL_oztRJ0Q_kjUa24gSwDIdF2QTtQ29QjchqUFhP_swcw/viewform" target="_blank">
-      Click Here to customize and Order Now
+      Click Here to Order Now
     </a>
   </div>
+
+  <script>
+    const images = ["sample1.jpg", "sample2.jpg", "sample3.jpg", "sample4.jpg", "sample5.jpg"];
+    let current = 0;
+
+    function showImage(index) {
+      const img = document.getElementById("carousel-image");
+      img.src = images[index];
+    }
+
+    function prevImage() {
+      current = (current - 1 + images.length) % images.length;
+      showImage(current);
+    }
+
+    function nextImage() {
+      current = (current + 1) % images.length;
+      showImage(current);
+    }
+  </script>
 </body>
 </html>
