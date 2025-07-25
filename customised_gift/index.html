@@ -3,61 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Customise Your Gift</title>
+  <title>Personalized Photo Frame</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f4f4;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
+      padding: 0;
+      background: #f9f9f9;
+      text-align: center;
     }
-
-    .product-image {
+    header {
+      background: #222;
+      color: white;
+      padding: 1rem 0;
+      font-size: 1.5rem;
+    }
+    .container {
+      margin: 2rem auto;
+      max-width: 800px;
+      padding: 0 1rem;
+    }
+    img {
       max-width: 100%;
-      max-height: 90vh;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      margin-bottom: 30px;
-    }
-
-    .customise-btn {
-      padding: 14px 28px;
-      background-color: #ffd814;
-      border: 1px solid #fcd200;
-      font-size: 18px;
-      font-weight: bold;
-      color: #000;
-      text-decoration: none;
+      height: auto;
       border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+      margin-top: 1rem;
     }
-
-    .customise-btn:hover {
-      background-color: #f7c600;
+    .form-link {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .form-link:hover {
+      background: #0056b3;
+    }
+    .product-title {
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin: 2rem 0 1rem 0;
+      color: #333;
     }
   </style>
 </head>
 <body>
-
-  <!-- Image section -->
-  <img 
-    src="sample.jpg" 
-    alt="Custom Frame Sample" 
-    class="product-image"
-  />
-
-  <!-- Button section -->
-  <a 
-    href="https://docs.google.com/forms/d/e/1FAIpQLSddTRL_oztRJ0Q_kjUa24gSwDIdF2QTtQ29QjchqUFhP_swcw/viewform" 
-    target="_blank" 
-    class="customise-btn"
-  >
-    Customise Now
-  </a>
-
+  <header>
+    Welcome to Aatman Tech - Gift Store
+  </header>
+  <div class="container">
+    <div class="product-title">
+      Personalized Photo Frame with BeechWood Stand (LED Stand)
+    </div>
+    <img src="sample.jpg" alt="Sample Photo Frame" />
+    <a class="form-link" href="https://docs.google.com/forms/d/e/1FAIpQLSddTRL_oztRJ0Q_kjUa24gSwDIdF2QTtQ29QjchqUFhP_swcw/viewform" target="_blank">
+      Click Here to customize and Order Now
+    </a>
+  </div>
 </body>
 </html>
