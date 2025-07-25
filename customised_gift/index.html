@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customise Your Gift</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    .preview {
+      flex: 1;
+      min-width: 300px;
+    }
+    .preview img {
+      max-width: 100%;
+      border: 1px solid #ccc;
+    }
+    .form-section {
+      flex: 1;
+      min-width: 300px;
+      max-width: 500px;
+    }
+    .form-section label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+    input[type="file"] {
+      margin-top: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #ffd814;
+      border: 1px solid #fcd200;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    #status {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Customise Your Frame</h1>
+  <div class="container">
+    <!-- Left side image preview -->
+    <div class="preview">
+      <img id="previewImage" src="https://via.placeholder.com/300x400?text=Preview" alt="Preview">
+      <p>Note: Display is an approximate preview.</p>
+    </div>
+
+    <!-- Right side form -->
+    <div class="form-section">
+      <form id="giftForm" enctype="multipart/form-data">
+        <label>* Upload your image</label>
+        <small>Upload a file no larger than 15MB in JPEG or PNG format.</small>
+        <input type="file" name="image" id="imageInput" accept=".jpg,.jpeg,.png" required>
+
+        <label>* Heading</label>
+        <input type="text" name="heading" maxlength="30" placeholder="Max 30 characters" required>
+
+        <label>* Sentence</label>
+        <textarea name="sentence" maxlength="60" placeholder="Max 60 characters" required></textarea>
+
+        <button type="submit">Continue</button>
+        <div id="status"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('giftForm');
+    const status = document.getElementById('status');
+    const imageInput = document.getElementById('imageInput');
+    const previewImage = document.getElementById('previewImage');
+
+    // Show image preview when selected
+    imageInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file && file.size <= 15 * 1024 * 1024) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          previewImage.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        alert("File must be JPEG/PNG and ≤ 15MB.");
+        imageInput.value = '';
+        previewImage.src = 'https://via.placeholder.com/300x400?text=Preview';
+      }
+    });
+
+    // Form submission handler
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.innerText = 'Uploading...';
+
+      const formData = new FormData(form);
+      const response = await fetch('https://your-backend-api.com/submit', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        status.innerText = '✅ Successfully submitted!';
+        form.reset();
+        previewImage.src = 'https://via.placeholder.com/300x400?text=Preview';
+      } else {
+        status.innerText = '❌ Submission failed. Please try again.';
+      }
+    });
+  </script>
+</body>
+</html>
