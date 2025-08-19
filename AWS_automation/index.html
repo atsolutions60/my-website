@@ -74,26 +74,37 @@
   </div>
 
   <script>
-    // Replace these URLs with your actual API Gateway Invoke URLs
+    // Replace with your actual API Gateway URLs
     const START_URL = "https://pznhd3sz94.execute-api.ap-south-1.amazonaws.com/default/StartEC2";
     const STOP_URL  = "https://1s1qklzk5g.execute-api.ap-south-1.amazonaws.com/default/StopEC2";
 
-    async function startEC2() {
+    async function callAPI(url, action) {
       try {
-        await fetch(START_URL, { method: "POST" });
-        alert("Start command sent to EC2.");
+        const res = await fetch(url, {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ action }) // optional payload
+        });
+
+        if (!res.ok) {
+          throw new Error("HTTP " + res.status);
+        }
+
+        alert(action + " command sent successfully!");
       } catch (err) {
-        alert("Error starting instance: " + err.message);
+        alert("Error: " + err.message + "\n(Enable CORS in API Gateway!)");
       }
     }
 
-    async function stopEC2() {
-      try {
-        await fetch(STOP_URL, { method: "POST" });
-        alert("Stop command sent to EC2.");
-      } catch (err) {
-        alert("Error stopping instance: " + err.message);
-      }
+    function startEC2() {
+      callAPI(START_URL, "Start");
+    }
+
+    function stopEC2() {
+      callAPI(STOP_URL, "Stop");
     }
   </script>
 </body>
