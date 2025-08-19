@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EC2 Control Panel</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      width: 360px;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      color: #ffd700;
+      font-size: 2rem;
+      margin-bottom: 40px;
+      letter-spacing: 1px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      margin: 15px 0;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .start-btn {
+      background: linear-gradient(45deg, #28a745, #218838);
+      color: white;
+    }
+
+    .start-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(40, 167, 69, 0.5);
+    }
+
+    .stop-btn {
+      background: linear-gradient(45deg, #dc3545, #c82333);
+      color: white;
+    }
+
+    .stop-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(220, 53, 69, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>EC2 Control</h1>
+    <button class="btn start-btn" onclick="startEC2()">Start Instance</button>
+    <button class="btn stop-btn" onclick="stopEC2()">Stop Instance</button>
+  </div>
+
+  <script>
+    // Replace these URLs with your actual API Gateway Invoke URLs
+    const START_URL = "https://pznhd3sz94.execute-api.ap-south-1.amazonaws.com/default/StartEC2";
+    const STOP_URL  = "https://1s1qklzk5g.execute-api.ap-south-1.amazonaws.com/default/StopEC2";
+
+    async function startEC2() {
+      try {
+        await fetch(START_URL, { method: "POST" });
+        alert("Start command sent to EC2.");
+      } catch (err) {
+        alert("Error starting instance: " + err.message);
+      }
+    }
+
+    async function stopEC2() {
+      try {
+        await fetch(STOP_URL, { method: "POST" });
+        alert("Stop command sent to EC2.");
+      } catch (err) {
+        alert("Error stopping instance: " + err.message);
+      }
+    }
+  </script>
+</body>
+</html>
