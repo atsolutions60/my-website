@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AWS Learning | AT Solutions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background:
+        url('../assets/image.jpg') no-repeat center center fixed,
+        radial-gradient(ellipse at top, #0f172a, #1e293b);
+      background-size: cover;
+      color: #f1f5f9;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    .neon-hover:hover {
+      box-shadow: 0 0 15px #6366f1, 0 0 30px #6366f1;
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+
+<body class="text-gray-100 font-[Segoe UI]">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-gray-900 bg-opacity-80 backdrop-blur-sm shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl md:text-3xl font-extrabold text-indigo-400 tracking-wide">AWS Learning</h1>
+      <nav class="space-x-6 text-sm font-medium hidden md:block">
+        <a href="../index.html" class="text-gray-300 hover:text-indigo-400 transition">🏠 Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="text-center py-20 px-4 sm:py-28 sm:px-6 bg-transparent">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">AWS Practical Labs</h2>
+    <p class="text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-10">
+      Hands-on learning path with step-by-step milestones to master AWS services.
+    </p>
+  </section>
+
+  <!-- Milestones -->
+  <section class="py-20 bg-transparent backdrop-blur-sm">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Milestone 1 -->
+      <div class="glass rounded-xl p-6 neon-hover transition duration-300">
+        <h3 class="text-xl font-semibold text-indigo-300 mb-4">Milestone 1</h3>
+        <ul class="space-y-3">
+          <li><a href="Milestone1/topic_milestone1_1.html" class="hover:underline text-gray-200">Topic 1</a></li>
+          <li><a href="Milestone1/topic_milestone1_2.html" class="hover:underline text-gray-200">Topic 2</a></li>
+          <li><a href="Milestone1/topic_milestone1_n.html" class="hover:underline text-gray-200">...</a></li>
+        </ul>
+      </div>
+
+      <!-- Milestone 2 -->
+      <div class="glass rounded-xl p-6 neon-hover transition duration-300">
+        <h3 class="text-xl font-semibold text-indigo-300 mb-4">Milestone 2</h3>
+        <ul class="space-y-3">
+          <li><a href="Milestone2/topic_milestone2_1.html" class="hover:underline text-gray-200">Topic 1</a></li>
+          <li><a href="Milestone2/topic_milestone2_2.html" class="hover:underline text-gray-200">Topic 2</a></li>
+          <li><a href="Milestone2/topic_milestone2_n.html" class="hover:underline text-gray-200">...</a></li>
+        </ul>
+      </div>
+
+      <!-- Milestone 12 -->
+      <div class="glass rounded-xl p-6 neon-hover transition duration-300">
+        <h3 class="text-xl font-semibold text-indigo-300 mb-4">Milestone 12</h3>
+        <ul class="space-y-3">
+          <li><a href="Milestone12/AWS DataSync Vs Storage Gateway.html" class="hover:underline text-gray-200">Topic 1</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 bg-gray-900 bg-opacity-70 text-gray-400 text-sm">
+    &copy; 2025 Aatman Techno Solutions | AWS Learning Path
+  </footer>
+</body>
+</html>

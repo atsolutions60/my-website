@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS DataSync vs Storage Gateway - Comparison</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #1b263b;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .note {
+      font-size: 0.9em;
+      color: #ffc107;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>AWS DataSync vs Storage Gateway</h1>
+
+  <table>
+    <tr>
+      <th>Aspect</th>
+      <th>AWS DataSync</th>
+      <th>AWS Storage Gateway</th>
+    </tr>
+    <tr>
+      <td>Definition</td>
+      <td>Aws DataSync is an online transfer service that simplifies automates, and accelerates the process of copying large amounts of data and from AWS storage services over Internet or over AWS Direct Connect.</td>
+      <td>AWS Storage Gateway is a hybrid Cloud Storage Service that gives you on-premises access to virtually unlimited cloud storage by linking it to S3. Storage Gateway provides 3 Types of Storage Interfaces for Your on-premises applications. File, Volume and Tape</td>
+    </tr>
+    <tr>
+      <td>Deployment</td>
+      <td>Use an agent which is a Virtual Machine that is owned by the user and is used to read or write data from your storage systems. You can activate the agent from the management console. The agent will then read from source location and sync your data to amazon S3, Amazon EFS, or Amazon Fsx for Windows File Server</td>
+      <td>Use a storage gateway Appliance a VM from Amazon Which is installed and hosted on your data center after the setup you can use the AWS console to provision you storage options: File Gateway, Cached volumes, in which data will be saved to amazon s3</td>
+    </tr>
+    <tr>
+      <td>Protocols</td>
+      <td>DataSync connects to existing storage Systems and data sources with standard storage protocol(NFS,SMB) or using the amazon s3 API</td>
+      <td>Storage Gateway provides a standard set of storage protocol such as iSCSI, SMB and NFS</td>
+    </tr>
+    <tr>
+      <td>Capabilities</td>
+      <td>DataSync Can copy data between NFS SMB or Self-Managed object storage It can also move data between your on-premises storage and AWS Snowcone, Amazon S3,Amazon EFS or Fsx</td>
+      <td>Storage Gateway enables you to store and retrieve objects in amazon s3 using File protocol such as NFS,SMB You can Also Use iSCSI and Tape Device</td>
+    </tr>
+    <tr>
+      <td>Conclusion</td>
+      <td colspan="2">Conclusion You can use a combination of DayaSync and File Gateway to minimize your on-premises operational costs while seamlessly connecting on-premises applications to your cloud storage AWS Datasync enables you to automate and accelerate online data transfers to AWS storage Services. File gateway then provides your on-premises application with low latency access to the migrated data</td>
+    </tr>
+  </table>
+</body>
+</html>
