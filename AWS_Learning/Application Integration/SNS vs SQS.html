@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SNS vs SQS - Comparisonia</title>
   <style>
     body {
@@ -14,25 +15,6 @@
       text-align: center;
       color: #ff7b00;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      background-color: #1b263b;
-    }
-    th, td {
-      border: 1px solid #415a77;
-      padding: 12px;
-      text-align: left;
-    }
-    th {
-      background-color: #ff7b00;
-      color: #0d1b2a;
-      text-align: center;
-    }
-    tr:nth-child(even) {
-      background-color: #243447;
-    }
     h2 {
       color: #ffb703;
       margin-top: 30px;
@@ -43,53 +25,106 @@
     li {
       margin: 6px 0;
     }
+    /* Desktop Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #1b263b;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+
+    /* Mobile Cards */
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      thead {
+        display: none; /* hide table header */
+      }
+      tr {
+        margin-bottom: 20px;
+        border: 1px solid #415a77;
+        border-radius: 8px;
+        background-color: #1b263b;
+        padding: 12px;
+      }
+      td {
+        border: none;
+        padding: 8px 0;
+      }
+      td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #ffb703;
+        display: block;
+        margin-bottom: 4px;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>SNS vs SQS </h1>
+  <h1>SNS vs SQS</h1>
 
   <table>
-    <tr>
-      <th>Aspect</th>
-      <th>SNS</th>
-      <th>SQS</th>
-    </tr>
-    <tr>
-      <td>Message Consumption</td>
-      <td>Push Mechanism - SNS pushes messages to consumers</td>
-      <td>Pull Mechanism - Consumers poll and pull messages from SQS</td>
-    </tr>
-    <tr>
-      <td>Use Case</td>
-      <td>Fanout - Processing the same message in multiple ways</td>
-      <td>Decoupling two applications and allowing parallel asynchronous processing</td>
-    </tr>
-    <tr>
-      <td>Persistence</td>
-      <td>No persistence. Whichever consumer is present at the time of message arrival gets the message and the message is deleted. If no consumers are available then the message is lost after a few retries.</td>
-      <td>Messages are persisted for a configurable duration (max 2 weeks). The consumer doesn’t have to be up when messages are added to the queue.</td>
-    </tr>
-    <tr>
-      <td>Consumer Type</td>
-      <td>Consumers might process messages in different ways</td>
-      <td>All consumers are typically identical and process messages the same way (though in rare cases messages may be resent)</td>
-    </tr>
-    <tr>
-      <td>Sample Applications</td>
-      <td>
-        Image processing example:  
-        - User uploads image to S3  
-        - SNS notifies 3 consumers:  
-          1. Watermarks image  
-          2. Creates thumbnail  
-          3. Sends Thank You email  
-        All consumers receive the same message (image URL) and process in parallel.
-      </td>
-      <td>
-        Jobs are submitted to SQS. Consumers process jobs asynchronously.  
-        If job frequency increases, more consumers can be added for better throughput.
-      </td>
-    </tr>
+    <thead>
+      <tr>
+        <th>Aspect</th>
+        <th>SNS</th>
+        <th>SQS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Aspect">Message Consumption</td>
+        <td data-label="SNS">Push Mechanism - SNS pushes messages to consumers</td>
+        <td data-label="SQS">Pull Mechanism - Consumers poll and pull messages from SQS</td>
+      </tr>
+      <tr>
+        <td data-label="Aspect">Use Case</td>
+        <td data-label="SNS">Fanout - Processing the same message in multiple ways</td>
+        <td data-label="SQS">Decoupling two applications and allowing parallel asynchronous processing</td>
+      </tr>
+      <tr>
+        <td data-label="Aspect">Persistence</td>
+        <td data-label="SNS">No persistence. Whichever consumer is present at the time of message arrival gets the message and the message is deleted. If no consumers are available then the message is lost after a few retries.</td>
+        <td data-label="SQS">Messages are persisted for a configurable duration (max 2 weeks). The consumer doesn’t have to be up when messages are added to the queue.</td>
+      </tr>
+      <tr>
+        <td data-label="Aspect">Consumer Type</td>
+        <td data-label="SNS">Consumers might process messages in different ways</td>
+        <td data-label="SQS">All consumers are typically identical and process messages the same way (though in rare cases messages may be resent)</td>
+      </tr>
+      <tr>
+        <td data-label="Aspect">Sample Applications</td>
+        <td data-label="SNS">
+          Image processing example:<br>
+          - User uploads image to S3<br>
+          - SNS notifies 3 consumers:<br>
+          1. Watermarks image<br>
+          2. Creates thumbnail<br>
+          3. Sends Thank You email<br>
+          All consumers receive the same message (image URL) and process in parallel.
+        </td>
+        <td data-label="SQS">
+          Jobs are submitted to SQS. Consumers process jobs asynchronously.<br>
+          If job frequency increases, more consumers can be added for better throughput.
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <h2>Fan-Out Intro</h2>
@@ -99,6 +134,5 @@
     <li>The SNS topic forwards messages to its subscribers (e.g., SQS queues).</li>
     <li>You can subscribe multiple queues to the same topic to replicate a message over multiple queues. This is called <strong>fan-out</strong>.</li>
   </ul>
-
 </body>
 </html>
