@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SNS vs SQS - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #1b263b;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    h2 {
+      color: #ffb703;
+      margin-top: 30px;
+    }
+    ul {
+      margin: 10px 0 20px 20px;
+    }
+    li {
+      margin: 6px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>SNS vs SQS </h1>
+
+  <table>
+    <tr>
+      <th>Aspect</th>
+      <th>SNS</th>
+      <th>SQS</th>
+    </tr>
+    <tr>
+      <td>Message Consumption</td>
+      <td>Push Mechanism - SNS pushes messages to consumers</td>
+      <td>Pull Mechanism - Consumers poll and pull messages from SQS</td>
+    </tr>
+    <tr>
+      <td>Use Case</td>
+      <td>Fanout - Processing the same message in multiple ways</td>
+      <td>Decoupling two applications and allowing parallel asynchronous processing</td>
+    </tr>
+    <tr>
+      <td>Persistence</td>
+      <td>No persistence. Whichever consumer is present at the time of message arrival gets the message and the message is deleted. If no consumers are available then the message is lost after a few retries.</td>
+      <td>Messages are persisted for a configurable duration (max 2 weeks). The consumer doesn’t have to be up when messages are added to the queue.</td>
+    </tr>
+    <tr>
+      <td>Consumer Type</td>
+      <td>Consumers might process messages in different ways</td>
+      <td>All consumers are typically identical and process messages the same way (though in rare cases messages may be resent)</td>
+    </tr>
+    <tr>
+      <td>Sample Applications</td>
+      <td>
+        Image processing example:  
+        - User uploads image to S3  
+        - SNS notifies 3 consumers:  
+          1. Watermarks image  
+          2. Creates thumbnail  
+          3. Sends Thank You email  
+        All consumers receive the same message (image URL) and process in parallel.
+      </td>
+      <td>
+        Jobs are submitted to SQS. Consumers process jobs asynchronously.  
+        If job frequency increases, more consumers can be added for better throughput.
+      </td>
+    </tr>
+  </table>
+
+  <h2>Fan-Out Intro</h2>
+  <ul>
+    <li>SNS is an AWS service that coordinates and manages the delivery of messages to subscribing endpoints.</li>
+    <li>You can create an SNS topic (logical access point / communication channel) and publish messages using AWS CLI, SDK, or Console.</li>
+    <li>The SNS topic forwards messages to its subscribers (e.g., SQS queues).</li>
+    <li>You can subscribe multiple queues to the same topic to replicate a message over multiple queues. This is called <strong>fan-out</strong>.</li>
+  </ul>
+
+</body>
+</html>
