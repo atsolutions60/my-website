@@ -2,155 +2,124 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AWS Storage Classification Tree - Comparisonia</title>
+  <title>AWS Storage Classification Tree</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #0d1b2a;
       color: #ffffff;
       margin: 10px;
+      text-align: center; /* center page content */
     }
 
     h1 {
-      text-align: center;
       color: #ff7b00;
       margin-bottom: 20px;
       font-size: 1.8em;
     }
 
-    .tree {
-      display: flex;
-      justify-content: center;
-      overflow-x: auto;
-      padding-bottom: 20px;
-    }
-
-    .tree ul {
-      padding-top: 20px;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .tree li {
+    ul.tree {
+      display: inline-block; /* shrink to content width */
+      padding-left: 0;
       list-style-type: none;
-      text-align: center;
+      text-align: left; /* keep lines inside left aligned */
+    }
+
+    ul.tree li {
       position: relative;
-      padding: 20px 10px 0 10px;
-      flex: 0 1 auto;
-      min-width: 120px;
+      margin: 10px 0;
+      padding-left: 20px;
     }
 
-    .tree li::before {
+    /* vertical line connector */
+    ul.tree li::before {
       content: '';
       position: absolute;
       top: 0;
-      left: 50%;
-      border-left: 2px solid #415a77;
-      height: 20px;
-      transform: translateX(-50%);
+      left: 8px;
+      width: 2px;
+      height: 100%;
+      background-color: #415a77;
     }
 
-    .tree ul::before {
+    ul.tree li::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      border-top: 2px solid #415a77;
-      width: 100%;
-    }
-
-    .tree > ul > li::before,
-    .tree > ul::before {
-      display: none;
+      top: 20px;
+      left: 8px;
+      width: 12px;
+      height: 2px;
+      background-color: #415a77;
     }
 
     .node {
       display: inline-block;
-      padding: 8px 14px;
-      border-radius: 8px;
+      padding: 6px 12px;
+      border-radius: 6px;
       background-color: #1b263b;
       border: 1px solid #415a77;
       font-weight: bold;
       white-space: nowrap;
-      margin: auto;
-      font-size: 0.9em;
     }
 
-    .category {
-      color: #ffb347;
+    .category { color: #ffb347; }
+    .service { color: #90ee90; }
+
+    /* remove connector for root */
+    ul.tree > li::before,
+    ul.tree > li::after {
+      display: none;
     }
 
-    .service {
-      color: #90ee90;
-    }
-
-    /* Mobile friendly */
+    /* mobile-friendly adjustments */
     @media (max-width: 700px) {
-      .tree ul {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .tree ul ul {
-        padding-left: 0;
-      }
-
-      .tree ul::before,
-      .tree li::before {
-        display: none; /* hide lines for mobile */
-      }
-
-      .node {
-        font-size: 0.85em;
-        padding: 6px 10px;
-      }
+      .node { font-size: 0.9em; padding: 5px 10px; }
+      ul.tree li { padding-left: 15px; }
+      ul.tree li::before { left: 5px; }
+      ul.tree li::after { left: 5px; width: 8px; }
     }
   </style>
 </head>
 <body>
-  <h1>AWS Storage Classification Tree</h1>
 
-  <div class="tree">
+<h1>AWS Storage Classification Tree</h1>
+
+<ul class="tree">
+  <li>
+    <div class="node category">Storage</div>
     <ul>
       <li>
-        <div class="node category">Storage</div>
+        <div class="node category">DAS / Block Storage</div>
+        <ul>
+          <li><div class="node service">EBS (Elastic Block Store)</div></li>
+        </ul>
+      </li>
+      <li>
+        <div class="node category">File Storage</div>
         <ul>
           <li>
-            <div class="node category">DAS / Block Storage</div>
+            <div class="node">NFS (Linux/Unix)</div>
             <ul>
-              <li><div class="node service">EBS (Elastic Block Store)</div></li>
+              <li><div class="node service">EFS (Elastic File System)</div></li>
             </ul>
           </li>
           <li>
-            <div class="node category">File Storage</div>
+            <div class="node">CIFS (Common Internet File Services)</div>
             <ul>
-              <li>
-                <div class="node">NFS (Linux/Unix)</div>
-                <ul>
-                  <li><div class="node service">EFS (Elastic File System)</div></li>
-                </ul>
-              </li>
-              <li>
-                <div class="node">CIFS (Common Internet File Services)</div>
-                <ul>
-                  <li><div class="node service">FSx (Windows File Server, Lustre)</div></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <div class="node category">Object Storage</div>
-            <ul>
-              <li><div class="node service">S3 (Simple Storage Service)</div></li>
+              <li><div class="node service">FSx (Windows File Server, Lustre)</div></li>
             </ul>
           </li>
         </ul>
       </li>
+      <li>
+        <div class="node category">Object Storage</div>
+        <ul>
+          <li><div class="node service">S3 (Simple Storage Service)</div></li>
+        </ul>
+      </li>
     </ul>
-  </div>
+  </li>
+</ul>
 
 </body>
 </html>
