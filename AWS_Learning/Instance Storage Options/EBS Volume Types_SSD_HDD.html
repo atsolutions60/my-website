@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS EBS Volume Types - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+      text-align: center;
+      color: #ff7b00;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #1b263b;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: center;
+      vertical-align: top;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>AWS EBS Volume Types</h1>
+
+  <!-- SSD Table -->
+  <h2>SSD-backed Volumes</h2>
+  <table>
+    <tr>
+      <th>Feature</th>
+      <th>gp2</th>
+      <th>gp3</th>
+      <th>io1</th>
+      <th>io2</th>
+    </tr>
+    <tr>
+      <td>Designed Use Cases</td>
+      <td>Transactional workloads, VDI, single-instance DBs, dev/test</td>
+      <td>Same as gp2</td>
+      <td>I/O-intensive DB workloads</td>
+      <td>Same as io1</td>
+    </tr>
+    <tr>
+      <td>Volume Size</td>
+      <td>1 GB - 16 TiB</td>
+      <td>1 GB - 16 TiB</td>
+      <td>4 GB - 16 TiB</td>
+      <td>4 GB - 16 TiB</td>
+    </tr>
+    <tr>
+      <td>Base Performance</td>
+      <td>3 IOPS/GB, up to 3,000 IOPS</td>
+      <td>Flat provisioned up to 16,000 IOPS</td>
+      <td>Provisioned up to 64,000 IOPS</td>
+      <td>Provisioned up to 64,000 IOPS</td>
+    </tr>
+    <tr>
+      <td>Max IOPS/Volume</td>
+      <td>16,000</td>
+      <td>16,000</td>
+      <td>64,000</td>
+      <td>64,000 (256,000 with Block Express)</td>
+    </tr>
+    <tr>
+      <td>Max Throughput/Volume</td>
+      <td>250 MiB/s</td>
+      <td>125–1000 MiB/s</td>
+      <td>1000 MiB/s</td>
+      <td>1000 MiB/s (4000 MiB/s with Block Express)</td>
+    </tr>
+    <tr>
+      <td>Burst Capability</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Cost / GB</td>
+      <td>$102</td>
+      <td>$81 + IOPS cost</td>
+      <td>$128 + IOPS cost</td>
+      <td>$128 + IOPS cost</td>
+    </tr>
+    <tr>
+      <td>Durability</td>
+      <td>99.9%</td>
+      <td>99.9%</td>
+      <td>99.9%</td>
+      <td>99.999%</td>
+    </tr>
+    <tr>
+      <td>Multi-Attach Capability</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>Yes (Nitro instances)</td>
+    </tr>
+    <tr>
+      <td>Configurable IOPS & Throughput</td>
+      <td>No</td>
+      <td>Yes (IOPS)</td>
+      <td>Yes (IOPS)</td>
+      <td>Yes (IOPS)</td>
+    </tr>
+    <tr>
+      <td>Boot Volume Support</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Block Express</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+  </table>
+
+  <!-- HDD Table -->
+  <h2>HDD-backed Volumes</h2>
+  <table>
+    <tr>
+      <th>Feature</th>
+      <th>Throughput Optimized HDD (st1)</th>
+      <th>Cold HDD (sc1)</th>
+      <th>Magnetic (Standard)</th>
+    </tr>
+    <tr>
+      <td>Designed Use Cases</td>
+      <td>Big data, logs, low-cost storage</td>
+      <td>Infrequent access</td>
+      <td>Legacy workloads</td>
+    </tr>
+    <tr>
+      <td>Volume Size</td>
+      <td>125 GiB - 16 TiB</td>
+      <td>125 GiB - 16 TiB</td>
+      <td>1 GiB - 1 TiB</td>
+    </tr>
+    <tr>
+      <td>Base Performance</td>
+      <td>500 IOPS max</td>
+      <td>250 IOPS max</td>
+      <td>Variable</td>
+    </tr>
+    <tr>
+      <td>Max IOPS/Volume</td>
+      <td>500</td>
+      <td>250</td>
+      <td>Hundreds</td>
+    </tr>
+    <tr>
+      <td>Max Throughput/Volume</td>
+      <td>500 MiB/s</td>
+      <td>250 MiB/s</td>
+      <td>40–90 MiB/s</td>
+    </tr>
+    <tr>
+      <td>Burst Capability</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Cost / GB</td>
+      <td>$46</td>
+      <td>$15</td>
+      <td>$51</td>
+    </tr>
+    <tr>
+      <td>Durability</td>
+      <td>99.8%–99.999%</td>
+      <td>99.8%–99.999%</td>
+      <td>99.5%–99.999%</td>
+    </tr>
+    <tr>
+      <td>Multi-Attach Capability</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Configurable IOPS & Throughput</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Boot Volume Support</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Block Express</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+  </table>
+</body>
+</html>
