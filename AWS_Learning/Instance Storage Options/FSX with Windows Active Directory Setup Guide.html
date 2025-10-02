@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS FSx Lab Setup - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 30px;
+      color: #ff7b00;
+    }
+    h3 {
+      margin-top: 20px;
+      color: #90ee90;
+    }
+    .step {
+      margin-bottom: 30px;
+      background-color: #1b263b;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(255, 123, 0, 0.3);
+    }
+    ul, ol {
+      margin-left: 25px;
+    }
+    code {
+      background-color: #243447;
+      color: #90ee90;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    .note {
+      color: #ffcc00;
+      font-style: italic;
+    }
+
+    /* Image styling */
+    .header-image {
+      display: block;
+      margin: 20px auto;
+      max-width: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255,123,0,0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .header-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255,123,0,0.8);
+    }
+  </style>
+</head>
+<body>
+  <h1>FSX with Windows Active Directory Setup Guide</h1>
+  <img src="FSX_Windows_FileServer_Alongwith_Active_Directory.png" 
+       alt="FSX Windows File Server with Active Directory" 
+       class="header-image">
+
+  <!-- Step 1 -->
+  <div class="step">
+    <h2>✅ Step 1: Create Security Groups</h2>
+    <h3>1.1 VmSG (for all EC2)</h3>
+    <ul>
+      <li>Inbound: Allow All traffic (0.0.0.0/0) – for lab</li>
+      <li>Outbound: All allowed (default)</li>
+    </ul>
+    <h3>1.2 FSxSG (for FSx)</h3>
+    <ul>
+      <li>Inbound: Allow All traffic from VmSG</li>
+      <li>Outbound: All allowed</li>
+    </ul>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="step">
+    <h2>✅ Step 2: Launch EC2 Windows Instances</h2>
+    <p>Repeat the below for each instance: <span class="highlight">AD-Server, Server-1, and Server-2</span></p>
+    <ul>
+      <li>AMI: Windows Server 2019 Base</li>
+      <li>Instance Type: t3.medium</li>
+      <li>Subnet:
+        <ul>
+          <li>AD-Server: ap-south-1a</li>
+          <li>Server-1: ap-south-1a</li>
+          <li>Server-2: ap-south-1b</li>
+        </ul>
+      </li>
+      <li>Security Group: VmSG</li>
+      <li>Key Pair: Choose or create one (needed for RDP)</li>
+    </ul>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="step">
+    <h2>✅ Step 3: Change Administrator Password</h2>
+    <p>Immediately after launching, for each instance:</p>
+    <ol>
+      <li>RDP into each EC2 instance using the key pair</li>
+      <li>Open Command Prompt or PowerShell as Administrator</li>
+      <li>Run the command: <code>net user Administrator Matrix@123</code></li>
+    </ol>
+    <p class="note">💡 Optional: Disable password complexity temporarily with <code>secedit</code> commands.</p>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="step">
+    <h2>✅ Step 4: Configure Active Directory</h2>
+    <h3>Part 1: Add Active Directory Domain Services (AD DS)</h3>
+    <p>Use Server Manager → Add Roles and Features → Install AD DS role.</p>
+
+    <h3>Part 2: Promote Server to Domain Controller</h3>
+    <ul>
+      <li>Deployment: Add a new forest</li>
+      <li>Root domain: <code>corp.example.com</code></li>
+      <li>Keep defaults (DNS, Global Catalog)</li>
+      <li>DSRM password: <code>Matrix@123</code></li>
+      <li>Reboot after installation</li>
+    </ul>
+  </div>
+
+  <!-- Step 5 -->
+  <div class="step">
+    <h2>✅ Step 5: Join Server-1 & Server-2 to Domain</h2>
+    <p>On each server:</p>
+    <ol>
+      <li>Set Preferred DNS to private IP of AD-Server</li>
+      <li>Join domain: <code>corp.example.com</code></li>
+      <li>Use domain admin credentials (Administrator / Matrix@123)</li>
+      <li>Reboot</li>
+    </ol>
+    <p>🛠️ Using <code>sysdm.cpl</code> → Change Computer Name → Select Domain → Enter credentials.</p>
+  </div>
+
+  <!-- Step 6 -->
+  <div class="step">
+    <h2>✅ Step 6: Create Amazon FSx (Windows File Server)</h2>
+    <ul>
+      <li>Go to Amazon FSx → Create File System</li>
+      <li>Choose: Windows File Server</li>
+      <li>VPC: Default VPC</li>
+      <li>Subnets: ap-south-1a and ap-south-1b</li>
+      <li>AD Domain: <code>corp.example.com</code></li>
+      <li>Credentials: Domain admin</li>
+      <li>Security Group: FSxSG</li>
+    </ul>
+    <p class="note">⚡ Takes ~15 minutes to create.</p>
+  </div>
+
+  <!-- Step 7 -->
+  <div class="step">
+    <h2>✅ Step 7: Map FSx Share</h2>
+    <p>On Server-1 & Server-2 run:</p>
+    <code>net use Z: \\&lt;fsx-dns&gt;\share /user:corp\Administrator Matrix@123</code>
+  </div>
+
+  <!-- Verification -->
+  <div class="step">
+    <h2>✅ Verification</h2>
+    <p>On AD-Server, check in <span class="highlight">Active Directory Users and Computers (ADUC)</span>:</p>
+    <ul>
+      <li>Expand: <code>corp.example.com → Computers</code></li>
+      <li>You should see: Server-1, Server-2, Amazon FSx</li>
+    </ul>
+  </div>
+
+  <!-- Done -->
+  <div class="step">
+    <h2>✅ Lab Setup Complete!</h2>
+    <ul>
+      <li>Windows EC2s with known passwords</li>
+      <li>Working AD domain</li>
+      <li>FSx joined to AD</li>
+      <li>Servers accessing shared storage</li>
+    </ul>
+  </div>
+</body>
+</html>
