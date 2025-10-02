@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWS KMS - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      color: #ffb703;
+      margin-top: 30px;
+    }
+    ul {
+      margin: 10px 0 20px 20px;
+    }
+    li {
+      margin: 6px 0;
+    }
+    /* Desktop Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #1b263b;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+
+    /* Mobile Cards */
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      thead {
+        display: none;
+      }
+      tr {
+        margin-bottom: 20px;
+        border: 1px solid #415a77;
+        border-radius: 8px;
+        background-color: #1b263b;
+        padding: 12px;
+      }
+      td {
+        border: none;
+        padding: 8px 0;
+      }
+      td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #ffb703;
+        display: block;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>AWS Key Management Service (KMS)</h1>
+
+  <h2>CMK Types</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Aspect</th>
+        <th>AWS-Managed CMK</th>
+        <th>Customer-Managed CMK</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Aspect">Management</td>
+        <td data-label="AWS-Managed CMK">Created, owned, and managed by AWS for customer use in AWS services.</td>
+        <td data-label="Customer-Managed CMK">Created and managed by the customer. Full control over lifecycle and permissions.</td>
+      </tr>
+      <tr>
+        <td data-label="Aspect">Rotation</td>
+        <td data-label="AWS-Managed CMK">Rotated every 3 years automatically by AWS.</td>
+        <td data-label="Customer-Managed CMK">Can enable annual automatic rotation. Customer controls policy.</td>
+      </tr>
+      <tr>
+        <td data-label="Aspect">Deletion</td>
+        <td data-label="AWS-Managed CMK">Cannot be deleted by customer.</td>
+        <td data-label="Customer-Managed CMK">Customer can schedule key deletion.</td>
+      </tr>
+      <tr>
+        <td data-label="Aspect">Access Control</td>
+        <td data-label="AWS-Managed CMK">Limited access control (used transparently by AWS services).</td>
+        <td data-label="Customer-Managed CMK">Full IAM policies and grants supported for fine-grained access.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Data Keys</h2>
+  <ul>
+    <li>Data keys are used to encrypt application data.</li>
+    <li>KMS CMKs generate, encrypt, and decrypt these keys.</li>
+    <li>KMS does not store plain-text data keys; customers must manage them.</li>
+    <li>Encrypted data keys should be stored alongside encrypted data (e.g., in S3).</li>
+  </ul>
+
+  <h2>Envelope Encryption</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Step</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Step">1</td>
+        <td data-label="Description">CMK generates a plain-text data key and an encrypted data key.</td>
+      </tr>
+      <tr>
+        <td data-label="Step">2</td>
+        <td data-label="Description">Plain-text data key is used to encrypt data outside KMS.</td>
+      </tr>
+      <tr>
+        <td data-label="Step">3</td>
+        <td data-label="Description">Plain-text data key is deleted from memory after use.</td>
+      </tr>
+      <tr>
+        <td data-label="Step">4</td>
+        <td data-label="Description">Encrypted data key is stored with encrypted data (e.g., in S3).</td>
+      </tr>
+      <tr>
+        <td data-label="Step">5</td>
+        <td data-label="Description">To decrypt, CMK decrypts the encrypted data key, retrieves the plain-text data key, and decrypts the data.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Points to Note</h2>
+  <ul>
+    <li>KMS is integrated with many AWS services (S3, EBS, RDS, etc.).</li>
+    <li>Keys are region-specific and cannot be transferred across regions.</li>
+    <li>Used primarily for data at rest encryption.</li>
+    <li>Supports importing your own key material (BYOK).</li>
+  </ul>
+</body>
+</html>
