@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS FSx Comparison - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 40px;
+    }
+
+    .comparison {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #1b263b;
+      border: 1px solid #415a77;
+      border-radius: 10px;
+      padding: 20px;
+      width: 260px;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #ff7b00;
+    }
+
+    .card h2 {
+      color: #90ee90;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .card p {
+      color: #ffffff;
+      font-size: 0.9em;
+      line-height: 1.4em;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 700px) {
+      .card {
+        width: 90%;
+      }
+      .card h2 {
+        font-size: 1.1em;
+      }
+      .card p {
+        font-size: 0.85em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h1>AWS FSx Umbrella</h1>
+
+<div class="comparison">
+  <div class="card">
+    <h2>FSx for Windows File Server</h2>
+    <p>Fully managed SMB (CIFS) file storage for Windows workloads. Supports Active Directory integration, NTFS permissions, automatic backups. Ideal for corporate file sharing and Windows applications.</p>
+  </div>
+
+  <div class="card">
+    <h2>FSx for Lustre</h2>
+    <p>High-performance parallel file system for HPC, big data, and ML workloads. Can link directly to S3 for fast data processing. Optimized for large-scale I/O and low latency.</p>
+  </div>
+
+  <div class="card">
+    <h2>FSx for NetApp ONTAP</h2>
+    <p>Enterprise-grade storage with multi-protocol support (NFS, SMB, iSCSI). Features snapshots, replication, cloning, deduplication, and high availability. Great for enterprise applications and DR setups.</p>
+  </div>
+
+  <div class="card">
+    <h2>FSx for OpenZFS</h2>
+    <p>Open-source ZFS file system with compression, snapshots, cloning, and data integrity. Supports high IOPS workloads and efficient backup/restore. Suitable for workloads requiring consistent performance.</p>
+  </div>
+</div>
+
+</body>
+</html>
