@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FSx ONTAP vs OpenZFS - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+      text-align: center;
+      color: #ff7b00;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 80%;
+      max-width: 1000px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: center;
+      vertical-align: top;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>FSx ONTAP vs OpenZFS</h1>
+
+  <!-- Overview -->
+  <h2>Overview</h2>
+  <div class="table-container">
+    <table>
+      <colgroup>
+        <col style="width: 20%">
+        <col style="width: 40%">
+        <col style="width: 40%">
+      </colgroup>
+      <tr>
+        <th>Aspect</th>
+        <th>OpenZFS</th>
+        <th>NetApp ONTAP</th>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td>Open-source file system and volume manager with robust data protection features, now also available for cloud deployments.</td>
+        <td>Standalone proprietary operating system focused on data management and storage solutions.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Operating System Requirements -->
+  <h2>Operating System Requirements and Nature</h2>
+  <div class="table-container">
+    <table>
+      <colgroup>
+        <col style="width: 20%">
+        <col style="width: 40%">
+        <col style="width: 40%">
+      </colgroup>
+      <tr>
+        <th>Aspect</th>
+        <th>OpenZFS</th>
+        <th>NetApp ONTAP</th>
+      </tr>
+      <tr>
+        <td>Nature</td>
+        <td>Not an operating system</td>
+        <td>Is a proprietary operating system itself</td>
+      </tr>
+      <tr>
+        <td>Requirement</td>
+        <td>Requires a host operating system</td>
+        <td>Doesn't require a separate OS</td>
+      </tr>
+      <tr>
+        <td>Deployment</td>
+        <td>Installed on various systems through the host OS</td>
+        <td>Specifically tailored for storage and data management tasks</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Use Cases -->
+  <h2>Use Cases</h2>
+  <div class="table-container">
+    <table>
+      <colgroup>
+        <col style="width: 20%">
+        <col style="width: 40%">
+        <col style="width: 40%">
+      </colgroup>
+      <tr>
+        <th>Aspect</th>
+        <th>OpenZFS</th>
+        <th>NetApp ONTAP</th>
+      </tr>
+      <tr>
+        <td>Ideal For</td>
+        <td>
+          • Small to medium enterprise storage <br>
+          • Personal cloud storage <br>
+          • Data archival systems
+        </td>
+        <td>
+          • Large enterprise data management <br>
+          • Hybrid cloud deployments <br>
+          • Virtualized storage environments
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- FSx Detailed Comparison (Swapped Columns) -->
+  <h2>FSx Detailed Comparison</h2>
+  <div class="table-container">
+    <table>
+      <colgroup>
+        <col style="width: 20%">
+        <col style="width: 40%">
+        <col style="width: 40%">
+      </colgroup>
+      <tr>
+        <th>Feature</th>
+        <th>FSx for OpenZFS</th>
+        <th>FSx for NetApp ONTAP</th>
+      </tr>
+      <tr>
+        <td>Latency</td>
+        <td>&lt; 0.5 ms</td>
+        <td>&lt; 1 ms</td>
+      </tr>
+      <tr>
+        <td>Max Throughput per File System</td>
+        <td>10–21 GB/s</td>
+        <td>4–6 GB/s</td>
+      </tr>
+      <tr>
+        <td>Maximum File System Size</td>
+        <td>512 TiB</td>
+        <td>Virtually unlimited</td>
+      </tr>
+      <tr>
+        <td>Client Compatibility</td>
+        <td>Windows, Linux, macOS</td>
+        <td>Windows, Linux, macOS</td>
+      </tr>
+      <tr>
+        <td>Protocol Support</td>
+        <td>NFS</td>
+        <td>SMB, NFS, iSCSI</td>
+      </tr>
+      <tr>
+        <td>AWS Compute Integration</td>
+        <td>EC2, ECS, EKS</td>
+        <td>EC2, ECS, EKS</td>
+      </tr>
+      <tr>
+        <td>Active Directory Support</td>
+        <td>No</td>
+        <td class="highlight">Yes</td>
+      </tr>
+      <tr>
+        <td>Anti-virus Integration</td>
+        <td>No</td>
+        <td class="highlight">Yes</td>
+      </tr>
+      <tr>
+        <td>Deployment Options</td>
+        <td>Single-AZ, Multi-AZ</td>
+        <td>Single-AZ, Multi-AZ</td>
+      </tr>
+      <tr>
+        <td>Availability SLA</td>
+        <td>Single-AZ: 99.5% <br> Multi-AZ: 99.99%</td>
+        <td>Single-AZ: 99.9% <br> Multi-AZ: 99.99%</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
