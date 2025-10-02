@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS EBS Snapshot Use Cases - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 40px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 90%;
+      margin: auto;
+      background-color: #1b263b;
+      border: 1px solid #415a77;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #415a77;
+    }
+
+    th {
+      background-color: #0d1b2a;
+      color: #ffb347;
+      font-size: 1.1em;
+    }
+
+    tr:hover {
+      background-color: #2a3b57;
+    }
+
+    td {
+      color: #ffffff;
+    }
+
+    /* Mobile */
+    @media (max-width: 700px) {
+      th, td {
+        padding: 10px;
+        font-size: 0.95em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h1>AWS EBS Snapshot Use Cases</h1>
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>Use Case</th>
+    <th>Purpose / Example</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Periodic / On-Demand Backup</td>
+    <td>Protect critical data. Example: Nightly snapshots of DB volumes to restore in case of corruption.</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Move Data Across AZ / Region</td>
+    <td>Enable redundancy or disaster recovery. Example: Copy snapshot from us-east-1a to us-west-2 and create new volume.</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Restore Data After EC2 Deletion</td>
+    <td>Attach volume from snapshot to new instance. Example: Recover web app after accidental instance deletion.</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Enable Encryption Post-Creation</td>
+    <td>Create encrypted volume from snapshot if original volume was unencrypted. Example: Secure sensitive data later.</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>Fast Snapshot / Quick Backup</td>
+    <td>Quick incremental backup without impacting performance. Example: Instant snapshot for fast restore during updates or maintenance.</td>
+  </tr>
+</table>
+
+</body>
+</html>
