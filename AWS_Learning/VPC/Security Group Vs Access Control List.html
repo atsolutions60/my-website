@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Security Group vs Access Control List - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 80%;
+      max-width: 1000px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: center;
+      vertical-align: top;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Security Group vs Access Control List (ACL)</h1>
+
+  <h2>Comparison Overview</h2>
+  <div class="table-container">
+    <table>
+      <colgroup>
+        <col style="width: 30%">
+        <col style="width: 35%">
+        <col style="width: 35%">
+      </colgroup>
+      <tr>
+        <th>Aspect</th>
+        <th>Security Group</th>
+        <th>Access Control List (ACL)</th>
+      </tr>
+      <tr>
+        <td>Assignment</td>
+        <td>Assigned to the <span class="highlight">Instance</span></td>
+        <td>Assigned to the <span class="highlight">Subnet</span></td>
+      </tr>
+      <tr>
+        <td>Rule Application</td>
+        <td>Applies <span class="highlight">all rules simultaneously</span></td>
+        <td>Rules are evaluated <span class="highlight">in sequence</span></td>
+      </tr>
+      <tr>
+        <td>Rule Types</td>
+        <td>Can only set <span class="highlight">Allow rules</span></td>
+        <td>Can set both <span class="highlight">Allow and Deny rules</span></td>
+      </tr>
+      <tr>
+        <td>Nature</td>
+        <td><span class="highlight">Stateful</span></td>
+        <td><span class="highlight">Stateless</span></td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

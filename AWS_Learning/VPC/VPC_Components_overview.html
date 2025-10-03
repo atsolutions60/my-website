@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Amazon VPC - Comparisonia Tree with Icons</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .tree-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    ul.tree {
+      list-style-type: none;
+      padding-left: 20px;
+      background-color: #1b263b;
+      border: 1px solid #415a77;
+      border-radius: 8px;
+      padding: 20px;
+      max-width: 900px;
+      width: 100%;
+    }
+    .tree li {
+      margin: 10px 0;
+      position: relative;
+    }
+    .tree li::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -15px;
+      border-left: 1px solid #415a77;
+      border-bottom: 1px solid #415a77;
+      width: 15px;
+      height: 20px;
+    }
+    .tree li:last-child::before {
+      border-left: 1px solid transparent;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    .node-title {
+      font-weight: bold;
+      color: #ff7b00;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .node-desc {
+      margin-top: 5px;
+      color: #ffffff;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Amazon VPC (Virtual Private Cloud)</h1>
+
+  <!-- Overview -->
+  <h2>Overview</h2>
+  <div class="tree-container">
+    <ul class="tree">
+      <li>
+        <span class="node-title">🌐 What is VPC?</span>
+        <div class="node-desc">A logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network you define.</div>
+      </li>
+      <li>
+        <span class="node-title">📏 CIDR Range</span>
+        <div class="node-desc">Specify IPv4 CIDR blocks between /16 and /28. Up to 5 CIDR blocks per VPC (default).</div>
+      </li>
+      <li>
+        <span class="node-title">⚙️ Limits</span>
+        <div class="node-desc">Default limit: 5 VPCs per region (can be increased).</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Subnets -->
+  <h2>Subnets</h2>
+  <div class="tree-container">
+    <ul class="tree">
+      <li>
+        <span class="node-title">🌍 Public Subnet</span>
+        <div class="node-desc">Accessible from the internet using an Internet Gateway. Ideal for web servers and load balancers.</div>
+      </li>
+      <li>
+        <span class="node-title">🔒 Private Subnet</span>
+        <div class="node-desc">Not directly accessible from the internet. Used for databases and internal services. Needs NAT Gateway for outbound internet.</div>
+      </li>
+      <li>
+        <span class="node-title">📊 Subnet Limits</span>
+        <div class="node-desc">Default: 200 subnets per VPC.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Gateways -->
+  <h2>Gateways & Connectivity</h2>
+  <div class="tree-container">
+    <ul class="tree">
+      <li>
+        <span class="node-title">🚪 Internet Gateway (IGW)</span>
+        <div class="node-desc">Allows VPC resources to communicate with the internet. Needed for public subnets.</div>
+      </li>
+      <li>
+        <span class="node-title">🔄 NAT Gateway</span>
+        <div class="node-desc">Enables private subnet instances to access the internet for updates. Supports up to 55,000 connections and ~45 Gbps throughput.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Route Tables -->
+  <h2>Route Tables</h2>
+  <div class="tree-container">
+    <ul class="tree">
+      <li>
+        <span class="node-title">🛣️ Main Route Table</span>
+        <div class="node-desc">Automatically created with each VPC, manages default routing.</div>
+      </li>
+      <li>
+        <span class="node-title">📑 Custom Route Tables</span>
+        <div class="node-desc">Created to control routing for specific subnets. Supports up to 200 per VPC, 50 routes per table.</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Common Patterns -->
+  <h2>Common Patterns</h2>
+  <div class="tree-container">
+    <ul class="tree">
+      <li>
+        <span class="node-title">🏛️ Public + Private</span>
+        <div class="node-desc">Web servers and load balancers in public subnets; databases and application servers in private subnets with NAT access.</div>
+      </li>
+      <li>
+        <span class="node-title">⚡ Multi-AZ</span>
+        <div class="node-desc">Distribute subnets across Availability Zones for high availability and fault tolerance.</div>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
