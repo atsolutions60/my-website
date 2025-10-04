@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS Transit Gateway - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 80%;
+      max-width: 1000px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left; /* Left aligned */
+      vertical-align: top;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center; /* Keep headers centered */
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .image-container img {
+      max-width: 90%;
+      border: 2px solid #415a77;
+      border-radius: 8px;
+      background-color: #ffffff;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    ul li {
+      text-align: left;
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>AWS Transit Gateway</h1>
+
+  <!-- Introduction -->
+  <h2>Introduction</h2>
+  <div class="table-container">
+    <table>
+      <colgroup>
+        <col style="width: 30%">
+        <col style="width: 70%">
+      </colgroup>
+      <tr>
+        <th>Aspect</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Definition</td>
+        <td>A transit gateway is a network transit hub that you can use to interconnect your virtual private clouds (VPCs) and on-premises networks.</td>
+      </tr>
+      <tr>
+        <td>Connections</td>
+        <td>
+          <ul>
+            <li>One or more VPCs</li>
+            <li>One or more VPN connections</li>
+            <li>One or more AWS Direct Connect gateways</li>
+            <li>One or more transit gateway peering connections</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Use Case -->
+  <h2>Use Case of Transit Gateway</h2>
+  <div class="table-container">
+    <table>
+      <colgroup>
+        <col style="width: 30%">
+        <col style="width: 70%">
+      </colgroup>
+      <tr>
+        <th>Scenario</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Without Transit Gateway</td>
+        <td>VPCs, VPNs, and Direct Connect gateways would require complex peering and multiple connections, leading to a mesh of network paths.</td>
+      </tr>
+      <tr>
+        <td>With Transit Gateway</td>
+        <td>All VPCs, VPNs, and Direct Connect gateways connect through a single hub, simplifying management and scalability.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Image for Use Case -->
+  <div class="image-container">
+    <img src="TransitGatewayUsecase.png" alt="Transit Gateway Use Case Diagram">
+  </div>
+</body>
+</html>
