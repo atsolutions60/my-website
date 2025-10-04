@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Managed Prefix Lists - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 90%;
+      max-width: 1000px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .image-container img {
+      max-width: 90%;
+      border: 2px solid #415a77;
+      border-radius: 8px;
+      background-color: #ffffff;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    ul li {
+      text-align: left;
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Managed Prefix Lists</h1>
+
+  <!-- Introduction -->
+  <h2>Introduction</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Aspect</th><th>Description</th></tr>
+      <tr>
+        <td>Definition</td>
+        <td>A managed prefix list is a set of one or more CIDR blocks. You can create a prefix list from the IP addresses that you frequently use, and reference them as a set in security group rules and routes instead of referencing them individually.</td>
+      </tr>
+      <tr>
+        <td>Usage</td>
+        <td>
+          You can reference a prefix list with:
+          <ul>
+            <li>VPC security groups</li>
+            <li>Subnet route tables</li>
+            <li>Transit gateway route tables</li>
+            <li>AWS Network Firewall rule groups</li>
+            <li>Amazon Managed Grafana network access control</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Before & After Images -->
+  <h2>Before & After</h2>
+  <div class="image-container">
+    <img src="before-prefix-list.png" alt="Before Prefix List Diagram">
+  </div>
+  <div class="image-container">
+    <img src="after-prefix-list.png" alt="After Prefix List Diagram">
+  </div>
+
+  <!-- Types -->
+  <h2>Types of Prefix Lists</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Type</th><th>Description</th></tr>
+      <tr>
+        <td>Customer-managed prefix lists</td>
+        <td>
+          <ul>
+            <li>Sets of IP address ranges that you define and manage.</li>
+            <li>You can share your prefix list with other AWS accounts.</li>
+            <li>Prefix list supports a single type of IP addressing only (IPv4 or IPv6).</li>
+            <li>A prefix list applies only to the Region where you created it.</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>AWS-managed prefix lists</td>
+        <td>
+          <ul>
+            <li>Sets of IP address ranges for AWS services.</li>
+            <li>You cannot create, modify, share, or delete an AWS-managed prefix list.</li>            
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Additional Illustration -->
+  <h2>List Of AWS-managed prefix lists</h2>
+  <div class="image-container">
+    <img src="AWS managed prefix list.png" alt="Managed Prefix Lists Illustration">
+  </div>
+
+</body>
+</html>
