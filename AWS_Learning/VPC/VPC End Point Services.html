@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS VPC Endpoint Services - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 80%;
+      max-width: 1000px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .image-container img {
+      max-width: 90%;
+      border: 2px solid #415a77;
+      border-radius: 8px;
+      background-color: #ffffff;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    ul li {
+      text-align: left;
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>AWS VPC Endpoint Services</h1>
+
+  <!-- Introduction -->
+  <h2>Introduction</h2>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Aspect</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Definition</td>
+        <td>A VPC (Virtual Private Cloud) endpoint service is like a special doorway that allows you to connect to certain online services in a secure and private way. Instead of going through the public internet, traffic flows securely within the AWS network.</td>
+      </tr>
+      <tr>
+        <td>Requirement</td>
+        <td>Endpoint services require either a <span class="highlight">Network Load Balancer (NLB)</span> or a <span class="highlight">Gateway Load Balancer (GWLB)</span>.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Before & After -->
+  <h2>Before & After Endpoint Services</h2>
+  <div class="image-container">
+    <img src="beforeendpointservice.png" alt="Before Endpoint Services Diagram">
+  </div>
+  <div class="image-container">
+    <img src="afterendpointservice.png" alt="After Endpoint Services Diagram">
+  </div>
+
+  <!-- Considerations -->
+  <h2>Key Considerations</h2>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Consideration</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Region Specific</td>
+        <td>An endpoint service is available in the <span class="highlight">Region</span> where you created it.</td>
+      </tr>
+      <tr>
+        <td>Cross-Region Access</td>
+        <td>You can access the endpoint service from other Regions using <span class="highlight">VPC peering</span>.</td>
+      </tr>
+      <tr>
+        <td>Protocol Support</td>
+        <td>An endpoint service supports traffic only over <span class="highlight">TCP</span>.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Additional Illustrations -->
+  <div class="image-container">
+    <img src="download9.png" alt="VPC Endpoint Service Illustration">
+  </div>
+</body>
+</html>
