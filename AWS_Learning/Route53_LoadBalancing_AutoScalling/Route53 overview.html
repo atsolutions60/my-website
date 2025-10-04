@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Amazon Route 53 Overview</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 90%;
+      max-width: 1000px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    ul li {
+      text-align: left;
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Amazon Route 53 Overview</h1>
+
+  <!-- What is Route 53 -->
+  <h2>What is Route 53?</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Aspect</th><th>Description</th></tr>
+      <tr>
+        <td>Definition</td>
+        <td>AWS’s highly available DNS service. Used to route users to websites, apps, and services using domain names.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Common Record Types -->
+  <h2>Common Record Types</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Record Type</th><th>Use Case</th></tr>
+      <tr><td>A</td><td>Maps domain to IPv4 address</td></tr>
+      <tr><td>AAAA</td><td>Maps domain to IPv6 address</td></tr>
+      <tr><td>CNAME</td><td>Alias for another domain name</td></tr>
+      <tr><td>MX</td><td>Mail server</td></tr>
+      <tr><td>TXT</td><td>Text record (e.g., SPF, DKIM validation)</td></tr>
+      <tr><td>NS</td><td>Points to name servers of hosted zone</td></tr>
+      <tr><td>Alias</td><td>AWS-specific record pointing to AWS resources (like ELB, S3, CloudFront)</td></tr>
+    </table>
+  </div>
+
+  <!-- Routing Policies -->
+  <h2>Routing Policies</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Policy</th><th>Description</th></tr>
+      <tr><td>Simple Routing</td><td>One record → one value (A or CNAME). No health checks or failover.</td></tr>
+      <tr><td>Latency Routing</td><td>Routes traffic to region with lowest latency. Example: Users in India → Indian server.</td></tr>
+      <tr><td>Geolocation Routing</td><td>Routes traffic based on user’s geographic location.</td></tr>
+      <tr><td>Geoproximity Routing</td><td>Requires Route 53 + Traffic Flow. Routes based on location + bias setting. You can expand/contract regions manually.</td></tr>
+      <tr><td>Failover Routing</td><td>Active-passive configuration. Routes traffic to primary (healthy). If primary fails, traffic goes to secondary.</td></tr>
+      <tr><td>Weighted Routing</td><td>Assign weights (e.g., 70/30 split). Route traffic proportionally.</td></tr>
+      <tr><td>Multivalue Answer Routing</td><td>Like simple routing but returns multiple IPs. Basic load balancing. Supports health checks.</td></tr>
+    </table>
+  </div>
+
+  <!-- Health Checks -->
+  <h2>Health Checks</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Feature</th><th>Description</th></tr>
+      <tr><td>Monitoring</td><td>Monitors endpoint health (HTTP, HTTPS, TCP).</td></tr>
+      <tr><td>Integration</td><td>Optional integration with CloudWatch alarms.</td></tr>
+      <tr><td>Routing</td><td>If health check = up → traffic routed. If health check fails → switch/remove resource from rotation.</td></tr>
+    </table>
+  </div>
+
+  <!-- Exam Tips -->
+  <h2>SAA-C03 Exam Tips</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Tip</th><th>Details</th></tr>
+      <tr><td>Geolocation vs Geoproximity</td><td>Geolocation = by country. Geoproximity = by location with bias control.</td></tr>
+      <tr><td>Disaster Recovery</td><td>Use failover for DR and high availability.</td></tr>
+      <tr><td>User Experience</td><td>Use latency-based routing for best UX.</td></tr>
+      <tr><td>CNAME Limitation</td><td>CNAME cannot be used at root domain (use Alias instead).</td></tr>
+      <tr><td>Alias Records</td><td>AWS-only, free, and support root domain.</td></tr>
+    </table>
+  </div>
+
+</body>
+</html>
