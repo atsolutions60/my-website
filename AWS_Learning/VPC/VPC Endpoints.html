@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS VPC Endpoints - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 80%;
+      max-width: 1000px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .image-container img {
+      max-width: 90%;
+      border: 2px solid #415a77;
+      border-radius: 8px;
+      background-color: #ffffff;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    ul li {
+      text-align: left;
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>AWS VPC Endpoints</h1>
+
+  <!-- Introduction -->
+  <h2>Introduction</h2>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Aspect</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Definition</td>
+        <td>A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by PrivateLink without requiring:</td>
+      </tr>
+      <tr>
+        <td>Without Endpoints</td>
+        <td>
+          <ul>
+            <li>Internet gateway</li>
+            <li>NAT device</li>
+            <li>VPN connection</li>
+            <li>AWS Direct Connect connection</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>Nature</td>
+        <td>Endpoints are virtual devices. They are horizontally scaled, redundant, and highly available VPC components that allow communication between instances in your VPC and services without imposing availability risks or bandwidth constraints.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Before & After -->
+  <h2>Before & After EndPoint</h2>
+  <div class="image-container">
+    <img src="beforeendpoint.png" alt="Before Endpoint Diagram">
+  </div>
+  <div class="image-container">
+    <img src="afterendpoint.png" alt="After Endpoint Diagram">
+  </div>
+
+  <!-- AWS PrivateLink -->
+  <h2>AWS PrivateLink Introduction</h2>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Security</td>
+        <td>AWS PrivateLink simplifies the security of data shared with cloud-based applications by eliminating the exposure of data to the public Internet.</td>
+      </tr>
+      <tr>
+        <td>Connectivity</td>
+        <td>AWS PrivateLink provides private connectivity between VPCs, AWS services, and on-premises applications, securely on the Amazon network.</td>
+      </tr>
+      <tr>
+        <td>Simplification</td>
+        <td>AWS PrivateLink makes it easy to connect services across different accounts and VPCs to significantly simplify the network architecture.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Types of Endpoints -->
+  <h2>Types of VPC Endpoints</h2>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Gateway Endpoints</td>
+        <td>
+          A gateway endpoint is for supported AWS services only. You specify a gateway endpoint as a route table target for traffic destined to:
+          <ul>
+            <li>Amazon S3</li>
+            <li>DynamoDB</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>Interface Endpoints</td>
+        <td>An interface endpoint is an elastic network interface with a private IP address from the IP range of your subnet. It serves as an entry point for traffic destined to a supported AWS service or a VPC endpoint service. Interface endpoints are powered by AWS PrivateLink.</td>
+      </tr>
+      <tr>
+        <td>Gateway Load Balancer Endpoints</td>
+        <td>A Gateway Load Balancer endpoint is an elastic network interface with a private IP address from the IP range of your subnet. These endpoints are powered by AWS PrivateLink and serve as an entry point to intercept traffic and route it to a service configured using Gateway Load Balancers.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Extra Image -->
+  <div class="image-container">
+    <img src="2025-02-07_10-37-50.png" alt="VPC Endpoints Diagram">
+  </div>
+</body>
+</html>
