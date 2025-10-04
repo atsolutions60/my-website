@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS DHCP Option Set - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 80%;
+      max-width: 1000px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .image-container img {
+      max-width: 90%;
+      border: 2px solid #415a77;
+      border-radius: 8px;
+      background-color: #ffffff;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    ul li {
+      text-align: left;
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>AWS DHCP Option Set</h1>
+
+  <!-- Introduction -->
+  <h2>Introduction</h2>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Aspect</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Definition</td>
+        <td>A <span class="highlight">DHCP Option Set</span> in AWS provides custom DHCP (Dynamic Host Configuration Protocol) options for your VPC, such as domain name, DNS servers, and NTP servers.</td>
+      </tr>
+      <tr>
+        <td>Purpose</td>
+        <td>It allows you to control how instances launched in a VPC receive network configuration settings dynamically.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Components -->
+  <h2>Key Components</h2>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Component</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Domain Name</td>
+        <td>Specifies a custom domain name for instances in the VPC (e.g., <code>example.com</code>).</td>
+      </tr>
+      <tr>
+        <td>Domain Name Servers</td>
+        <td>List of DNS servers (e.g., <span class="highlight">AmazonProvidedDNS</span> or custom IPs).</td>
+      </tr>
+      <tr>
+        <td>NTP Servers</td>
+        <td>Specifies one or more Network Time Protocol (NTP) servers for time synchronization.</td>
+      </tr>
+      <tr>
+        <td>NetBIOS Name Servers</td>
+        <td>List of servers for NetBIOS name resolution (for legacy Windows workloads).</td>
+      </tr>
+      <tr>
+        <td>NetBIOS Node Type</td>
+        <td>Defines how NetBIOS clients resolve names (e.g., broadcast or WINS).</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Use Cases -->
+  <h2>Use Cases</h2>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Scenario</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Custom DNS</td>
+        <td>Direct instances to use a custom DNS server (e.g., an on-premises DNS resolver).</td>
+      </tr>
+      <tr>
+        <td>Time Synchronization</td>
+        <td>Provide your own NTP servers for better control of time-sensitive applications.</td>
+      </tr>
+      <tr>
+        <td>Hybrid Environments</td>
+        <td>Integrate with existing corporate DNS and name resolution infrastructure when extending workloads into AWS.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Considerations -->
+  <h2>Considerations</h2>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Consideration</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Default Option Set</td>
+        <td>Every VPC automatically gets a default DHCP option set with AmazonProvidedDNS.</td>
+      </tr>
+      <tr>
+        <td>One per VPC</td>
+        <td>You can only associate one DHCP option set with a VPC at a time, but you can replace it anytime.</td>
+      </tr>
+      <tr>
+        <td>Global Scope</td>
+        <td>DHCP option sets are scoped to a Region, not a single VPC.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Illustration -->
+  <div class="image-container">
+    <img src="dhcp-optionset-diagram.png" alt="AWS DHCP Option Set Diagram">
+  </div>
+</body>
+</html>
