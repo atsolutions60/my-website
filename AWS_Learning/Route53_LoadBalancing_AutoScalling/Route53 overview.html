@@ -58,6 +58,14 @@
       text-align: left;
       margin: 4px 0;
     }
+    /* 👇 Adjust first column width */
+    th:first-child, td:first-child {
+      width: 25%;   /* you can reduce to 20% if you want tighter */
+      white-space: nowrap;
+    }
+    th:last-child, td:last-child {
+      width: 75%;
+    }
   </style>
 </head>
 <body>
