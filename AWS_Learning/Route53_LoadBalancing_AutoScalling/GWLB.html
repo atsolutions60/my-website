@@ -26,8 +26,12 @@
       background-color: #1b263b;
       width: 90%;
       max-width: 1000px;
-      table-layout: fixed;
+      table-layout: fixed; /* keep fixed layout so col widths are respected */
     }
+    /* Column width control */
+    table col.col-1 { width: 28%; min-width: 150px; max-width: 280px; }
+    table col.col-2 { width: 72%; }
+
     th, td {
       border: 1px solid #415a77;
       padding: 12px;
@@ -89,6 +93,8 @@
 
     @media (max-width: 768px) {
       .image-card { width: 95%; }
+      table col.col-1 { width: 36%; } /* give more room on mobile */
+      table { width: 100%; }
     }
 
     .source {
@@ -106,6 +112,10 @@
   <h2>Introduction</h2>
   <div class="table-container">
     <table>
+      <colgroup>
+        <col class="col-1">
+        <col class="col-2">
+      </colgroup>
       <tr><th>Aspect</th><th>Description</th></tr>
 
       <tr>
@@ -145,6 +155,10 @@
   <h2>Use Case / Traffic Flow</h2>
   <div class="table-container">
     <table>
+      <colgroup>
+        <col class="col-1">
+        <col class="col-2">
+      </colgroup>
       <tr><th>Scenario</th><th>Description</th></tr>
 
       <tr>
@@ -170,11 +184,16 @@
       <img src="GWLB.png" alt="GWLB - deployment diagram">
       <figcaption>GWLB deployment / flow diagram</figcaption>
     </figure>
+  </div>
 
   <!-- Exam / Notes -->
   <h2>Notes & Best Practices</h2>
   <div class="table-container">
     <table>
+      <colgroup>
+        <col class="col-1">
+        <col class="col-2">
+      </colgroup>
       <tr><th>Topic</th><th>Notes</th></tr>
       <tr>
         <td>Deployment</td>
@@ -191,8 +210,5 @@
     </table>
   </div>
 
-  <div class="source">
-    Content transcribed from the attached PDF: GW Load Balancer.pdf. :contentReference[oaicite:0]{index=0}
-  </div>
 </body>
 </html>
