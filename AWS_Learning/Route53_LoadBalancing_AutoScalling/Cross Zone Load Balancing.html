@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cross-Zone Load Balancing - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 90%;
+      max-width: 1000px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    ul li {
+      text-align: left;
+      margin: 4px 0;
+    }
+    .image-section {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .image-section img {
+      width: 45%;
+      max-width: 500px;
+      border: 2px solid #415a77;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cross-Zone Load Balancing</h1>
+
+  <h2>Overview</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Feature</th><th>Description</th></tr>
+      <tr>
+        <td>Purpose</td>
+        <td>Cross-Zone Load Balancing determines whether each load balancer node distributes traffic only to targets in its own Availability Zone or across targets in all enabled Availability Zones.</td>
+      </tr>
+    </table>
+  </div>
+
+  <h2>Behavior Comparison</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>State</th><th>Behavior</th></tr>
+      <tr>
+        <td><span class="highlight">When Disabled</span></td>
+        <td>Each load balancer node distributes traffic across the registered targets in <strong>its Availability Zone only</strong>.</td>
+      </tr>
+      <tr>
+        <td><span class="highlight">When Enabled</span></td>
+        <td>Each load balancer node distributes traffic across the registered targets in <strong>all enabled Availability Zones</strong>.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="image-section">
+    <img src="czlb_disabled.png" alt="Cross-Zone Load Balancing Disabled">
+    <img src="czlb_enabled.png" alt="Cross-Zone Load Balancing Enabled">
+  </div>
+  
+  <h2>Considerations</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Service</th><th>Details</th></tr>
+      <tr>
+        <td>Application Load Balancer (ALB)</td>
+        <td>Cross-Zone Load Balancing is <span class="highlight">always enabled</span> and cannot be disabled.</td>
+      </tr>
+      <tr>
+        <td>Network Load Balancer (NLB)</td>
+        <td>Cross-Zone Load Balancing is <span class="highlight">disabled by default</span>. You can enable or disable it at any time after creation using the AWS Console, CLI, or API.</td>
+      </tr>
+      <tr>
+        <td>Gateway Load Balancer (GWLB)</td>
+        <td>Similar to NLB — Cross-Zone Load Balancing is disabled by default but can be toggled later.</td>
+      </tr>
+    </table>
+  </div>
+
+  <h2>Key Points & Exam Tips</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Topic</th><th>Explanation</th></tr>
+      <tr>
+        <td>Traffic Distribution</td>
+        <td>When enabled, traffic is evenly spread across all registered targets in all Availability Zones, improving utilization and resilience.</td>
+      </tr>
+      <tr>
+        <td>Use Case</td>
+        <td>Ideal when target counts differ per AZ, ensuring fair distribution across all healthy targets.</td>
+      </tr>
+      <tr>
+        <td>Latency Impact</td>
+        <td>May slightly affect latency due to cross-zone routing but provides higher availability overall.</td>
+      </tr>
+      <tr>
+        <td>Exam Tip</td>
+        <td>Remember that <strong>ALB always has Cross-Zone enabled</strong>, while <strong>NLB/GWLB have it disabled by default</strong>.</td>
+      </tr>
+    </table>
+  </div>
+
+</body>
+</html>
