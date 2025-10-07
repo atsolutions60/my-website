@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Path-based Routing vs Host-based Routing - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 90%;
+      max-width: 1000px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    ul li {
+      text-align: left;
+      margin: 4px 0;
+    }
+    .image-section {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: 40px 0;
+    }
+    .image-card {
+      background-color: #1b263b;
+      border: 1px solid #415a77;
+      border-radius: 12px;
+      padding: 16px;
+      width: 48%;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .image-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 20px rgba(255,123,0,0.3);
+    }
+    .image-card img {
+      width: 100%;
+      max-height: 420px;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 2px solid #415a77;
+    }
+    .image-card figcaption {
+      margin-top: 12px;
+      font-size: 16px;
+      color: #ff7b00;
+      font-weight: bold;
+      text-shadow: 0 0 6px rgba(255,123,0,0.4);
+    }
+    @media (max-width: 768px) {
+      .image-card { width: 90%; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Path-based Routing vs Host-based Routing</h1>
+
+  <!-- Overview -->
+  <h2>Routing Criteria</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Aspect</th><th>Path-Based Routing</th><th>Host-Based Routing</th></tr>
+      <tr>
+        <td>Definition</td>
+        <td>Routes traffic based on the <span class="highlight">URL path</span>.<br>Example: example.com/images or example.com/orders</td>
+        <td>Routes traffic based on the <span class="highlight">domain name</span> in the request.<br>Example: images.example.com or orders.example.com</td>
+      </tr>
+    </table>
+  </div>
+
+  <h2>DNS Configuration</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Aspect</th><th>Path-Based Routing</th><th>Host-Based Routing</th></tr>
+      <tr>
+        <td>DNS Setup</td>
+        <td>Points to the same ALB — no specific DNS setup for individual paths.</td>
+        <td>Requires <span class="highlight">DNS records</span> for each domain or subdomain to point to the ALB.</td>
+      </tr>
+    </table>
+  </div>
+
+  <h2>Use Cases</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Aspect</th><th>Path-Based Routing</th><th>Host-Based Routing</th></tr>
+      <tr>
+        <td>Best Suited For</td>
+        <td>Routing to different applications or services under the <span class="highlight">same domain</span>.</td>
+        <td>Routing to different applications or services based on <span class="highlight">different domains or subdomains</span>.</td>
+      </tr>
+    </table>
+  </div>
+
+  <h2>SSL/TLS Certificates</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Aspect</th><th>Path-Based Routing</th><th>Host-Based Routing</th></tr>
+      <tr>
+        <td>Certificate Management</td>
+        <td>A single SSL/TLS certificate can cover all paths under one domain.</td>
+        <td>May require <span class="highlight">multiple certificates</span> if different domains are used.</td>
+      </tr>
+    </table>
+  </div>
+
+  <h2>Flexibility</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Aspect</th><th>Path-Based Routing</th><th>Host-Based Routing</th></tr>
+      <tr>
+        <td>Scope</td>
+        <td>Limited to routing within a single domain.</td>
+        <td>More flexible — supports multiple domains and subdomains.</td>
+      </tr>
+    </table>
+  </div>
+
+  <h2>Complexity</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Aspect</th><th>Path-Based Routing</th><th>Host-Based Routing</th></tr>
+      <tr>
+        <td>Management Overhead</td>
+        <td>Generally simpler — fewer DNS records to maintain.</td>
+        <td>More complex — requires managing multiple DNS entries and SSL certificates.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Architecture Images -->
+  <div class="image-section">
+    <figure class="image-card">
+      <img src="New_pathbased.png" alt="Path-based Routing Diagram">
+      <figcaption>Path-based Routing Architecture</figcaption>
+    </figure>
+    <figure class="image-card">
+      <img src="new_hostbased.png" alt="Host-based Routing Diagram">
+      <figcaption>Host-based Routing Architecture</figcaption>
+    </figure>
+  </div>
+
+  <!-- Exam Tips -->
+  <h2>SAA-C03 Exam Tips</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Topic</th><th>Explanation</th></tr>
+      <tr>
+        <td>Routing Criteria</td>
+        <td>Path-based routes by <strong>URL path</strong>, Host-based routes by <strong>domain name</strong>.</td>
+      </tr>
+      <tr>
+        <td>Certificate Management</td>
+        <td>Use one certificate for path-based routing; multiple certificates may be required for host-based routing.</td>
+      </tr>
+      <tr>
+        <td>Flexibility</td>
+        <td>Host-based routing is more flexible, while path-based routing is simpler.</td>
+      </tr>
+      <tr>
+        <td>DNS Records</td>
+        <td>Path-based needs no separate DNS entries; Host-based requires DNS entries for each domain.</td>
+      </tr>
+    </table>
+  </div>
+
+</body>
+</html>
