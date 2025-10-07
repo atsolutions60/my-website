@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Network Load Balancer - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 90%;
+      max-width: 1000px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    ul li {
+      text-align: left;
+      margin: 4px 0;
+    }
+    .image-section {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: 40px 0;
+    }
+    .image-card {
+      background-color: #1b263b;
+      border: 1px solid #415a77;
+      border-radius: 12px;
+      padding: 16px;
+      width: 48%;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .image-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 20px rgba(255,123,0,0.3);
+    }
+    .image-card img {
+      width: 100%;
+      max-height: 420px;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 2px solid #415a77;
+    }
+    .image-card figcaption {
+      margin-top: 12px;
+      font-size: 16px;
+      color: #ff7b00;
+      font-weight: bold;
+      text-shadow: 0 0 6px rgba(255,123,0,0.4);
+    }
+    @media (max-width: 768px) {
+      .image-card { width: 90%; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Network Load Balancer (NLB)</h1>
+
+  <!-- Overview -->
+  <h2>Overview</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Feature</th><th>Description</th></tr>
+      <tr>
+        <td>Purpose</td>
+        <td><span class="highlight">Network Load Balancers</span> are best suited for load balancing of TCP, UDP, and TLS traffic where extreme performance and ultra-low latency are required.</td>
+      </tr>
+      <tr>
+        <td>Operation Layer</td>
+        <td>Operates at the <span class="highlight">connection level (Layer 4)</span> of the OSI model.</td>
+      </tr>
+      <tr>
+        <td>Performance</td>
+        <td>Capable of handling <strong>millions of requests per second</strong> while maintaining ultra-low latency.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Image placeholders -->
+  <div class="image-section">
+    <figure class="image-card">
+      <img src="elb-app.png" alt="Application Load Balancer Diagram">
+      <figcaption>Application Load Balancer Architecture</figcaption>
+    </figure>
+    <figure class="image-card">
+      <img src="nlb.png" alt="Network Load Balancer Diagram">
+      <figcaption>Network Load Balancer Architecture</figcaption>
+    </figure>
+  </div>
+
+  <!-- Comparison -->
+  <h2>Application vs Network Load Balancer</h2>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>Application Load Balancer (ALB)</th>
+        <th>Network Load Balancer (NLB)</th>
+      </tr>
+      <tr>
+        <td>Supported Protocols</td>
+        <td>HTTP, HTTPS, gRPC</td>
+        <td>TCP, UDP, TLS</td>
+      </tr>
+      <tr>
+        <td>Load Balancer Type</td>
+        <td>Layer 7</td>
+        <td>Layer 4</td>
+      </tr>
+      <tr>
+        <td>Sticky Sessions (Cookies)</td>
+        <td>Yes — helps route requests from the same client to the same target</td>
+        <td>Yes — supported for certain target groups</td>
+      </tr>
+      <tr>
+        <td>Idle Connection Timeout</td>
+        <td>Yes — reuses TCP connections for a short duration</td>
+        <td>Not Applicable (connection-level load balancing)</td>
+      </tr>
+      <tr>
+        <td>Path & Host-Based Routing</td>
+        <td>Yes — supports routing based on URL path or hostname</td>
+        <td>No — distributes purely based on network information</td>
+      </tr>
+      <tr>
+        <td>WebSockets Support</td>
+        <td>Yes — supports bidirectional communication</td>
+        <td>Yes — supported at transport layer</td>
+      </tr>
+      <tr>
+        <td>Static IP Support</td>
+        <td>No — uses DNS names</td>
+        <td>Yes — provides one static IP per AZ</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Additional Images -->
+  <div class="image-section">
+	  <figure class="image-card">
+		<img src="sticky-session.png" alt="Sticky Session Concept">
+		<figcaption>Sticky Session Concept</figcaption>
+		<p class="image-text" style="text-align: left;">
+		  Sticky Sessions (also called session affinity) ensure that requests from the same client are always routed 
+		  to the same backend target. This maintains user session continuity — especially useful for applications that 
+		  store temporary session data locally on a specific server.
+		</p>
+	  </figure>
+	  <div style="clear: both;"></div> <!-- ADD THIS -->
+	</div>
+
+
+
+  <!-- Exam Tips -->
+  <h2>SAA-C03 Exam Tips</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Topic</th><th>Explanation</th></tr>
+      <tr>
+        <td>Protocol Level</td>
+        <td>NLB operates at <strong>Layer 4</strong> while ALB operates at <strong>Layer 7</strong>.</td>
+      </tr>
+      <tr>
+        <td>Performance</td>
+        <td>NLB offers <span class="highlight">ultra-low latency</span> and high throughput — ideal for millions of requests per second.</td>
+      </tr>
+      <tr>
+        <td>Use Cases</td>
+        <td>Choose NLB for TCP/UDP traffic or static IP requirements; ALB for advanced routing (path/host-based, HTTP features).</td>
+      </tr>
+      <tr>
+        <td>Static IPs</td>
+        <td>Only <span class="highlight">Network Load Balancer</span> supports static IP addresses.</td>
+      </tr>
+    </table>
+  </div>
+
+</body>
+</html>
