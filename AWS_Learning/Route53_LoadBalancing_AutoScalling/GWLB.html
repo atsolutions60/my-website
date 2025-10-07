@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS Gateway Load Balancer - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 { margin-top: 40px; }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 90%;
+      max-width: 1000px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+    }
+    tr:nth-child(even) { background-color: #243447; }
+    .highlight { color: #90ee90; font-weight: bold; }
+    ul { padding-left: 20px; margin: 0; }
+    ul li { text-align: left; margin: 4px 0; }
+
+    /* Image section */
+    .image-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      margin: 50px 0;
+    }
+    .image-card {
+      background-color: #0d1b2a;
+      border: 1px solid #415a77;
+      border-radius: 16px;
+      padding: 20px;
+      width: 95%;
+      max-width: 950px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .image-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(255,123,0,0.3);
+    }
+    .image-card img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      border: 2px solid #415a77;
+      display: block;
+      margin: 0 auto;
+      background-color: #ffffff;
+    }
+    .image-card figcaption {
+      margin-top: 12px;
+      font-size: 16px;
+      color: #ff7b00;
+      font-weight: bold;
+      text-shadow: 0 0 6px rgba(255,123,0,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .image-card { width: 95%; }
+    }
+
+    .source {
+      text-align: center;
+      margin-top: 12px;
+      color: #9fb4d6;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <h1>AWS Gateway Load Balancer (GWLB)</h1>
+
+  <!-- Overview -->
+  <h2>Introduction</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Aspect</th><th>Description</th></tr>
+
+      <tr>
+        <td>Layer</td>
+        <td>AWS Gateway Load Balancer (GWLB) is a Layer 3 (network layer) service.</td>
+      </tr>
+
+      <tr>
+        <td>Purpose</td>
+        <td>Gateway Load Balancer (GWLB) is a service designed to help you deploy, scale, and manage virtual appliances, such</td>
+      </tr>
+
+      <tr>
+        <td>Appliance Examples</td>
+        <td>
+          <ul>
+            <li>Firewalls</li>
+            <li>Intrusion Detection System (IDS)</li>
+            <li>Intrusion Prevention System (IPS)</li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Capabilities</td>
+        <td>It distributes traffic across multiple appliance instances, performs health checks, and supports Equal-Cost Multi-Path routing (ECMP) for high availability and throughput.</td>
+      </tr>
+
+      <tr>
+        <td>Benefit</td>
+        <td>GWLB simplifies the deployment and management of network appliances in AWS, making it easier to enhance security and networking capabilities in the cloud.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Use Case / Traffic Flow -->
+  <h2>Use Case / Traffic Flow</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Scenario</th><th>Description</th></tr>
+
+      <tr>
+        <td>Traffic Flow</td>
+        <td>Use GWLB to steer traffic to a fleet of virtual appliances for inspection or processing, enabling scalable, highly-available inline network services.</td>
+      </tr>
+
+      <tr>
+        <td>Scaling & HA</td>
+        <td>Distributes traffic across multiple appliance instances and leverages health checks and ECMP to achieve high availability and throughput.</td>
+      </tr>
+
+      <tr>
+        <td>Typical Integrations</td>
+        <td>Often used with third-party firewalls, IDS/IPS, and other network security appliances to centralize inspection and enforcement.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Image Section -->
+  <div class="image-section">
+    <figure class="image-card">
+      <img src="GWLB.png" alt="GWLB - deployment diagram">
+      <figcaption>GWLB deployment / flow diagram</figcaption>
+    </figure>
+
+  <!-- Exam / Notes -->
+  <h2>Notes & Best Practices</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Topic</th><th>Notes</th></tr>
+      <tr>
+        <td>Deployment</td>
+        <td>Deploy GWLB in front of virtual appliance fleets; configure target appliances to receive and process traffic forwarded by the GWLB.</td>
+      </tr>
+      <tr>
+        <td>Health & Routing</td>
+        <td>Use GWLB health checks to ensure traffic is only sent to healthy appliance instances; ECMP support allows multiple equal-cost paths for higher throughput.</td>
+      </tr>
+      <tr>
+        <td>Use Cases</td>
+        <td>Centralized inspection, inline traffic processing, scalable firewall/IDS/IPS deployments.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="source">
+    Content transcribed from the attached PDF: GW Load Balancer.pdf. :contentReference[oaicite:0]{index=0}
+  </div>
+</body>
+</html>
