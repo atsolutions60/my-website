@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VPC Ingress Routing - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 90%;
+      max-width: 1000px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    ul li {
+      text-align: left;
+      margin: 4px 0;
+    }
+
+    /* ---- Updated image section ---- */
+    .image-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      margin: 50px 0;
+    }
+
+    .image-card {
+      background-color: #0d1b2a;
+      border: 1px solid #415a77;
+      border-radius: 16px;
+      padding: 20px;
+      width: 95%;
+      max-width: 950px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .image-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(255,123,0,0.3);
+    }
+
+    .image-card img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      border: 2px solid #415a77;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .image-card figcaption {
+      margin-top: 12px;
+      font-size: 16px;
+      color: #ff7b00;
+      font-weight: bold;
+      text-shadow: 0 0 6px rgba(255,123,0,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .image-card { width: 95%; }
+    }
+  </style>
+</head>
+<body>
+  <h1>VPC Ingress Routing</h1>
+
+  <!-- Overview -->
+  <h2>Overview</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Aspect</th><th>Description</th></tr>
+      <tr>
+        <td>Definition</td>
+        <td><span class="highlight">VPC Ingress Routing</span> allows you to configure routing rules in your Virtual Private Cloud (VPC) to direct all inbound traffic entering through an Internet Gateway (IGW) or Virtual Private Gateway (VGW) to specific targets such as network appliances, firewalls, or security inspection tools before reaching your workloads.</td>
+      </tr>
+      <tr>
+        <td>Purpose</td>
+        <td>Used to enable centralized traffic inspection and control, improving network security and compliance for inbound traffic entering AWS.</td>
+      </tr>
+      <tr>
+        <td>Use Case</td>
+        <td>Commonly used to integrate with <span class="highlight">third-party firewalls, IDS/IPS appliances, or custom traffic filtering solutions</span> deployed within a VPC.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Traditional vs With Ingress Routing -->
+  <h2>Traditional vs With Ingress Routing</h2>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Aspect</th>
+        <th>Traditional VPC (Without Ingress Routing)</th>
+        <th>VPC With Ingress Routing</th>
+      </tr>
+      <tr>
+        <td>Traffic Flow</td>
+        <td>Inbound traffic from the Internet Gateway (IGW) directly reaches application subnets or EC2 instances without inspection.</td>
+        <td>Inbound traffic first passes through <span class="highlight">routing appliances</span> (such as a firewall or inspection layer) before reaching target subnets.</td>
+      </tr>
+      <tr>
+        <td>Security</td>
+        <td>Limited visibility and control over incoming packets; difficult to enforce security inspection.</td>
+        <td>Enhanced security as all traffic is routed through a dedicated inspection appliance or firewall.</td>
+      </tr>
+      <tr>
+        <td>Routing Tables</td>
+        <td>Route tables directly associate subnets with the IGW for inbound/outbound access.</td>
+        <td>Custom route tables define routes for Internet-bound traffic via an <span class="highlight">Ingress Routing Target (ENI or Gateway)</span>.</td>
+      </tr>
+      <tr>
+        <td>Use Case</td>
+        <td>Basic setups with low security requirements or isolated workloads.</td>
+        <td>Used in regulated environments requiring <span class="highlight">centralized inspection</span> of inbound traffic.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Image Section -->
+  <div class="image-section">
+    <figure class="image-card">
+      <img src="without_ingress_routing.png" alt="Traditional VPC Architecture">
+      <figcaption>Traditional VPC without Ingress Routing</figcaption>
+    </figure>
+
+    <figure class="image-card">
+      <img src="with_ingress_routing.png" alt="VPC with Ingress Routing Architecture">
+      <figcaption>VPC with Ingress Routing Enabled</figcaption>
+    </figure>
+  </div>
+
+  <!-- Exam Tips -->
+  <h2>SAA-C03 Exam Tips</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Topic</th><th>Explanation</th></tr>
+      <tr>
+        <td>Purpose</td>
+        <td>VPC Ingress Routing is used to direct inbound traffic through specific network appliances for inspection and monitoring.</td>
+      </tr>
+      <tr>
+        <td>Common Appliances</td>
+        <td>Typically integrated with <strong>firewalls, IDS/IPS systems, or third-party network appliances</strong>.</td>
+      </tr>
+      <tr>
+        <td>Configuration</td>
+        <td>Uses <span class="highlight">custom route tables</span> to redirect ingress traffic to specific targets like ENIs or gateway endpoints.</td>
+      </tr>
+      <tr>
+        <td>Exam Tip</td>
+        <td>When the question involves directing inbound traffic for inspection before reaching workloads, the correct answer is <span class="highlight">VPC Ingress Routing</span>.</td>
+      </tr>
+    </table>
+  </div>
+
+</body>
+</html>
