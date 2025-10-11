@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS Auto Scaling - Comparisonia Theme</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    /* ---- BASE THEME ---- */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 0;
+      padding: 10px 0;
+    }
+
+    h1, h2, th, td, li {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff7b00;
+      margin-top: 25px;
+      font-size: 1.8em;
+      letter-spacing: 0.5px;
+    }
+
+    h2 {
+      margin: 35px 0 15px;
+      text-align: center;
+      color: #ff7b00;
+      font-size: 1.3em;
+      letter-spacing: 0.3px;
+    }
+
+    /* ---- TABLE WRAPPER ---- */
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin: 10px 0 25px;
+      overflow-x: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 85%;
+      max-width: 1000px;
+      table-layout: fixed;
+      margin: 0 auto;
+      font-size: 15px;
+    }
+
+    colgroup col:first-child {
+      width: 28%;
+    }
+
+    colgroup col:last-child {
+      width: 72%;
+    }
+
+    th, td {
+      border: 1px solid #415a77;
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+      white-space: normal;
+      word-wrap: break-word;
+      font-size: 15px;
+      line-height: 1.5;
+      font-weight: normal;
+      color: #ffffff;
+    }
+
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      list-style-type: disc;
+    }
+
+    li {
+      margin-bottom: 4px;
+      line-height: 1.5;
+      font-size: 15px;
+      color: #e0e6ed;
+    }
+
+    @media (max-width: 900px) {
+      table {
+        width: 96%;
+        font-size: 14px;
+      }
+      th, td {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>AWS Auto Scaling</h1>
+
+  <!-- INTRO -->
+  <h2>Introduction</h2>
+  <div class="table-container">
+    <table>
+      <colgroup><col><col></colgroup>
+      <tr><th>Aspect</th><th>Details</th></tr>
+      <tr><td>Purpose</td><td>Ensures the correct number of Amazon EC2 instances are available to handle the load for applications.</td></tr>
+      <tr><td>Minimum Instances</td><td>The group never goes below the specified minimum size.</td></tr>
+      <tr><td>Maximum Instances</td><td>The group never exceeds the specified maximum size.</td></tr>
+      <tr><td>Desired Capacity</td><td>Ensures the group maintains the defined number of instances at all times.</td></tr>
+    </table>
+  </div>
+
+  <!-- BENEFITS -->
+  <h2>Benefits</h2>
+  <div class="table-container">
+    <table>
+      <colgroup><col><col></colgroup>
+      <tr><th>Benefit</th><th>Explanation</th></tr>
+      <tr><td>Fault Tolerance</td><td>Detects unhealthy instances, terminates them, and launches replacements. Supports multi-AZ resilience.</td></tr>
+      <tr><td>High Availability</td><td>Ensures applications always have sufficient capacity to handle demand.</td></tr>
+    </table>
+  </div>
+
+  <!-- SCALING TERMINOLOGY -->
+  <h2>Scaling Terminology</h2>
+  <div class="table-container">
+    <table>
+      <colgroup><col><col></colgroup>
+      <tr><th>Type</th><th>Description</th></tr>
+      <tr><td>Vertical Scaling</td><td>
+        <ul>
+          <li><b>Scale Up:</b> Add CPU or memory to one node.</li>
+          <li><b>Scale Down:</b> Remove resources from that node.</li>
+        </ul>
+      </td></tr>
+      <tr><td>Horizontal Scaling</td><td>
+        <ul>
+          <li><b>Scale Out:</b> Add more nodes or EC2 instances.</li>
+          <li><b>Scale In:</b> Remove nodes.</li>
+        </ul>
+      </td></tr>
+      <tr><td>Auto Scaling</td><td>Automatically performs horizontal scaling.</td></tr>
+    </table>
+  </div>
+
+  <!-- COMPONENTS -->
+  <h2>Auto Scaling Components</h2>
+  <div class="table-container">
+    <table>
+      <colgroup><col><col></colgroup>
+      <tr><th>Component</th><th>Description</th></tr>
+      <tr><td>Auto Scaling Groups</td><td>Organize EC2 instances into logical groups for scaling and management.</td></tr>
+      <tr><td>Launch Templates / Configurations</td><td>
+        <ul>
+          <li>Launch Configurations define AMI ID, type, key pair, and security groups.</li>
+          <li><b>Launch Templates Advantages:</b>
+            <ul>
+              <li>Versioning support.</li>
+              <li>Access to new features (gp3/io2, EBS tagging).</li>
+              <li>Supports mixed instance types and Spot + On-Demand setups.</li>
+            </ul>
+          </li>
+        </ul>
+      </td></tr>
+    </table>
+  </div>
+
+  <!-- SCALING OPTIONS -->
+  <h2>Scaling Options</h2>
+  <div class="table-container">
+    <table>
+      <colgroup>
+        <col style="width: 25%">
+        <col style="width: 45%">
+        <col style="width: 30%">
+      </colgroup>
+      <tr><th>Type</th><th>Description</th><th>Use Case</th></tr>
+      <tr><td>Manual Scaling</td><td>Manual change of min, max, or desired capacity.</td><td>Special events (e.g., new app release).</td></tr>
+      <tr><td>Scheduled Scaling</td><td>Triggered by date/time schedules.</td><td>Predictable workloads (month-end).</td></tr>
+      <tr><td>Dynamic Scaling</td><td>Based on metrics (e.g., CPU > 90% for 15 mins).</td><td>Unpredictable loads.</td></tr>
+    </table>
+  </div>
+
+  <!-- SCALING POLICIES -->
+  <h2>Scaling Policy Types</h2>
+  <div class="table-container">
+    <table>
+      <colgroup><col><col></colgroup>
+      <tr><th>Policy Type</th><th>Description</th></tr>
+      <tr><td>Simple Scaling</td><td>Single threshold (e.g., add 1 instance if CPU between 50–60%).</td></tr>
+      <tr><td>Step Scaling</td><td>Multiple thresholds (add 1, 2, or 3 instances depending on CPU).</td></tr>
+      <tr><td>Target Tracking</td><td>Automatically optimizes to maintain target utilization.</td></tr>
+    </table>
+  </div>
+
+  <!-- PREDICTIVE SCALING -->
+  <h2>Predictive Scaling</h2>
+  <div class="table-container">
+    <table>
+      <colgroup><col><col></colgroup>
+      <tr><th>Aspect</th><th>Details</th></tr>
+      <tr><td>Definition</td><td>Uses ML models to forecast demand using 3+ weeks of data, scaling proactively.</td></tr>
+      <tr><td>Modes</td><td><b>On:</b> Auto adjust.<br><b>Off:</b> Only forecasts.</td></tr>
+      <tr><td>Metrics</td><td>CPU, network I/O, or request count.</td></tr>
+      <tr><td>Target Utilization</td><td>Desired usage (e.g., 50% CPU).</td></tr>
+      <tr><td>Pre-Launch</td><td>Launch instances before forecast time (e.g., 5 mins early).</td></tr>
+      <tr><td>Buffer</td><td>Adds extra capacity (e.g., +20%).</td></tr>
+    </table>
+  </div>
+
+  <!-- INSTANCE MAINTENANCE -->
+  <h2>Instance Maintenance Policy</h2>
+  <div class="table-container">
+    <table>
+      <colgroup><col><col></colgroup>
+      <tr><th>Mode</th><th>Description</th></tr>
+      <tr><td>Terminate & Launch</td><td>Removes unhealthy instances immediately and replaces them.</td></tr>
+      <tr><td>Launch Before Terminate</td><td>Starts new instances first to minimize downtime.</td></tr>
+      <tr><td>Custom Behavior</td><td>Advanced fine-tuning using health checks and policies.</td></tr>
+    </table>
+  </div>
+
+  <!-- TERMINATION POLICY -->
+  <h2>Termination Policy</h2>
+  <div class="table-container">
+    <table>
+      <colgroup><col><col></colgroup>
+      <tr><th>Policy</th><th>Description</th></tr>
+      <tr><td>Default</td><td>Balances across AZs, respects protection, prefers oldest config, and optimizes by billing hour.</td></tr>
+      <tr><td>Built-in</td><td>OldestTemplate, ClosestToNextHour, NewestInstance, OldestInstance.</td></tr>
+      <tr><td>Custom</td><td>Lambda-based smart termination with graceful shutdown, data backup, and flexible logic.</td></tr>
+    </table>
+  </div>
+
+  <!-- TIMERS -->
+  <h2>Auto Scaling Timers</h2>
+  <div class="table-container">
+    <table>
+      <colgroup>
+        <col style="width: 30%">
+        <col style="width: 50%">
+        <col style="width: 20%">
+      </colgroup>
+      <tr><th>Timer</th><th>Purpose</th><th>Default</th></tr>
+      <tr><td>Warm-Up</td><td>Time before new instances count towards metrics.</td><td>Optional</td></tr>
+      <tr><td>Cool-Down</td><td>Wait time before next scaling action.</td><td>5 min</td></tr>
+      <tr><td>Grace Period</td><td>Delay before health checks start on new instances.</td><td>5 min</td></tr>
+    </table>
+  </div>
+
+  <!-- EXERCISE -->
+  <h2>Exercise: Scaling Timers</h2>
+  <div class="table-container">
+    <table>
+      <colgroup>
+        <col style="width: 35%">
+        <col style="width: 30%">
+        <col style="width: 35%">
+      </colgroup>
+      <tr><th>Task</th><th>Given</th><th>Result</th></tr>
+      <tr><td>Effective Warm-Up Time</td><td>5 minutes</td><td>Instances counted from 12:05 PM.</td></tr>
+      <tr><td>Earliest Next Scale Action</td><td>Cool-down 10 min</td><td>Next scaling at 12:15 PM.</td></tr>
+      <tr><td>Health Check Start</td><td>Grace 3 min</td><td>Health checks start at 12:03 PM.</td></tr>
+    </table>
+  </div>
+
+</body>
+</html>
