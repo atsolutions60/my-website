@@ -1,42 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>IAM Policies - Comparisonia</title>
   <style>
+    :root{
+      --bg:#0d1b2a;
+      --card:#1b263b;
+      --accent:#ff7b00;
+      --muted:#ffd580;
+      --border:#415a77;
+      --text:#ffffff;
+      --green:#90ee90;
+    }
+    html,body{height:100%;}
     body {
       font-family: Arial, sans-serif;
-      background-color: #0d1b2a;
-      color: #ffffff;
-      margin: 20px;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 20px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
-    h1, h2, h3 {
-      text-align: center;
-      color: #ff7b00;
+
+    header{
+      text-align:center;
+      margin-bottom: 28px;
     }
+    h1 {
+      color: var(--accent);
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    /* page-wide section title (centered) */
     h2 {
+      color: var(--accent);
+      text-align: center;
       margin-top: 40px;
+      margin-bottom: 12px;
     }
+
+    /* subsection headings — left aligned within content column */
     h3 {
-      color: #ffd580;
+      color: var(--muted);
       margin-top: 25px;
+      margin-bottom: 8px;
       text-align: left;
     }
+
+    /* main centered content column that controls alignment */
+    .content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* table container preserves horizontal scroll if needed */
     .table-container {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
+      margin-top: 12px;
       overflow-x: auto;
     }
+
     table {
       border-collapse: collapse;
-      background-color: #1b263b;
-      width: 90%;
-      max-width: 1000px;
+      background-color: var(--card);
+      width: 100%;                 /* full width of .content */
       table-layout: fixed;
     }
     th, td {
-      border: 1px solid #415a77;
+      border: 1px solid var(--border);
       padding: 12px;
       text-align: left;
       vertical-align: top;
@@ -44,43 +77,48 @@
       word-wrap: break-word;
     }
     th {
-      background-color: #ff7b00;
+      background-color: var(--accent);
       color: #0d1b2a;
-      text-align: center;
+      text-align:center;
     }
-    tr:nth-child(even) {
-      background-color: #243447;
+    tr:nth-child(even){
+      background-color:#243447;
     }
+
     ul {
       padding-left: 20px;
       margin: 0;
     }
     ul li {
-      text-align: left;
       margin: 4px 0;
     }
+
     .image-container {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-      flex-wrap: wrap;
-      gap: 20px;
+      display:flex;
+      justify-content:center;
+      margin-top:18px;
+      gap:16px;
+      flex-wrap:wrap;
     }
     .image-container img {
-      max-width: 40%;
-      border: 2px solid #415a77;
-      border-radius: 8px;
-      background-color: #ffffff;
+      max-width:40%;
+      border-radius:8px;
+      border:2px solid var(--border);
+      background:#fff;
     }
+
     pre {
-      background-color: #243447;
-      border: 1px solid #415a77;
-      padding: 10px;
-      border-radius: 6px;
-      overflow-x: auto;
-      font-size: 13px;
-      color: #90ee90;
+      background-color:#243447;
+      border:1px solid var(--border);
+      padding:10px;
+      border-radius:6px;
+      overflow-x:auto;
+      font-size:13px;
+      color: var(--green);
+      white-space: pre-wrap;
     }
+
+    /* narrower first column for better layout */
     th:first-child, td:first-child {
       width: 25%;
       white-space: nowrap;
@@ -88,103 +126,121 @@
     th:last-child, td:last-child {
       width: 75%;
     }
+
+    a { color: var(--green); }
+    @media (max-width:700px){
+      .image-container img{ max-width:90%; }
+      th:first-child, td:first-child { white-space: normal; width: 35%; }
+    }
   </style>
 </head>
 <body>
 
-  <h1>IAM Policies</h1>
+  <header>
+    <h1>IAM Policies</h1>
+  </header>
 
-  <!-- Introduction -->
-  <h2>Introduction</h2>
-  <div class="table-container">
-    <table>
-      <tr><th>Aspect</th><th>Description</th></tr>
-      <tr><td>Purpose</td><td>Defines who is allowed to do what with which AWS resources.</td></tr>
-      <tr><td>Control</td><td>Controls access to AWS services and resources.</td></tr>
-      <tr><td>Format</td><td>Policies are defined as a set of rules in JSON format.</td></tr>
-      <tr><td>Security</td><td>Helps keep your AWS environment secure.</td></tr>
-      <tr><td>Attachment Entities</td><td>Policies can be attached to <span class="highlight">Users</span>, <span class="highlight">Groups</span>, or <span class="highlight">Roles</span>.</td></tr>
-      <tr><td>Types</td><td>There are three types of IAM Policies: AWS Managed, Customer Managed, and Inline Policies.</td></tr>
-    </table>
-  </div>
+  <!-- INTRODUCTION -->
+  <section class="content">
+    <h2>Introduction</h2>
 
+    <div class="table-container">
+      <table>
+        <tr><th>Aspect</th><th>Description</th></tr>
+        <tr><td>Purpose</td><td>Defines who is allowed to do what with which AWS resources.</td></tr>
+        <tr><td>Control</td><td>Controls access to AWS services and resources.</td></tr>
+        <tr><td>Format</td><td>Policies are defined as a set of rules in JSON format.</td></tr>
+        <tr><td>Security</td><td>Helps keep your AWS environment secure.</td></tr>
+        <tr><td>Attachment Entities</td><td>Policies can be attached to <strong>Users</strong>, <strong>Groups</strong>, or <strong>Roles</strong>.</td></tr>
+        <tr><td>Types</td><td>There are three types of IAM Policies: AWS Managed, Customer Managed, and Inline Policies.</td></tr>
+      </table>
+    </div>
 
-  <!-- AWS Managed Policies -->
-  <h2>AWS Managed Policies</h2>
-  <div class="table-container">
-    <table>
-      <tr><th>Feature</th><th>Description</th></tr>
-      <tr><td>Definition</td><td>Created and managed by AWS for common use cases.</td></tr>
-      <tr><td>Reusability</td><td>Ready to attach to multiple IAM users, groups, or roles within an AWS account.</td></tr>
-      <tr><td>Automatic Updates</td><td>Updated automatically by AWS to include new services or permissions.</td></tr>
-      <tr><td>Use Case</td><td>Provides a quick way to assign necessary permissions based on job function or need.</td></tr>
-      <tr><td>Types</td><td>Divided into <span class="highlight">AWS Managed Policies (general use)</span> and <span class="highlight">Service-linked Policies</span>.</td></tr>
-    </table>
-  </div>
+  </section>
 
-  <h3>Example</h3>
-  <div class="table-container">
-    <table>
-      <tr><th>Aspect</th><th>Details</th></tr>
-      <tr><td>Objective</td><td>Enable the IAM user <span class="highlight">EC2MasterMind</span> to fully manage EC2 instances.</td></tr>
-      <tr><td>Policy Used</td><td>AmazonEC2FullAccess</td></tr>
-      <tr><td>Entity</td><td>IAM User: EC2MasterMind</td></tr>
-      <tr><td>Permissions</td><td>
-        <ul>
-          <li>Launch EC2 instances with chosen AMIs, instance types, and configurations</li>
-          <li>Start, stop, reboot, and terminate EC2 instances</li>
-          <li>Manage storage (volumes, snapshots)</li>
-          <li>Configure network settings and security groups</li>
-          <li>Create and manage SSH key pairs</li>
-          <li>Monitor instances using CloudWatch and set alerts</li>
-        </ul>
-      </td></tr>
-    </table>
-  </div>
+  <!-- AWS MANAGED POLICIES -->
+  <section class="content">
+    <h2>AWS Managed Policies</h2>
 
-  <h3>Benefits & Limitations</h3>
-  <div class="table-container">
-    <table>
-      <tr><th>Benefits</th><th>Limitations</th></tr>
-      <tr>
-        <td>
-          <ul>
-            <li>Simplicity</li>
-            <li>Predefined by AWS</li>
-            <li>Automatic updates</li>
-            <li>Reusable</li>
-            <li>Follows AWS best practices</li>
-          </ul>
-        </td>
-        <td>
-          <ul>
-            <li>Cannot specify permissions at individual resource level</li>
-            <li>No customization for unique use cases</li>
-            <li>May grant broader permissions than needed</li>
-            <li>Dependent on AWS for updates</li>
-            <li>Complex to fully understand large managed policies</li>
-          </ul>
-        </td>
-      </tr>
-    </table>
-  </div>
+    <div class="table-container">
+      <table>
+        <tr><th>Feature</th><th>Description</th></tr>
+        <tr><td>Definition</td><td>Created and managed by AWS for common use cases.</td></tr>
+        <tr><td>Reusability</td><td>Ready to attach to multiple IAM users, groups, or roles within an AWS account.</td></tr>
+        <tr><td>Automatic Updates</td><td>Updated automatically by AWS to include new services or permissions.</td></tr>
+        <tr><td>Use Case</td><td>Provides a quick way to assign necessary permissions based on job function or need.</td></tr>
+        <tr><td>Types</td><td>Divided into <strong>AWS Managed Policies (general use)</strong> and <strong>Service-linked Policies</strong>.</td></tr>
+      </table>
+    </div>
 
-  <!-- Customer Managed Policies -->
-  <h2>Customer Managed Policies</h2>
-  <div class="table-container">
-    <table>
-      <tr><th>Feature</th><th>Description</th></tr>
-      <tr><td>Definition</td><td>Created and managed by the user for specific requirements.</td></tr>
-      <tr><td>Flexibility</td><td>Tailored permissions; attachable to multiple entities.</td></tr>
-      <tr><td>Updates</td><td>Manual updates required.</td></tr>
-      <tr><td>Control</td><td>Enables fine-grained access control.</td></tr>
-      <tr><td>Versioning</td><td>Supports versioning and rollback.</td></tr>
-    </table>
-  </div>
+    <h3>Example</h3>
+    <div class="table-container">
+      <table>
+        <tr><th>Aspect</th><th>Details</th></tr>
+        <tr><td>Objective</td><td>Enable the IAM user <strong>EC2MasterMind</strong> to fully manage EC2 instances.</td></tr>
+        <tr><td>Policy Used</td><td>AmazonEC2FullAccess</td></tr>
+        <tr><td>Entity</td><td>IAM User: EC2MasterMind</td></tr>
+        <tr>
+          <td>Permissions</td>
+          <td>
+            <ul>
+              <li>Launch EC2 instances with chosen AMIs, instance types, and configurations</li>
+              <li>Start, stop, reboot, and terminate EC2 instances</li>
+              <li>Manage storage (volumes, snapshots)</li>
+              <li>Configure network settings and security groups</li>
+              <li>Create and manage SSH key pairs</li>
+              <li>Monitor instances using CloudWatch and set alerts</li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </div>
 
-  <h3>Example Policy</h3>
-  <pre>
-{
+    <h3>Benefits &amp; Limitations</h3>
+    <div class="table-container">
+      <table>
+        <tr><th>Benefits</th><th>Limitations</th></tr>
+        <tr>
+          <td>
+            <ul>
+              <li>Simplicity</li>
+              <li>Predefined by AWS</li>
+              <li>Automatic updates</li>
+              <li>Reusable</li>
+              <li>Follows AWS best practices</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Cannot specify permissions at individual resource level</li>
+              <li>No customization for unique use cases</li>
+              <li>May grant broader permissions than needed</li>
+              <li>Dependent on AWS for updates</li>
+              <li>Complex to fully understand large managed policies</li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- CUSTOMER MANAGED POLICIES -->
+  <section class="content">
+    <h2>Customer Managed Policies</h2>
+
+    <div class="table-container">
+      <table>
+        <tr><th>Feature</th><th>Description</th></tr>
+        <tr><td>Definition</td><td>Created and managed by the user for specific requirements.</td></tr>
+        <tr><td>Flexibility</td><td>Tailored permissions; attachable to multiple entities.</td></tr>
+        <tr><td>Updates</td><td>Manual updates required.</td></tr>
+        <tr><td>Control</td><td>Enables fine-grained access control.</td></tr>
+        <tr><td>Versioning</td><td>Supports versioning and rollback.</td></tr>
+      </table>
+    </div>
+
+    <h3>Example Policy</h3>
+    <pre>{
   "Version": "2012-10-17",
   "Statement": [
     {
@@ -201,33 +257,39 @@
     }
   ]
 }
-  </pre>
+    </pre>
 
-  <p style="text-align:center;">Test your policy with the <a href="https://policysim.aws.amazon.com/" target="_blank" style="color:#90ee90;">AWS Policy Simulator</a>.</p>
+    <p style="text-align:center;">Test your policy with the <a href="https://policysim.aws.amazon.com/" target="_blank">AWS Policy Simulator</a>.</p>
 
-  <h3>Policy Evaluation</h3>
-  <div class="table-container">
-    <table>
-      <tr><th>Rule</th><th>Description</th></tr>
-      <tr><td>Default Deny</td><td>If no policy explicitly allows an action, it’s denied by default.</td></tr>
-      <tr><td>Explicit Allow</td><td>Permits an action unless explicitly denied.</td></tr>
-      <tr><td>Explicit Deny</td><td>Overrides any allow. Explicit denies take precedence.</td></tr>
-      <tr><td>Maximum Size</td><td>Each customer managed policy can be up to 6,144 characters (including whitespace).</td></tr>
-    </table>
-  </div>
+    <h3>Policy Evaluation</h3>
+    <div class="table-container">
+      <table>
+        <tr><th>Rule</th><th>Description</th></tr>
+        <tr><td>Default Deny</td><td>If no policy explicitly allows an action, it’s denied by default.</td></tr>
+        <tr><td>Explicit Allow</td><td>Permits an action unless explicitly denied.</td></tr>
+        <tr><td>Explicit Deny</td><td>Overrides any allow. Explicit denies take precedence.</td></tr>
+        <tr><td>Maximum Size</td><td>Each customer managed policy can be up to 6,144 characters (including whitespace).</td></tr>
+      </table>
+    </div>
+  </section>
 
-  <!-- Inline Policies -->
-  <h2>Inline Policies</h2>
-  <div class="table-container">
-    <table>
-      <tr><th>Feature</th><th>Description</th></tr>
-      <tr><td>Definition</td><td>Policies directly embedded within a single IAM user, group, or role.</td></tr>
-      <tr><td>Relationship</td><td>Each inline policy is tied to exactly one entity; deleted when entity is removed.</td></tr>
-      <tr><td>Non-Reusable</td><td>Cannot be shared or reused with other IAM entities.</td></tr>
-      <tr><td>No ARN</td><td>Do not have ARNs as they aren’t separate AWS entities.</td></tr>
-      <tr><td>Use Cases</td><td>Used for specific job needs, short-term projects, and tighter security control.</td></tr>
-    </table>
-  </div>
+  <!-- INLINE POLICIES -->
+  <section class="content">
+    <h2>Inline Policies</h2>
+
+    <div class="table-container">
+      <table>
+        <tr><th>Feature</th><th>Description</th></tr>
+        <tr><td>Definition</td><td>Policies directly embedded within a single IAM user, group, or role.</td></tr>
+        <tr><td>Relationship</td><td>Each inline policy is tied to exactly one entity; deleted when entity is removed.</td></tr>
+        <tr><td>Non-Reusable</td><td>Cannot be shared or reused with other IAM entities.</td></tr>
+        <tr><td>No ARN</td><td>Do not have ARNs as they aren’t separate AWS entities.</td></tr>
+        <tr><td>Use Cases</td><td>Used for specific job needs, short-term projects, and tighter security control.</td></tr>
+      </table>
+    </div>
+
+
+  </section>
 
 </body>
 </html>
