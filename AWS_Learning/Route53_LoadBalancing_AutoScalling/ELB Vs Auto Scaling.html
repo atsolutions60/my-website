@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ELB vs Auto Scaling - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 85%;
+      max-width: 1000px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .image-container img {
+      max-width: 40%;
+      border: 2px solid #415a77;
+      border-radius: 8px;
+      background-color: #ffffff;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    ul li {
+      text-align: left;
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>ELB vs Auto Scaling</h1>
+
+  <!-- Auto Scaling Section -->
+  <h2>Auto Scaling</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Feature</th><th>Description</th></tr>
+      <tr>
+        <td>Infrastructure Scaling</td>
+        <td>It scales your infrastructure whenever needed.</td>
+      </tr>
+      <tr>
+        <td>Automatic Group Adjustment</td>
+        <td>Automatically increases and decreases the size of Auto Scaling group (mainly EC2 instances).</td>
+      </tr>
+      <tr>
+        <td>Dynamic Load Handling</td>
+        <td>Adds new instances when load reaches a certain level and spins down instances when no longer needed.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="image-container">
+    <img src="autoscaling.png" alt="Auto Scaling Diagram">
+  </div>
+
+  <!-- ELB Section -->
+  <h2>Elastic Load Balancer (ELB)</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Feature</th><th>Description</th></tr>
+      <tr>
+        <td>Traffic Distribution</td>
+        <td>Automatically routes incoming application traffic across dynamically changing number of multiple EC2 instances.</td>
+      </tr>
+      <tr>
+        <td>Single Entry Point</td>
+        <td>Acts as a single point of contact for all incoming traffic to the instances in your Auto Scaling group.</td>
+      </tr>
+      <tr>
+        <td>Health Monitoring</td>
+        <td>Monitors the health of registered instances so the load balancer sends requests only to healthy instances.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="image-container">
+    <img src="elb.png" alt="ELB Diagram">
+  </div>
+
+  <!-- Comparison Section -->
+  <h2>Auto Scaling vs ELB</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Aspect</th><th>Auto Scaling</th><th>ELB</th></tr>
+      <tr>
+        <td>Primary Function</td>
+        <td>Automatically adjusts the number of EC2 instances based on demand.</td>
+        <td>Distributes incoming network traffic evenly across EC2 instances.</td>
+      </tr>
+      <tr>
+        <td>Scaling</td>
+        <td>Scales infrastructure up or down as per defined policies.</td>
+        <td>Does not scale instances but manages traffic distribution.</td>
+      </tr>
+      <tr>
+        <td>Health Check</td>
+        <td>Uses EC2 status checks to determine instance health.</td>
+        <td>Performs health checks and routes traffic to healthy instances only.</td>
+      </tr>
+      <tr>
+        <td>Integration</td>
+        <td>Often works together with ELB for dynamic load handling.</td>
+        <td>Typically paired with Auto Scaling for fault tolerance and performance optimization.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="image-container">
+    <img src="sumo.jpg" alt="Comparison Illustration">
+  </div>
+</body>
+</html>
