@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS Root User Best Practices - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    p {
+      text-align: center;
+      color: #e0e0e0;
+      margin-bottom: 10px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 85%;
+      max-width: 1000px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+    ul li {
+      margin: 4px 0;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .image-container img {
+      max-width: 80%;
+      border: 2px solid #415a77;
+      border-radius: 8px;
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>AWS IAM Root User - Best Practices</h1>
+
+  <!-- Enable MFA -->
+  <h2>1. Enable Multi-Factor Authentication (MFA)</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Best Practice</th><th>Explanation</th></tr>
+      <tr>
+        <td>Always enable MFA for the root user</td>
+        <td>
+          MFA adds an extra layer of security by requiring a second form of verification (such as an authenticator app or hardware token) beyond just a password.
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Avoid Using Root for Daily Tasks -->
+  <h2>2. Never Use the Root User for Everyday Tasks</h2>
+  <p>Use the root user only for specific account-level activities that require root privileges.</p>
+
+  <div class="table-container">
+    <table>
+      <tr><th>Task</th><th>Why Root User is Required</th></tr>
+      <tr><td>Change Account Settings</td><td>Only root can update the AWS account email address or password.</td></tr>
+      <tr><td>Close AWS Account</td><td>Only the root user can permanently close an AWS account.</td></tr>
+      <tr><td>Restore IAM User Permissions</td><td>If all IAM permissions are lost, only root can restore them.</td></tr>
+      <tr><td>Configure AWS Shield Advanced</td><td>Certain advanced DDoS protection features require root privileges.</td></tr>
+      <tr><td>Configure Account Contacts</td><td>Root user must set billing, operations, and security contact details.</td></tr>
+      <tr><td>Access Billing Information</td><td>Root user can update payment methods or manage AWS Support plans.</td></tr>
+      <tr><td>Submit Requests to Increase Service Limits</td><td>Some limit increase requests can only be made by root.</td></tr>
+      <tr><td>Transfer AWS Support Plan</td><td>Only root can transfer an existing AWS Support plan to another account.</td></tr>
+      <tr><td>Sign Up for AWS GovCloud</td><td>Root is required to initiate a GovCloud account signup.</td></tr>
+    </table>
+  </div>
+
+  <p style="text-align:center;">For day-to-day operations, create an <span class="highlight">administrative IAM user</span> instead of using the root account.</p>
+
+  <!-- Delete or Rotate Access Keys -->
+  <h2>3. Delete or Rotate Root Access Keys</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Action</th><th>Recommendation</th></tr>
+      <tr><td>Access Keys</td><td>If root user access keys exist, delete them immediately unless absolutely necessary.</td></tr>
+      <tr><td>Rotation</td><td>If keys must exist temporarily, rotate them regularly and store securely.</td></tr>
+      <tr><td>Preferred Alternative</td><td>Use <span class="highlight">IAM roles and users</span> for API and CLI access instead of root keys.</td></tr>
+    </table>
+  </div>
+
+  <!-- Secure Email -->
+  <h2>4. Secure the Root User’s Email Address</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Risk</th><th>Mitigation</th></tr>
+      <tr>
+        <td>Email compromise can lead to full account takeover via password reset.</td>
+        <td>
+          Secure the email with a strong, unique password and enable MFA at the email provider level.
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Use Account Alias -->
+  <h2>5. Use Account Aliases</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Concept</th><th>Explanation</th></tr>
+      <tr>
+        <td>Account Alias</td>
+        <td>An alias replaces your AWS account ID in the Management Console URL, making it easier to remember and more secure.</td>
+      </tr>
+      <tr>
+        <td>Example</td>
+        <td>
+          Instead of logging in with:<br>
+          <code>https://123456789012.signin.aws.amazon.com/console</code><br>
+          You can create:<br>
+          <code>https://mycompanyname.signin.aws.amazon.com/console</code>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Summary -->
+  <h2>Summary: Root User Security Checklist</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Best Practice</th><th>Status</th></tr>
+      <tr><td>Enable MFA on root user</td><td>✅ Must be enabled</td></tr>
+      <tr><td>Never use root for daily work</td><td>✅ Create IAM admin user</td></tr>
+      <tr><td>Delete or rotate root access keys</td><td>✅ Recommended</td></tr>
+      <tr><td>Secure root email with MFA</td><td>✅ Highly recommended</td></tr>
+      <tr><td>Set up account alias</td><td>✅ For convenience & clarity</td></tr>
+    </table>
+  </div>
+
+  <p style="text-align:center; margin-top:30px;">🔒 <span class="highlight">The root account is your AWS account’s master key — protect it with the highest security controls possible.</span></p>
+
+</body>
+</html>
