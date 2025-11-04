@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS IAM Reports - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    p {
+      text-align: center;
+      color: #dbe9f3;
+      margin-bottom: 10px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1200px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+    li {
+      margin: 4px 0;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>AWS IAM Reports - Comparison Overview</h1>
+  <p>IAM Reports provide visibility into identity and access configurations across your AWS account.  
+  They are crucial for <span class="highlight">auditing, compliance, and security</span>.</p>
+
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>IAM Credential Report</th>
+        <th>IAM Access Advisor Report</th>
+        <th>AWS IAM Access Analyzer</th>
+      </tr>
+      <tr>
+        <td><strong>Purpose</strong></td>
+        <td>Provides an overview of IAM user credentials, password status, access keys, and MFA usage.</td>
+        <td>Helps identify unused AWS service permissions to enforce least privilege.</td>
+        <td>Analyzes resource permissions to find resources shared externally or unused permissions.</td>
+      </tr>
+      <tr>
+        <td><strong>Primary Focus</strong></td>
+        <td>Credentials and user security posture</td>
+        <td>Permission usage by users, roles, and groups</td>
+        <td>External and unused access detection for AWS resources</td>
+      </tr>
+      <tr>
+        <td><strong>Content / Insights</strong></td>
+        <td>
+          <ul>
+            <li>Password age and usage</li>
+            <li>Access key status</li>
+            <li>MFA configuration</li>
+            <li>Last login/access timestamps</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li>List of services accessed by IAM entities</li>
+            <li>Last access time per service</li>
+            <li>Unused permissions visibility</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li>External Access Findings (S3, IAM roles, KMS, SQS, Lambda)</li>
+            <li>Unused Access Findings</li>
+            <li>Cross-account and public access analysis</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Scope</strong></td>
+        <td>All IAM users in the AWS account</td>
+        <td>All IAM entities (users, roles, and groups)</td>
+        <td>All AWS resources across chosen regions</td>
+      </tr>
+      <tr>
+        <td><strong>Frequency / Update</strong></td>
+        <td>Generated on demand from IAM Console</td>
+        <td>Updated in real-time and available anytime</td>
+        <td>Continuous analysis (per region)</td>
+      </tr>
+      <tr>
+        <td><strong>Use Cases</strong></td>
+        <td>
+          <ul>
+            <li>Auditing IAM users</li>
+            <li>Checking MFA and key activity</li>
+            <li>Compliance and credential hygiene</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li>Identify unused permissions</li>
+            <li>Optimize IAM policies</li>
+            <li>Implement least privilege access</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li>Detect publicly shared resources</li>
+            <li>Identify unnecessary permissions</li>
+            <li>Secure multi-account environments</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Format / Access</strong></td>
+        <td>Downloadable CSV via IAM Console</td>
+        <td>Integrated view within IAM Console</td>
+        <td>Console-based findings and JSON export</td>
+      </tr>
+      <tr>
+        <td><strong>Access Control</strong></td>
+        <td>Account administrators from IAM dashboard</td>
+        <td>Admins and authorized IAM users</td>
+        <td>Admins or users with Access Analyzer permissions</td>
+      </tr>
+      <tr>
+        <td><strong>Cost</strong></td>
+        <td>No additional cost</td>
+        <td>No additional cost</td>
+        <td>
+          External access findings – Free<br>
+          Unused access findings – $0.20 per IAM user/role per month
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Security & Compliance Value</strong></td>
+        <td>Ensures user credentials follow best practices and MFA is enabled.</td>
+        <td>Improves IAM hygiene by cleaning unused permissions.</td>
+        <td>Strengthens external sharing control and minimizes attack surface.</td>
+      </tr>
+    </table>
+  </div>
+
+  <p style="text-align:center; margin-top:30px;">
+    🔍 <span class="highlight">IAM Reports together provide full visibility into identity security, access usage, and compliance posture across AWS accounts.</span>
+  </p>
+
+</body>
+</html>
