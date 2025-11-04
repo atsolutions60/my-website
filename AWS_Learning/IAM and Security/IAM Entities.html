@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IAM Entities - Comparisonia</title>
+  <style>
+    :root {
+      --bg: #0d1b2a;
+      --card: #1b263b;
+      --accent: #ff7b00;
+      --muted: #ffd580;
+      --border: #415a77;
+      --text: #ffffff;
+      --green: #90ee90;
+      --maxw: 1000px;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      color: var(--accent);
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    h2 {
+      color: var(--accent);
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      color: var(--muted);
+      text-align: left;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+
+    .content {
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+
+    table {
+      border-collapse: collapse;
+      background-color: var(--card);
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+
+    th {
+      background-color: var(--accent);
+      color: #0d1b2a;
+      text-align: center;
+    }
+
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+
+    th:first-child, td:first-child {
+      width: 25%;
+      white-space: nowrap;
+    }
+
+    th:last-child, td:last-child {
+      width: 75%;
+    }
+
+    ul {
+      margin: 6px 0 6px 20px;
+      padding: 0;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    .image-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .image-row img {
+      max-width: 45%;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      background-color: #ffffff;
+    }
+
+    p {
+      line-height: 1.6;
+      color: #dbe9f3;
+    }
+
+    pre {
+      background-color: #243447;
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+      color: var(--green);
+      font-size: 13px;
+      white-space: pre-wrap;
+    }
+
+    a {
+      color: var(--green);
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 700px) {
+      .image-row img {
+        max-width: 90%;
+      }
+      th:first-child, td:first-child {
+        white-space: normal;
+        width: 35%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>IAM Entities</h1>
+    <p>Overview of IAM Users, Groups, Roles, Federation, and Custom Trust Policies.</p>
+  </header>
+
+  <main class="content">
+
+    <!-- INTRODUCTION -->
+    <section class="card">
+      <h2>Introduction</h2>
+      <p>IAM Entities represent the identities that interact with AWS resources. They define <strong>who</strong> can perform <strong>what actions</strong> on <strong>which resources</strong>.</p>
+
+      <div class="table-container">
+        <table>
+          <tr><th>Entity</th><th>Description</th></tr>
+          <tr><td>IAM User</td><td>Represents an individual or service that interacts with AWS.</td></tr>
+          <tr><td>IAM Group</td><td>A collection of users with common permissions.</td></tr>
+          <tr><td>IAM Role</td><td>Temporary identity assumed by trusted entities or services.</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- USERS -->
+    <section class="card">
+      <h2>IAM Users</h2>
+      <p>An IAM User is a unique identity with long-term credentials to access AWS. Each user can have console and/or programmatic access.</p>
+
+      <h3>Key Properties</h3>
+      <div class="table-container">
+        <table>
+          <tr><th>Property</th><th>Details</th></tr>
+          <tr><td>Credentials</td><td>Password for console access and Access Keys for CLI/API.</td></tr>
+          <tr><td>Permissions</td><td>Granted via user policies or inherited from groups.</td></tr>
+          <tr><td>MFA</td><td>Highly recommended for better security.</td></tr>
+        </table>
+      </div>
+
+      <h3>Password Policies</h3>
+      <ul>
+        <li>Define length, complexity, and rotation rules.</li>
+        <li>Enforce MFA for critical users.</li>
+        <li>Apply least-privilege principle.</li>
+      </ul>
+
+      <div class="image-row">
+        <img src="without-group.png" alt="IAM user without group">
+        <img src="with-group.png" alt="IAM user with group permissions">
+      </div>
+    </section>
+
+    <!-- GROUPS -->
+    <section class="card">
+      <h2>IAM Groups</h2>
+      <p>Groups simplify management by grouping users and attaching policies once for the entire group.</p>
+
+      <div class="table-container">
+        <table>
+          <tr><th>Aspect</th><th>Details</th></tr>
+          <tr><td>Purpose</td><td>Assign permissions collectively to users.</td></tr>
+          <tr><td>Membership</td><td>Users can belong to multiple groups.</td></tr>
+          <tr><td>Best Practice</td><td>Use groups for role-based access and easier management.</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ROLES -->
+    <section class="card">
+      <h2>IAM Roles</h2>
+      <p>A Role provides temporary credentials to perform actions. It’s assumed by entities such as users, services, or external identities.</p>
+
+      <h3>Key Benefits</h3>
+      <ul>
+        <li>Eliminates the need for long-term keys.</li>
+        <li>Provides temporary, scoped access.</li>
+        <li>Supports cross-account and federated access.</li>
+      </ul>
+
+      <h3>Service Role Example (EC2 → S3)</h3>
+      <p>Instead of storing access keys on an EC2 instance, create a role with S3 upload permissions and attach it to the instance. EC2 automatically receives temporary credentials limited to that role’s permissions.</p>
+
+      <div class="image-row">
+        <img src="g-p-key.png" alt="Service role example EC2 to S3">
+      </div>
+    </section>
+
+    <!-- ASSUME ROLE -->
+    <section class="card">
+      <h2>Assume Role (STS)</h2>
+      <p>Allows an entity to adopt the permissions of another role for a limited time, granting temporary security credentials via AWS STS.</p>
+
+      <h3>Use Cases</h3>
+      <ul>
+        <li>Cross-account access.</li>
+        <li>Temporary admin or audit access.</li>
+        <li>Application role switching.</li>
+      </ul>
+
+      <div class="table-container">
+        <table>
+          <tr><th>Type</th><th>Scenario</th></tr>
+          <tr><td>Same Account</td><td>Delegating access within your own AWS account.</td></tr>
+          <tr><td>Cross Account</td><td>Granting another AWS account temporary access.</td></tr>
+        </table>
+      </div>
+    </section>
+
+	<!-- FEDERATION -->
+	<section class="card">
+	  <h2>Federation (Web Identity / SAML)</h2>
+	  <p>Federation enables users from external identity providers (IdPs) to access AWS without creating IAM users. They receive temporary credentials after successful authentication.</p>
+
+	  <div class="table-container">
+		<table>
+		  <tr><th>Type</th><th>Example</th></tr>
+		  <tr><td>Web Identity (OIDC)</td><td>Google, Facebook, Amazon Login</td></tr>
+		  <tr><td>SAML 2.0</td><td>ADFS, Okta, OneLogin (Enterprise SSO)</td></tr>
+		</table>
+	  </div>
+
+	  <ul>
+		<li>Reduces credential management overhead.</li>
+		<li>Improves user experience via SSO.</li>
+		<li>Provides short-lived, scoped credentials.</li>
+	  </ul>
+
+	  <div class="image-row">
+		<img src="federation-diagram.png" alt="Federation Web Identity and SAML flow diagram">
+	  </div>
+	</section>
+
+    <!-- CUSTOM TRUST POLICIES -->
+    <section class="card">
+      <h2>Custom Trust Policies</h2>
+      <p>Trust policies define who can assume a role and under what conditions. They are critical for cross-account or federated access security.</p>
+
+      <h3>Common Conditions</h3>
+      <ul>
+        <li>Require MFA for AssumeRole.</li>
+        <li>Restrict by source IP address.</li>
+        <li>Restrict by time or date conditions.</li>
+        <li>Restrict based on federated identity attributes (department, email, group).</li>
+      </ul>
+    </section>
+
+  </main>
+</body>
+</html>
