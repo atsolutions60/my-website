@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Amazon S3 Storage Classes - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    p {
+      text-align: center;
+      color: #dbe9f3;
+      margin-bottom: 10px;
+      font-size: 17px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1400px;
+      table-layout: fixed;
+      font-size: 16px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+    li {
+      margin: 6px 0;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Amazon S3 Storage Classes</h1>
+  <p>Each Amazon S3 storage class is designed for a different access pattern and cost optimization strategy.</p>
+
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Storage Class</th>
+        <th>Ideal For</th>
+        <th>Durability</th>
+        <th>Availability</th>
+        <th>Availability Zones</th>
+        <th>Minimum Storage Duration</th>
+        <th>Minimum Billable Object Size</th>
+        <th>Other Considerations</th>
+        <th>Price (per 100 GB)</th>
+      </tr>
+      <tr>
+        <td><strong>S3 Standard</strong></td>
+        <td>Frequently accessed data (more than once a month) with millisecond access</td>
+        <td>99.999999999%</td>
+        <td>99.99%</td>
+        <td>≥ 3</td>
+        <td>None</td>
+        <td>None</td>
+        <td>None</td>
+        <td>$2.50</td>
+      </tr>
+      <tr>
+        <td><strong>S3 Standard-Infrequent Access (IA)</strong></td>
+        <td>Long-lived, infrequently accessed data (once a month) with millisecond access</td>
+        <td>99.999999999%</td>
+        <td>99.9%</td>
+        <td>≥ 3</td>
+        <td>30 days</td>
+        <td>128 KB</td>
+        <td>Per-GB retrieval fees apply</td>
+        <td>$1.38</td>
+      </tr>
+      <tr>
+        <td><strong>S3 Intelligent-Tiering</strong></td>
+        <td>Long-lived data with changing or unpredictable access patterns</td>
+        <td>99.999999999%</td>
+        <td>99.9%</td>
+        <td>≥ 3</td>
+        <td>30 days</td>
+        <td>None</td>
+        <td>Monitoring and automation fees per object apply. No retrieval fees.</td>
+        <td>$2.30</td>
+      </tr>
+      <tr>
+        <td><strong>S3 One Zone-Infrequent Access (IA)</strong></td>
+        <td>Recreatable, infrequently accessed data stored in a single Availability Zone</td>
+        <td>99.999999999%</td>
+        <td>99.5%</td>
+        <td>1</td>
+        <td>30 days</td>
+        <td>128 KB</td>
+        <td>Retrieval fees apply. Not resilient to AZ loss.</td>
+        <td>$1.10</td>
+      </tr>
+      <tr>
+        <td><strong>S3 Express One Zone</strong></td>
+        <td>Latency-sensitive applications needing single-digit millisecond data access within a single AZ</td>
+        <td>99.999999999%</td>
+        <td>99.95%</td>
+        <td>1</td>
+        <td>None</td>
+        <td>None</td>
+        <td>Objects are stored in one specific AWS Availability Zone you choose.</td>
+        <td>$1.25</td>
+      </tr>
+      <tr>
+        <td><strong>S3 Glacier Instant Retrieval</strong></td>
+        <td>Long-lived archive data accessed once a quarter with millisecond retrieval</td>
+        <td>99.999999999%</td>
+        <td>99.9%</td>
+        <td>≥ 3</td>
+        <td>90 days</td>
+        <td>128 KB</td>
+        <td>Per-GB retrieval fees apply</td>
+        <td>$0.50</td>
+      </tr>
+      <tr>
+        <td><strong>S3 Glacier Flexible Retrieval</strong></td>
+        <td>Long-term data archiving with retrieval times ranging from minutes to hours</td>
+        <td>99.999999999%</td>
+        <td>99.99%</td>
+        <td>≥ 3</td>
+        <td>90 days</td>
+        <td>40 KB</td>
+        <td>Per-GB retrieval fees apply. Offline storage.</td>
+        <td>$0.45</td>
+      </tr>
+      <tr>
+        <td><strong>S3 Glacier Deep Archive</strong></td>
+        <td>Very long-term archive data accessed less than once per year with hours-long retrieval</td>
+        <td>99.999999999%</td>
+        <td>99.99%</td>
+        <td>≥ 3</td>
+        <td>180 days</td>
+        <td>40 KB</td>
+        <td>Per-GB retrieval fees apply. Offline storage.</td>
+        <td>$0.20</td>
+      </tr>
+      <tr>
+        <td><strong>S3 Reduced Redundancy Storage (RRS)</strong></td>
+        <td>Noncritical, frequently accessed data with millisecond access (Deprecated)</td>
+        <td>99.99%</td>
+        <td>99.99%</td>
+        <td>≥ 3</td>
+        <td>None</td>
+        <td>None</td>
+        <td>Deprecated — use S3 Standard instead</td>
+        <td>—</td>
+      </tr>
+    </table>
+  </div>
+
+  <p style="text-align:center; margin-top:30px; font-size:18px;">
+    📦 <span class="highlight">Choose your S3 storage class based on access frequency, durability, and cost requirements.</span>
+  </p>
+
+</body>
+</html>
