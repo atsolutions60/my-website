@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>S3 Object Lock - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 10px;
+    }
+    p {
+      text-align: center;
+      color: #dbe9f3;
+      font-size: 17px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1300px;
+      table-layout: fixed;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+    li {
+      margin: 6px 0;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    section {
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Section 1: Introduction -->
+  <h1>Amazon S3 Object Lock</h1>
+  <p>Ensures data immutability by preventing object deletion or modification for a fixed time or indefinitely.</p>
+
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Purpose</td>
+        <td>Prevents deletion or modification of an S3 object or its version for a defined retention period or indefinitely.</td>
+      </tr>
+      <tr>
+        <td>Benefits</td>
+        <td>Protects data from accidental or malicious deletion and ensures compliance with regulatory retention requirements.</td>
+      </tr>
+      <tr>
+        <td>Use Cases</td>
+        <td>
+          <ul>
+            <li>Regulatory compliance requiring immutable storage</li>
+            <li>Legal investigations where data must be preserved</li>
+            <li>Protection against human or system errors</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Section 2: Terminology -->
+  <section>
+    <h2>Terminology and Modes</h2>
+    <p>Key terms and configuration modes used in S3 Object Lock.</p>
+
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Term</th>
+          <th>Explanation</th>
+          <th>Example / Notes</th>
+        </tr>
+        <tr>
+          <td>Retention Mode</td>
+          <td>Defines how strictly an object version is protected for a specific duration.</td>
+          <td>Two modes: Governance and Compliance.</td>
+        </tr>
+        <tr>
+          <td>Governance Mode</td>
+          <td>Allows only users with special permissions to delete or modify objects before retention ends.</td>
+          <td>
+            Requires permissions like <code>s3:BypassGovernanceRetention</code> and <code>s3:PutObjectRetention</code>.
+          </td>
+        </tr>
+        <tr>
+          <td>Compliance Mode</td>
+          <td>Strict mode preventing modification or deletion by any user, including the root account, until retention expires.</td>
+          <td>Used for highly regulated workloads (e.g., financial or healthcare data).</td>
+        </tr>
+        <tr>
+          <td>Retention Period</td>
+          <td>Specifies how long the object version remains protected from deletion or overwrite.</td>
+          <td>Can be defined in days or years at object or bucket level.</td>
+        </tr>
+        <tr>
+          <td>Legal Hold</td>
+          <td>Provides indefinite protection with no predefined expiration.</td>
+          <td>Useful during legal investigations where retention length is unknown.</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 3: Enabling Object Lock -->
+  <section>
+    <h2>Enabling S3 Object Lock</h2>
+    <p>Steps and requirements for configuring Object Lock on an S3 bucket.</p>
+
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Requirement</th>
+          <th>Details</th>
+        </tr>
+        <tr>
+          <td>Versioning</td>
+          <td>Bucket versioning must be enabled before you can enable Object Lock.</td>
+        </tr>
+        <tr>
+          <td>Permissions</td>
+          <td>
+            The following IAM permissions are required:
+            <ul>
+              <li><code>s3:PutObjectRetention</code></li>
+              <li><code>s3:GetObjectRetention</code></li>
+              <li><code>s3:PutObjectLegalHold</code></li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Enable Object Lock</td>
+          <td>
+            <ul>
+              <li>Must be activated during bucket creation.</li>
+              <li>Once enabled, cannot be disabled.</li>
+              <li>Allows applying retention policies and legal holds.</li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 4: Default Retention -->
+  <section>
+    <h2>Default Retention Configuration</h2>
+    <p>Defines whether all new objects in a bucket automatically receive a retention policy.</p>
+
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Setting</th>
+          <th>When to Use</th>
+          <th>Advantages</th>
+        </tr>
+        <tr>
+          <td>Disabled</td>
+          <td>
+            <ul>
+              <li>When you want full control over which objects are protected.</li>
+              <li>When object lifespans vary within the same bucket.</li>
+            </ul>
+          </td>
+          <td>Provides flexibility and easier manual management.</td>
+        </tr>
+        <tr>
+          <td>Enabled</td>
+          <td>
+            <ul>
+              <li>When consistent protection is required for all objects.</li>
+              <li>When compliance regulations demand immutability.</li>
+              <li>To reduce manual configuration and errors.</li>
+            </ul>
+          </td>
+          <td>Applies automatic protection to all new objects.</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 5: Summary -->
+  <section>
+    <h2>Summary</h2>
+    <p style="text-align:center; margin-top:25px; font-size:18px;">
+      🔐 <span class="highlight">Summary:</span>  
+      <strong>S3 Object Lock</strong> ensures object-level immutability.  
+      Use <strong>Governance mode</strong> for controlled flexibility and <strong>Compliance mode</strong> for strict, non-overridable protection.  
+      <br><br>
+      Enable Object Lock only on versioned buckets and configure <strong>default retention</strong> for consistent, compliant data protection.
+    </p>
+  </section>
+
+</body>
+</html>
