@@ -12,7 +12,7 @@
       line-height: 1.7;
       font-size: 17px;
     }
-    h1, h2 {
+    h1, h2, h3 {
       text-align: center;
       color: #ff7b00;
       margin-bottom: 10px;
@@ -65,8 +65,6 @@
       color: #90ee90;
       font-weight: bold;
     }
-
-    /* Section and image layout styling */
     section {
       margin-top: 60px;
     }
@@ -108,10 +106,9 @@
 </head>
 <body>
 
-  <!-- Section 1: Data at Rest vs Data in Transit -->
+  <!-- Section 1 -->
   <h1>Data at Rest vs Data in Transit</h1>
   <p>Comparison of how AWS protects data during storage and transfer within S3.</p>
-
   <div class="table-container">
     <table>
       <tr>
@@ -153,11 +150,10 @@
     while <strong>Data in Transit</strong> is secured using <span class="highlight">HTTPS (SSL/TLS)</span>.
   </p>
 
-  <!-- Section 2: Symmetric vs Asymmetric Encryption -->
+  <!-- Section 2 -->
   <section>
     <h2>Symmetric vs Asymmetric Encryption</h2>
     <p>Encryption mechanisms used by AWS for securing S3 data both at rest and during transfer.</p>
-
     <div class="table-container">
       <table>
         <tr>
@@ -187,19 +183,8 @@
         </tr>
         <tr>
           <td>Common Algorithms</td>
-          <td>
-            <ul>
-              <li>AES (Advanced Encryption Standard) - AES-128, AES-192, AES-256</li>
-              <li>3DES (Triple DES)</li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li>RSA (Rivest–Shamir–Adleman)</li>
-              <li>ECC (Elliptic Curve Cryptography)</li>
-              <li>Diffie-Hellman Key Exchange</li>
-            </ul>
-          </td>
+          <td><ul><li>AES (Advanced Encryption Standard) - AES-128, AES-192, AES-256</li><li>3DES (Triple DES)</li></ul></td>
+          <td><ul><li>RSA (Rivest–Shamir–Adleman)</li><li>ECC (Elliptic Curve Cryptography)</li><li>Diffie-Hellman Key Exchange</li></ul></td>
         </tr>
         <tr>
           <td>Use in AWS</td>
@@ -208,7 +193,6 @@
         </tr>
       </table>
     </div>
-
     <div class="encryption-image-section">
       <div class="enc-card">
         <img src="Symmetric Encryption.png" alt="Symmetric Encryption Diagram">
@@ -219,19 +203,12 @@
         <div class="caption">Asymmetric Encryption Process</div>
       </div>
     </div>
-
-    <p style="text-align:center; margin-top:25px; font-size:18px;">
-      🧩 <span class="highlight">Summary:</span>  
-      <strong>Symmetric Encryption</strong> is used for fast data encryption (e.g., AES-256 in S3),  
-      while <strong>Asymmetric Encryption</strong> secures key exchange and authentication (e.g., RSA in KMS).
-    </p>
   </section>
 
-  <!-- Section 3: Server-Side Encryption vs Client-Side Encryption -->
+  <!-- Section 3 -->
   <section>
     <h2>Server-Side Encryption (SSE) vs Client-Side Encryption (CSE)</h2>
     <p>Comparison between encryption handled by AWS and encryption performed by the client.</p>
-
     <div class="table-container">
       <table>
         <tr>
@@ -264,35 +241,26 @@
           <td>Provides encryption at rest. Protects data stored in S3.</td>
           <td>Stronger protection — data is encrypted both in transit and at rest.</td>
         </tr>
-        <tr>
-          <td>Compliance</td>
-          <td>Helps meet compliance requirements (e.g., with SSE-KMS).</td>
-          <td>Greater flexibility for custom compliance and regulatory controls.</td>
-        </tr>
-        <tr>
-          <td>Use Case Examples</td>
-          <td>
-            <ul>
-              <li>General-purpose data protection</li>
-              <li>Compliance-driven workloads</li>
-              <li>Ease of setup and management</li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li>Maximum security and control</li>
-              <li>Custom encryption requirements</li>
-              <li>Highly regulated environments</li>
-            </ul>
-          </td>
-        </tr>
       </table>
     </div>
+  </section>
 
-    <p style="text-align:center; margin-top:25px; font-size:18px;">
-      🔒 <span class="highlight">Summary:</span>  
-      <strong>SSE</strong> is simpler and AWS-managed, while <strong>CSE</strong> provides stronger security and control by encrypting data before upload.
-    </p>
+  <!-- Section 4 -->
+  <section>
+    <h2>Server-Side Encryption with Amazon S3-Managed Keys (SSE-S3)</h2>
+    <p>This method allows AWS S3 to handle encryption and decryption automatically using AWS-managed keys.</p>
+    <div class="table-container">
+      <table>
+        <tr><th>Aspect</th><th>Description</th></tr>
+        <tr><td>Definition</td><td>AWS automatically manages both encryption and decryption of your S3 data using <span class="highlight">AES-256</span> encryption keys fully controlled by AWS.</td></tr>
+        <tr><td>Default Option</td><td>Can be enabled as the default encryption method for an S3 bucket to automatically encrypt all new objects.</td></tr>
+        <tr><td>Cost</td><td>No extra cost beyond standard S3 storage and requests.</td></tr>
+        <tr><td>How It Works</td><td><ul><li>When data is uploaded, Amazon S3 automatically encrypts it using AES-256.</li><li>When data is retrieved, S3 automatically decrypts it before returning it.</li></ul></td></tr>
+        <tr><td>Key Management</td><td><ul><li>Fully managed by AWS.</li><li>Users cannot rotate, revoke, or audit keys.</li><li>For more control, use SSE-KMS.</li></ul></td></tr>
+        <tr><td>Integration</td><td><ul><li>Does not integrate with KMS.</li><li>Customer keys not supported.</li></ul></td></tr>
+        <tr><td>Use Case</td><td>Ideal for users seeking simple, AWS-managed encryption for general workloads.</td></tr>
+      </table>
+    </div>
   </section>
 
 </body>
