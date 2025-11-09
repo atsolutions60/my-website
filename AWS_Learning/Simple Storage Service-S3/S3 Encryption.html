@@ -106,9 +106,10 @@
 </head>
 <body>
 
-  <!-- Section 1 -->
+  <!-- Section 1: Data at Rest vs Data in Transit -->
   <h1>Data at Rest vs Data in Transit</h1>
   <p>Comparison of how AWS protects data during storage and transfer within S3.</p>
+
   <div class="table-container">
     <table>
       <tr>
@@ -150,10 +151,11 @@
     while <strong>Data in Transit</strong> is secured using <span class="highlight">HTTPS (SSL/TLS)</span>.
   </p>
 
-  <!-- Section 2 -->
+  <!-- Section 2: Symmetric vs Asymmetric Encryption -->
   <section>
     <h2>Symmetric vs Asymmetric Encryption</h2>
     <p>Encryption mechanisms used by AWS for securing S3 data both at rest and during transfer.</p>
+
     <div class="table-container">
       <table>
         <tr>
@@ -183,8 +185,19 @@
         </tr>
         <tr>
           <td>Common Algorithms</td>
-          <td><ul><li>AES (Advanced Encryption Standard) - AES-128, AES-192, AES-256</li><li>3DES (Triple DES)</li></ul></td>
-          <td><ul><li>RSA (Rivest–Shamir–Adleman)</li><li>ECC (Elliptic Curve Cryptography)</li><li>Diffie-Hellman Key Exchange</li></ul></td>
+          <td>
+            <ul>
+              <li>AES (Advanced Encryption Standard) - AES-128, AES-192, AES-256</li>
+              <li>3DES (Triple DES)</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>RSA (Rivest–Shamir–Adleman)</li>
+              <li>ECC (Elliptic Curve Cryptography)</li>
+              <li>Diffie-Hellman Key Exchange</li>
+            </ul>
+          </td>
         </tr>
         <tr>
           <td>Use in AWS</td>
@@ -193,6 +206,7 @@
         </tr>
       </table>
     </div>
+
     <div class="encryption-image-section">
       <div class="enc-card">
         <img src="Symmetric Encryption.png" alt="Symmetric Encryption Diagram">
@@ -203,12 +217,19 @@
         <div class="caption">Asymmetric Encryption Process</div>
       </div>
     </div>
+
+    <p style="text-align:center; margin-top:25px; font-size:18px;">
+      🧩 <span class="highlight">Summary:</span>  
+      <strong>Symmetric Encryption</strong> is used for fast data encryption (e.g., AES-256 in S3),  
+      while <strong>Asymmetric Encryption</strong> secures key exchange and authentication (e.g., RSA in KMS).
+    </p>
   </section>
 
-  <!-- Section 3 -->
+  <!-- Section 3: Server-Side Encryption vs Client-Side Encryption -->
   <section>
     <h2>Server-Side Encryption (SSE) vs Client-Side Encryption (CSE)</h2>
     <p>Comparison between encryption handled by AWS and encryption performed by the client.</p>
+
     <div class="table-container">
       <table>
         <tr>
@@ -241,27 +262,139 @@
           <td>Provides encryption at rest. Protects data stored in S3.</td>
           <td>Stronger protection — data is encrypted both in transit and at rest.</td>
         </tr>
+        <tr>
+          <td>Compliance</td>
+          <td>Helps meet compliance requirements (e.g., with SSE-KMS).</td>
+          <td>Greater flexibility for custom compliance and regulatory controls.</td>
+        </tr>
+        <tr>
+          <td>Use Case Examples</td>
+          <td>
+            <ul>
+              <li>General-purpose data protection</li>
+              <li>Compliance-driven workloads</li>
+              <li>Ease of setup and management</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Maximum security and control</li>
+              <li>Custom encryption requirements</li>
+              <li>Highly regulated environments</li>
+            </ul>
+          </td>
+        </tr>
       </table>
     </div>
+
+    <p style="text-align:center; margin-top:25px; font-size:18px;">
+      🔒 <span class="highlight">Summary:</span>  
+      <strong>SSE</strong> is simpler and AWS-managed, while <strong>CSE</strong> provides stronger security and control by encrypting data before upload.
+    </p>
   </section>
 
-  <!-- Section 4 -->
+  <!-- Section 4: Server-Side Encryption with Amazon S3-Managed Keys (SSE-S3) -->
   <section>
     <h2>Server-Side Encryption with Amazon S3-Managed Keys (SSE-S3)</h2>
     <p>This method allows AWS S3 to handle encryption and decryption automatically using AWS-managed keys.</p>
+
     <div class="table-container">
       <table>
         <tr><th>Aspect</th><th>Description</th></tr>
         <tr><td>Definition</td><td>AWS automatically manages both encryption and decryption of your S3 data using <span class="highlight">AES-256</span> encryption keys fully controlled by AWS.</td></tr>
         <tr><td>Default Option</td><td>Can be enabled as the default encryption method for an S3 bucket to automatically encrypt all new objects.</td></tr>
-        <tr><td>Cost</td><td>No extra cost beyond standard S3 storage and requests.</td></tr>
-        <tr><td>How It Works</td><td><ul><li>When data is uploaded, Amazon S3 automatically encrypts it using AES-256.</li><li>When data is retrieved, S3 automatically decrypts it before returning it.</li></ul></td></tr>
-        <tr><td>Key Management</td><td><ul><li>Fully managed by AWS.</li><li>Users cannot rotate, revoke, or audit keys.</li><li>For more control, use SSE-KMS.</li></ul></td></tr>
-        <tr><td>Integration</td><td><ul><li>Does not integrate with KMS.</li><li>Customer keys not supported.</li></ul></td></tr>
-        <tr><td>Use Case</td><td>Ideal for users seeking simple, AWS-managed encryption for general workloads.</td></tr>
+        <tr><td>Cost</td><td>Included in standard S3 storage and request pricing. No additional charge for SSE-S3.</td></tr>
+        <tr><td>How It Works</td><td><ul><li>When data is uploaded, Amazon S3 automatically encrypts it using AES-256.</li><li>When data is retrieved, S3 automatically decrypts it before returning it to you.</li></ul></td></tr>
+        <tr><td>Key Management</td><td><ul><li>Fully managed by AWS.</li><li>Customers cannot view, rotate, or revoke keys manually.</li><li>If you need control over key lifecycle or rotation, use <span class="highlight">SSE-KMS</span> instead.</li></ul></td></tr>
+        <tr><td>Logging & Auditing</td><td><ul><li>SSE-S3 provides basic encryption but does not support detailed key usage logs.</li><li>Not suitable for compliance needs requiring audit trails of encryption key operations.</li></ul></td></tr>
+        <tr><td>Integration</td><td><ul><li>Does not integrate with AWS Key Management Service (KMS).</li><li>Customer-provided keys are not supported in SSE-S3.</li></ul></td></tr>
+        <tr><td>Use Case</td><td>Ideal for users seeking simple, cost-free encryption where AWS manages everything automatically.</td></tr>
       </table>
     </div>
+
+    <p style="text-align:center; margin-top:25px; font-size:18px;">
+      🛡️ <span class="highlight">Summary:</span>  
+      <strong>SSE-S3</strong> offers simple, AWS-managed AES-256 encryption for all S3 data, ideal for general workloads not requiring detailed compliance or key management control.
+    </p>
   </section>
+
+  <!-- Section 5: SSE-KMS (AWS-managed vs Customer-managed keys) -->
+  <section>
+    <h2>Server-Side Encryption with AWS KMS (SSE-KMS)</h2>
+    <p>Comparison between <strong>AWS-managed</strong> and <strong>Customer-managed</strong> KMS keys for server-side encryption.</p>
+
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Feature</th>
+          <th>SSE-S3</th>
+          <th>SSE-KMS (AWS-managed keys)</th>
+          <th>SSE-KMS (Customer-managed keys)</th>
+        </tr>
+        <tr>
+          <td>Encryption Key Management</td>
+          <td>Fully managed by AWS S3.</td>
+          <td>AWS KMS manages the keys, but you have limited visibility and control.</td>
+          <td>You create and manage the keys in AWS KMS, giving you full control.</td>
+        </tr>
+        <tr>
+          <td>Key Control</td>
+          <td>No direct control over keys.</td>
+          <td>Limited control (enable/disable keys, view key IDs).</td>
+          <td>Full control over key rotation, policies, and permissions.</td>
+        </tr>
+        <tr>
+          <td>Key Visibility</td>
+          <td>No visibility into key details.</td>
+          <td>Limited visibility (key ID visible).</td>
+          <td>Full visibility of key metadata and usage through AWS CloudTrail.</td>
+        </tr>
+        <tr>
+          <td>Auditing</td>
+          <td>Basic audit logs via S3 access logs.</td>
+          <td>Detailed audit logs available via CloudTrail.</td>
+          <td>Detailed audit logs via CloudTrail, including key usage events.</td>
+        </tr>
+        <tr>
+          <td>Key Rotation</td>
+          <td>Automatic, with no user visibility.</td>
+          <td>Automatic, trackable through CloudTrail.</td>
+          <td>Automatic or manual rotation — fully customizable.</td>
+        </tr>
+        <tr>
+          <td>Granular Permissions</td>
+          <td>Limited to S3 bucket policies.</td>
+          <td>Controlled through KMS key and IAM policies.</td>
+          <td>Full granular control using KMS key and IAM policies.</td>
+        </tr>
+        <tr>
+          <td>Compliance</td>
+          <td>Basic encryption, may not meet strict compliance requirements.</td>
+          <td>Better compliance through detailed audit trails.</td>
+          <td>Best compliance with full control and visibility over key usage.</td>
+        </tr>
+        <tr>
+          <td>Cost</td>
+          <td>Included in S3 storage cost.</td>
+          <td>Additional charges for KMS API requests.</td>
+          <td>Additional charges for KMS requests and key storage.</td>
+        </tr>
+        <tr>
+          <td>Use Cases</td>
+          <td>Simple encryption when you don’t need to control keys.</td>
+          <td>Balance between simplicity and some level of control — suitable for most use cases.</td>
+          <td>Ideal for sensitive data and compliance-driven workloads needing full key management control.</td>
+        </tr>
+      </table>
+    </div>
+
+    <p style="text-align:center; margin-top:25px; font-size:18px;">
+      🔐 <span class="highlight">Summary:</span>  
+      <strong>SSE-KMS (Customer-managed)</strong> provides full visibility and control of encryption keys,  
+      while <strong>SSE-KMS (AWS-managed)</strong> offers a balanced approach between automation and limited governance.
+    </p>
+  </section>
+
 
 </body>
 </html>
