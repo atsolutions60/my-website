@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>S3 Public Access - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 10px;
+    }
+    p {
+      text-align: center;
+      color: #dbe9f3;
+      font-size: 17px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1300px;
+      table-layout: fixed;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+    li {
+      margin: 6px 0;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    section {
+      margin-top: 60px;
+    }
+    pre {
+      background-color: #08131f;
+      color: #a9e8ff;
+      border: 1px solid #415a77;
+      border-radius: 8px;
+      padding: 15px;
+      overflow-x: auto;
+      font-size: 15px;
+      width: 90%;
+      margin: 20px auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Section 1: Introduction -->
+  <h1>S3 Public Access</h1>
+  <p>Understanding how AWS S3 manages public access, associated risks, and ways to safely control it.</p>
+
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Concept</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Public Access</td>
+        <td>Allows anyone on the internet to view or interact with your S3 bucket's content.</td>
+      </tr>
+      <tr>
+        <td>Use Cases</td>
+        <td>
+          <ul>
+            <li>Hosting static websites</li>
+            <li>Sharing files publicly</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>Risk</td>
+        <td>Exposing sensitive or private data to the public if permissions are misconfigured.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Section 2: Two Ways to Grant Public Access -->
+  <section>
+    <h2>Two Ways to Grant Public Access</h2>
+    <p>Public access can be granted through ACLs or Bucket Policies.</p>
+
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Method</th>
+          <th>Details</th>
+          <th>Notes</th>
+        </tr>
+        <tr>
+          <td>Access Control Lists (ACLs)</td>
+          <td>
+            Permissions associated with individual objects in your bucket.
+            Example: Allow public read access to a specific image.
+          </td>
+          <td>
+            <ul>
+              <li>Older mechanism for object-level access</li>
+              <li>Less flexible than bucket policies</li>
+              <li>AWS recommends avoiding ACLs when possible</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Bucket Policies</td>
+          <td>
+            JSON-based documents attached to buckets defining who can do what.
+          </td>
+          <td>
+            <ul>
+              <li>Preferred method for granting access</li>
+              <li>Provides centralized permission control</li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <h2 style="text-align:center;">Example Bucket Policy for Public Read Access</h2>
+    <pre>{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadGetObject",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::your-bucket-name/*"
+    }
+  ]
+}</pre>
+  </section>
+
+  <!-- Section 3: Block Public Access -->
+  <section>
+    <h2>Block Public Access</h2>
+    <p>Centralized settings that prevent public access to buckets and objects.</p>
+
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Level</th>
+          <th>Scope</th>
+          <th>Details</th>
+        </tr>
+        <tr>
+          <td>Account Level</td>
+          <td>Applies to all buckets in the AWS account.</td>
+          <td>Most secure configuration. Prevents public access across all buckets.</td>
+        </tr>
+        <tr>
+          <td>Bucket Level</td>
+          <td>Applies to individual buckets.</td>
+          <td>Allows granular control for specific buckets, useful when selective public access is required.</td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <strong>Example:</strong><br>
+            If Block Public Access is enabled at the <span class="highlight">account level</span> but disabled at the <span class="highlight">bucket level</span>,  
+            public access will still be blocked because the account-level settings override bucket-level ones.
+          </td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 4: Block Public Access Options -->
+  <section>
+    <h2>Block Public Access Configuration Options</h2>
+    <p>Each option provides a different level of protection against unwanted exposure.</p>
+
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Option</th>
+          <th>Description</th>
+          <th>Impact</th>
+        </tr>
+        <tr>
+          <td>1. Block new public ACLs</td>
+          <td>Prevents creation of new public ACLs on buckets and objects.</td>
+          <td>Does not affect existing ACLs. Basic safeguard for new permissions.</td>
+        </tr>
+        <tr>
+          <td>2. Block all public ACLs</td>
+          <td>Blocks public access to buckets and objects, even if ACLs already exist.</td>
+          <td>Stronger protection—ensures no object is public due to any ACL.</td>
+        </tr>
+        <tr>
+          <td>3. Block new public bucket or access point policies</td>
+          <td>Prevents creation of new bucket or access point policies allowing public access.</td>
+          <td>Existing public policies remain unaffected.</td>
+        </tr>
+        <tr>
+          <td>4. Block all public and cross-account access via bucket or access point policies</td>
+          <td>Completely blocks public access, even if bucket or access point policies allow it.</td>
+          <td>Most restrictive—only allows access from your AWS account.</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 5: Example Bucket Policy Explanation -->
+  <section>
+    <h2>Bucket Policy Components Explained</h2>
+    <p>The main elements of a bucket policy that grants public read access.</p>
+
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Element</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td><code>Version</code></td>
+          <td>Specifies the policy language version (e.g., 2012-10-17).</td>
+        </tr>
+        <tr>
+          <td><code>Statement</code></td>
+          <td>Array containing one or more policy statements.</td>
+        </tr>
+        <tr>
+          <td><code>Sid</code></td>
+          <td>Optional identifier for the statement.</td>
+        </tr>
+        <tr>
+          <td><code>Effect</code></td>
+          <td>Determines whether the statement allows or denies the action.</td>
+        </tr>
+        <tr>
+          <td><code>Principal</code></td>
+          <td>Specifies who the permission applies to. “*” means public (anyone).</td>
+        </tr>
+        <tr>
+          <td><code>Action</code></td>
+          <td>The operation allowed or denied (e.g., <code>s3:GetObject</code>).</td>
+        </tr>
+        <tr>
+          <td><code>Resource</code></td>
+          <td>The ARN of the bucket and its objects to which the policy applies.</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 6: Summary -->
+  <section>
+    <h2>Summary</h2>
+    <p style="text-align:center; margin-top:25px; font-size:18px;">
+      🌐 <span class="highlight">Summary:</span>  
+      Use <strong>Bucket Policies</strong> instead of ACLs for granting public access.<br>
+      Always enable <strong>Block Public Access</strong> settings at the account level to prevent accidental exposure.<br>
+      For hosting static websites or sharing public files, carefully configure only the necessary permissions.<br>
+      <br>
+      🚫 Public access is powerful but risky — always review your policies and test configurations before deployment.
+    </p>
+  </section>
+
+</body>
+</html>
