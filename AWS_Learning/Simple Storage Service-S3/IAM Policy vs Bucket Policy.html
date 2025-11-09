@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IAM Policy vs Bucket Policy - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 20px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 90%;
+      max-width: 1100px;
+      table-layout: fixed;
+      font-size: 16px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      text-align: left;
+      vertical-align: middle;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    p {
+      text-align: center;
+      color: #dbe9f3;
+      font-size: 17px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>IAM Policy vs Bucket Policy</h1>
+  <p>This table compares the key differences between <span class="highlight">IAM Policies</span> and <span class="highlight">Bucket Policies</span> in AWS.</p>
+
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>IAM Policy</th>
+        <th>Bucket Policy</th>
+      </tr>
+      <tr>
+        <td><strong>Management</strong></td>
+        <td>Managed via the IAM dashboard</td>
+        <td>Managed via the S3 dashboard</td>
+      </tr>
+      <tr>
+        <td><strong>Format</strong></td>
+        <td>JSON</td>
+        <td>JSON</td>
+      </tr>
+      <tr>
+        <td><strong>Scope</strong></td>
+        <td>Applies to AWS services / Identity-based</td>
+        <td>Applies to S3 buckets / Resource-based</td>
+      </tr>
+      <tr>
+        <td><strong>Use Cases</strong></td>
+        <td>Broad AWS permissions</td>
+        <td>Specific S3 permissions</td>
+      </tr>
+      <tr>
+        <td><strong>Attached To</strong></td>
+        <td>IAM users, groups, or roles</td>
+        <td>S3 buckets</td>
+      </tr>
+      <tr>
+        <td><strong>Best For</strong></td>
+        <td>Multiple AWS services</td>
+        <td>Specific S3 access</td>
+      </tr>
+      <tr>
+        <td><strong>Cross-Account</strong></td>
+        <td>Complex configuration</td>
+        <td>Ideal for S3 cross-account access</td>
+      </tr>
+      <tr>
+        <td><strong>Public Access</strong></td>
+        <td>Not applicable</td>
+        <td>Explicit public access control</td>
+      </tr>
+    </table>
+  </div>
+
+  <p style="text-align:center; margin-top:25px; font-size:18px;">
+    💡 <span class="highlight">Tip:</span> IAM Policies are <strong>identity-based</strong> and apply across AWS services,  
+    while Bucket Policies are <strong>resource-based</strong> and specific to S3 buckets.
+  </p>
+
+</body>
+</html>

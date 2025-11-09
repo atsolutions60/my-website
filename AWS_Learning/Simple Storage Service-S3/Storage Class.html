@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Amazon S3 Storage Classes - Comparisonia</title>
+  <title>Amazon S3 Storage Classes & Backup vs Archive - Comparisonia</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -64,10 +64,15 @@
       color: #90ee90;
       font-weight: bold;
     }
+    /* Spacing between sections */
+    section {
+      margin-top: 60px;
+    }
   </style>
 </head>
 <body>
 
+  <!-- S3 Storage Classes -->
   <h1>Amazon S3 Storage Classes</h1>
   <p>Each Amazon S3 storage class is designed for a different access pattern and cost optimization strategy.</p>
 
@@ -189,6 +194,47 @@
   <p style="text-align:center; margin-top:30px; font-size:18px;">
     📦 <span class="highlight">Choose your S3 storage class based on access frequency, durability, and cost requirements.</span>
   </p>
+
+  <!-- Backup vs Archive Section -->
+  <section>
+    <h2>Backup Storage vs Archive</h2>
+    <p>Backup and Archive both store data — but they serve different purposes in storage strategy and recovery planning.</p>
+
+    <div class="table-container">
+      <table style="max-width: 1000px; text-align:center;">
+        <tr>
+          <th>Feature</th>
+          <th>Backup Storage</th>
+          <th>Archive</th>
+        </tr>
+        <tr>
+          <td><strong>Primary Goal</strong></td>
+          <td>Disaster recovery</td>
+          <td>Long-term data preservation</td>
+        </tr>
+        <tr>
+          <td><strong>Access Frequency</strong></td>
+          <td>Potentially frequent</td>
+          <td>Infrequent</td>
+        </tr>
+        <tr>
+          <td><strong>Retrieval Speed</strong></td>
+          <td>Faster (seconds to minutes)</td>
+          <td>Slower (minutes to hours+)</td>
+        </tr>
+        <tr>
+          <td><strong>Cost</strong></td>
+          <td>May vary depending on solution</td>
+          <td>Lower</td>
+        </tr>
+      </table>
+    </div>
+
+    <p style="text-align:center; margin-top:25px; font-size:18px;">
+      💡 <span class="highlight">In summary:</span> Backup ensures <strong>quick recovery</strong>,  
+      while Archive focuses on <strong>long-term retention</strong> at lower cost.
+    </p>
+  </section>
 
 </body>
 </html>

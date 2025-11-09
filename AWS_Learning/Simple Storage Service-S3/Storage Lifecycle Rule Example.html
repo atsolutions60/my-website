@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>S3 Lifecycle Rules Example - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 90%;
+      max-width: 1100px;
+      table-layout: fixed;
+      font-size: 16px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    p {
+      text-align: center;
+      color: #dbe9f3;
+      font-size: 17px;
+    }
+    section {
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>S3 Lifecycle Rules Example</h1>
+  <p>This example shows how objects transition through different S3 storage classes over time using lifecycle rules.</p>
+
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Time Since Upload</th>
+        <th>Storage Class</th>
+        <th>Action</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td><strong>0 days</strong></td>
+        <td>Standard</td>
+        <td>Object Upload</td>
+        <td>Object is initially uploaded to the <span class="highlight">Standard</span> storage class.</td>
+      </tr>
+      <tr>
+        <td><strong>30 days</strong></td>
+        <td>Standard-IA</td>
+        <td>Transition</td>
+        <td>Object is less frequently accessed and moved to <span class="highlight">Standard-IA</span>.</td>
+      </tr>
+      <tr>
+        <td><strong>90 days</strong></td>
+        <td>One Zone-IA</td>
+        <td>Transition</td>
+        <td>Object is moved to <span class="highlight">One Zone-IA</span> for further cost savings.</td>
+      </tr>
+      <tr>
+        <td><strong>365 days (1 year)</strong></td>
+        <td>Glacier Flexible Retrieval</td>
+        <td>Transition</td>
+        <td>Object is archived in <span class="highlight">Glacier</span> for long-term storage.</td>
+      </tr>
+      <tr>
+        <td><strong>1,095 days (3 years)</strong></td>
+        <td>Glacier Deep Archive</td>
+        <td>Transition</td>
+        <td>Object is moved to <span class="highlight">Glacier Deep Archive</span> for lowest-cost storage.</td>
+      </tr>
+      <tr>
+        <td><strong>3,650 days (10 years)</strong></td>
+        <td>—</td>
+        <td>Expiration</td>
+        <td>Object is deleted as per the company's retention policy.</td>
+      </tr>
+    </table>
+  </div>
+
+  <p style="text-align:center; margin-top:25px; font-size:18px;">
+    🔁 <span class="highlight">Lifecycle Rules</span> help automate object transitions and optimize storage costs.
+  </p>
+
+  <!-- Lifecycle Rule Options Section -->
+  <section>
+    <h2>Lifecycle Rule Options Explained</h2>
+    <p>These lifecycle configuration options determine how S3 manages current and noncurrent object versions automatically.</p>
+
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Rule Option</th>
+          <th>Description</th>
+          <th>Example Use Case</th>
+        </tr>
+        <tr>
+          <td><strong>Move current versions of objects between storage classes</strong></td>
+          <td>Transitions current (latest) object versions from one S3 storage class to another to reduce cost.</td>
+          <td>
+            Example: After 30 days of inactivity, move objects from <span class="highlight">S3 Standard</span> to 
+            <span class="highlight">S3 Standard-IA</span>.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Move noncurrent versions of objects between storage classes</strong></td>
+          <td>Transitions older versions of objects (from versioned buckets) to cheaper storage classes.</td>
+          <td>
+            Example: Move previous versions of files older than 60 days from 
+            <span class="highlight">Standard</span> to <span class="highlight">Glacier Flexible Retrieval</span>.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Expire current versions of objects</strong></td>
+          <td>Deletes the latest version of an object automatically after a defined period.</td>
+          <td>
+            Example: Delete log files older than <span class="highlight">365 days</span> to save storage.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Permanently delete noncurrent versions of objects</strong></td>
+          <td>Removes outdated object versions permanently to minimize storage usage in versioned buckets.</td>
+          <td>
+            Example: Automatically delete noncurrent object versions after <span class="highlight">180 days</span>.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Delete expired object delete markers or incomplete multipart uploads</strong></td>
+          <td>Removes leftover delete markers and unfinished uploads to keep the bucket clean and avoid costs.</td>
+          <td>
+            Example: Automatically delete incomplete multipart uploads older than <span class="highlight">7 days</span>.
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <p style="text-align:center; margin-top:25px; font-size:18px;">
+      ⚙️ <span class="highlight">Tip:</span> These lifecycle options can be combined for precise cost and data management automation.
+    </p>
+  </section>
+
+</body>
+</html>
