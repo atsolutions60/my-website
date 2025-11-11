@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Amazon S3 Static Web Hosting - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 10px;
+    }
+    p {
+      text-align: center;
+      color: #dbe9f3;
+      font-size: 17px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1300px;
+      table-layout: fixed;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+    li {
+      margin: 6px 0;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .image-container img {
+      max-width: 85%;
+      border: 2px solid #415a77;
+      border-radius: 8px;
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Amazon S3 Static Web Hosting</h1>
+  <p>Static web hosting allows you to host websites with fixed content using Amazon S3 buckets.</p>
+
+  <!-- Section 1: Introduction -->
+  <h2>Introduction</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Aspect</th><th>Description</th></tr>
+      <tr>
+        <td>Definition</td>
+        <td>Static web hosting is a type of hosting where website content is fixed and only changes when files are manually updated. No backend server or database is required.</td>
+      </tr>
+      <tr>
+        <td>Content Type</td>
+        <td>HTML, CSS, JavaScript, and image files stored directly in an S3 bucket.</td>
+      </tr>
+      <tr>
+        <td>Comparison</td>
+        <td>Unlike dynamic hosting (e.g., PHP, Node.js), static hosting doesn’t involve server-side scripting — all pages are prebuilt and delivered “as is”.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Section 2: Key Characteristics -->
+  <h2>Key Characteristics of Static Web Hosting</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Feature</th><th>Description</th></tr>
+      <tr>
+        <td>Fixed Content</td>
+        <td>All content is pre-written and does not change unless the files themselves are updated. Ideal for portfolios, blogs, and documentation.</td>
+      </tr>
+      <tr>
+        <td>No Server-Side Processing</td>
+        <td>No backend scripts or databases. Files are served directly to users, improving performance and reducing complexity.</td>
+      </tr>
+      <tr>
+        <td>Simplicity and Speed</td>
+        <td>Easy to create, upload, and deploy. Without server-side logic, loading times are faster and security is enhanced.</td>
+      </tr>
+      <tr>
+        <td>Maintenance</td>
+        <td>Low maintenance — updates only require uploading new or modified files.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Section 3: Advantages of Using Amazon S3 for Static Web Hosting -->
+  <h2>Advantages of S3 Static Web Hosting</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Advantage</th><th>Explanation</th></tr>
+      <tr>
+        <td>Scalability</td>
+        <td>Automatically scales to handle any number of visitors without provisioning additional servers.</td>
+      </tr>
+      <tr>
+        <td>Cost-Effective</td>
+        <td>Pay only for what you use — no need to maintain web servers. Ideal for small websites or test environments.</td>
+      </tr>
+      <tr>
+        <td>High Availability & Durability</td>
+        <td>Backed by Amazon S3’s 99.999999999% durability and high availability across multiple AZs.</td>
+      </tr>
+      <tr>
+        <td>Fast Content Delivery</td>
+        <td>Can integrate with Amazon CloudFront CDN for global low-latency delivery.</td>
+      </tr>
+      <tr>
+        <td>Simple Management</td>
+        <td>Easy to set up via S3 console — just upload files and enable static website hosting.</td>
+      </tr>
+      <tr>
+        <td>Security</td>
+        <td>Supports HTTPS access via CloudFront, IAM-based access control, and S3 bucket policies.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Section 4: Setup Overview -->
+  <h2>Setting Up S3 Static Web Hosting</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Step</th><th>Action</th></tr>
+      <tr>
+        <td>1. Create a Bucket</td>
+        <td>Create an S3 bucket with a name matching your domain (e.g., <span class="highlight">www.example.com</span>).</td>
+      </tr>
+      <tr>
+        <td>2. Upload Website Files</td>
+        <td>Upload all static content files (HTML, CSS, JS, images) to the bucket.</td>
+      </tr>
+      <tr>
+        <td>3. Configure Permissions</td>
+        <td>Enable public access or use CloudFront for secure public delivery. Adjust bucket policy accordingly.</td>
+      </tr>
+      <tr>
+        <td>4. Enable Static Website Hosting</td>
+        <td>In S3 bucket properties, enable “Static website hosting” and specify index (e.g., index.html) and error (e.g., error.html) documents.</td>
+      </tr>
+      <tr>
+        <td>5. (Optional) Configure DNS</td>
+        <td>Use Route 53 to map your domain to the S3 endpoint for custom domain hosting.</td>
+      </tr>
+      <tr>
+        <td>6. (Optional) Add CloudFront</td>
+        <td>Integrate Amazon CloudFront for improved caching, HTTPS support, and faster global delivery.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Section 5: Example Diagram -->
+  <div class="image-container">
+    <img src="static_web.png" alt="S3 Static Web Hosting Example Diagram">
+  </div>
+
+  <p style="text-align:center; margin-top:25px; font-size:18px;">
+    🌐 <span class="highlight">Summary:</span>  
+    <strong>Amazon S3 Static Web Hosting</strong> is ideal for hosting simple, fast, and cost-efficient websites  
+    without managing servers — perfect for documentation, portfolios, or static applications.
+  </p>
+
+</body>
+</html>
