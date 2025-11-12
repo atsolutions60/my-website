@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cross-Origin Resource Sharing (CORS) - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.6;
+      font-size: 17px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+    }
+    p {
+      text-align: center;
+      color: #dbe9f3;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1200px;
+      table-layout: fixed;
+      font-size: 16px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    pre {
+      background-color: #243447;
+      border: 1px solid #415a77;
+      padding: 15px;
+      border-radius: 6px;
+      color: #90ee90;
+      font-family: "Courier New", monospace;
+      font-size: 15px;
+      overflow-x: auto;
+      width: 80%;
+      margin: 25px auto;
+      display: block;
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .image-container img {
+      width: 80%;
+      max-width: 900px;
+      border-radius: 8px;
+      border: 2px solid #415a77;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Cross-Origin Resource Sharing (CORS)</h1>
+  <p>Enable secure communication between resources from different domains using AWS S3.</p>
+
+  <!-- Introduction Table -->
+  <div class="table-container">
+    <table>
+      <tr><th>Aspect</th><th>Description</th></tr>
+      <tr><td>Definition</td><td>CORS (Cross-Origin Resource Sharing) allows web applications hosted on one domain to request resources from another domain securely.</td></tr>
+      <tr><td>Browser Restriction</td><td>By default, web browsers block cross-origin requests for security reasons; CORS provides a mechanism to allow safe access when configured.</td></tr>
+      <tr><td>Purpose</td><td>Tells browsers that it’s safe to fetch resources from another domain, such as another S3 bucket or API endpoint.</td></tr>
+    </table>
+  </div>
+
+  <!-- Why Use CORS with S3 -->
+  <h2>Why Use CORS with Amazon S3</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Scenario</th><th>Explanation</th></tr>
+      <tr><td>Multi-Bucket Websites</td><td>If your static website is hosted in one S3 bucket but needs to access images or APIs from another S3 bucket, CORS enables this safely.</td></tr>
+      <tr><td>Security</td><td>Without CORS, browsers block cross-domain requests. With proper setup, the browser allows controlled access across origins.</td></tr>
+      <tr><td>Configuration</td><td>You define a CORS configuration in the source bucket specifying which domains, methods, and headers are allowed.</td></tr>
+      <tr><td>Result</td><td>Once enabled, your web app can securely load resources such as images, JSON, or files from another S3 bucket or AWS service.</td></tr>
+    </table>
+  </div>
+
+  <!-- CORS Diagram -->
+  <div class="image-container">
+    <img src="cors-diagram.png" alt="CORS Communication Flow Diagram">
+  </div>
+
+  <!-- Sample JSON Configuration -->
+  <h2>Sample CORS Configuration Rule</h2>
+  <pre>{
+  "CORSRules": [
+    {
+      "AllowedHeaders": ["*"],
+      "AllowedMethods": ["GET", "POST", "PUT"],
+      "AllowedOrigins": ["*"],
+      "ExposeHeaders": [],
+      "MaxAgeSeconds": 3000
+    }
+  ]
+}</pre>
+
+  <p style="text-align:center; font-size:18px;">
+    🌐 <span class="highlight">Summary:</span>  
+    CORS enables secure, controlled sharing of data between domains — ensuring your AWS S3-hosted assets can be safely accessed by external web applications.
+  </p>
+
+</body>
+</html>
