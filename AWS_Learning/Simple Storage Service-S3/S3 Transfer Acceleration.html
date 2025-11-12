@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Amazon S3 Transfer Acceleration - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 10px;
+    }
+    p {
+      text-align: center;
+      color: #dbe9f3;
+      margin-bottom: 20px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1200px;
+      table-layout: fixed;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+    li {
+      margin: 6px 0;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin: 25px auto;
+    }
+    .image-container img {
+      width: 85%;
+      max-width: 900px;
+      border-radius: 8px;
+      border: 2px solid #415a77;
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Amazon S3 Transfer Acceleration (S3TA)</h1>
+  <p>Accelerate file uploads and downloads to Amazon S3 by leveraging Amazon’s global edge network and optimized routing.</p>
+
+  <!-- Introduction Section -->
+  <h2>Introduction</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Aspect</th><th>Description</th></tr>
+      <tr><td>Purpose</td><td>S3 Transfer Acceleration (S3TA) significantly increases the speed of file transfers to and from Amazon S3, especially for users distant from the target bucket.</td></tr>
+      <tr><td>Performance Gain</td><td>Can improve data transfer speeds by <span class="highlight">50%–500%</span> depending on distance and network conditions.</td></tr>
+      <tr><td>Ease of Setup</td><td>Simple to enable at the bucket level through the S3 console or AWS CLI.</td></tr>
+      <tr><td>Testing Tool</td><td>Measure speed difference using AWS’s official tool:  
+        <a href="https://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html" target="_blank" style="color:#90ee90;">S3 Acceleration Speed Test</a></td></tr>
+    </table>
+  </div>
+
+  <!-- How It Works -->
+  <h2>How It Works</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Component</th><th>Explanation</th></tr>
+      <tr><td>Global Edge Locations</td><td>Utilizes <span class="highlight">Amazon CloudFront’s edge network</span> which is geographically closer to your users to reduce latency.</td></tr>
+      <tr><td>Optimized Routing</td><td>Transfers data via <span class="highlight">AWS’s private network paths</span> for faster and more reliable delivery than the public internet.</td></tr>
+      <tr><td>Consistent Speed</td><td>Minimizes effects of internet congestion and varying local ISP speeds by using AWS’s optimized infrastructure.</td></tr>
+    </table>
+  </div>
+
+  <!-- Comparison Section -->
+  <h2>Standard S3 Transfer vs S3 Transfer Acceleration</h2>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>Standard S3 Transfer</th>
+        <th>S3 Transfer Acceleration (S3TA)</th>
+      </tr>
+      <tr><td>Network Path</td><td>Uses the public internet for data transfer.</td><td>Uses AWS’s global edge and backbone network for faster routing.</td></tr>
+      <tr><td>Speed</td><td>Varies depending on distance and internet congestion.</td><td>Up to 5x faster for long-distance uploads/downloads.</td></tr>
+      <tr><td>Configuration</td><td>No special configuration; standard S3 endpoint used.</td><td>Enable on bucket → Use accelerated endpoint (e.g., <span class="highlight">bucketname.s3-accelerate.amazonaws.com</span>).</td></tr>
+      <tr><td>Ideal For</td><td>Users located close to the AWS Region of the bucket.</td><td>Users distributed globally or far from the target S3 Region.</td></tr>
+      <tr><td>Pricing</td><td>Standard data transfer charges.</td><td>Additional per-GB cost for accelerated data transfers.</td></tr>
+    </table>
+  </div>
+
+  <!-- Architecture Diagram -->
+  <div class="image-container">
+    <img src="S3TA.png" alt="S3 Transfer Acceleration Architecture Diagram">
+  </div>
+
+  <!-- Live Demo -->
+  <h2>Live Demo</h2>
+  <p>Try out the AWS-provided demo to compare upload and download speeds with and without acceleration:</p>
+  <p><a href="https://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html" target="_blank" style="color:#90ee90; font-weight:bold;">🔗 AWS S3 Transfer Acceleration Speed Comparison Tool</a></p>
+
+  <p style="text-align:center; font-size:18px; margin-top:30px;">
+    ⚡ <span class="highlight">Summary:</span>  
+    <strong>S3 Transfer Acceleration</strong> improves global data transfer performance using AWS’s edge and backbone network —  
+    ideal for large, distributed applications with global users.
+  </p>
+
+</body>
+</html>
