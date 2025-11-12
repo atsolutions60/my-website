@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Amazon S3 Cross-Region Replication (CRR) - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 10px;
+    }
+    p {
+      text-align: center;
+      color: #dbe9f3;
+      margin-bottom: 20px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1300px;
+      table-layout: fixed;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+    li {
+      margin: 6px 0;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin: 25px auto;
+    }
+    .image-container img {
+      width: 85%;
+      max-width: 900px;
+      border-radius: 8px;
+      border: 2px solid #415a77;
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Amazon S3 Cross-Region Replication (CRR)</h1>
+  <p>Automatically replicate S3 objects across AWS Regions for durability, compliance, and low-latency access.</p>
+
+  <!-- Overview Table -->
+  <div class="table-container">
+    <table>
+      <tr><th>Aspect</th><th>Description</th></tr>
+      <tr><td>Definition</td><td>CRR automatically replicates objects from a source S3 bucket to a destination bucket in another AWS Region.</td></tr>
+      <tr><td>Purpose</td><td>Improve data durability, enable global access, meet compliance requirements, and support disaster recovery.</td></tr>
+      <tr><td>Replication Direction</td><td>One-way replication (from source to destination). It’s not bi-directional by default.</td></tr>
+      <tr><td>Replication Scope</td><td>Entire bucket or specific objects based on prefix or tag filters.</td></tr>
+      <tr><td>Use Case Example</td><td>Replicate customer data uploaded in <span class="highlight">us-east-1</span> to <span class="highlight">ap-south-1</span> for compliance or global availability.</td></tr>
+    </table>
+  </div>
+
+  <!-- Comparison Table -->
+  <h2>Cross-Region Replication (CRR) vs Same-Region Replication (SRR)</h2>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>Cross-Region Replication (CRR)</th>
+        <th>Same-Region Replication (SRR)</th>
+      </tr>
+      <tr><td>Replication Location</td><td>Replicates data between different AWS Regions.</td><td>Replicates data within the same AWS Region.</td></tr>
+      <tr><td>Primary Use</td><td>Disaster recovery, latency optimization, compliance, and global distribution.</td><td>Backup, log aggregation, and access segregation within the same region.</td></tr>
+      <tr><td>Data Transfer Cost</td><td>Cross-region transfer fees apply.</td><td>No cross-region transfer cost (same-region only storage cost).</td></tr>
+      <tr><td>Latency</td><td>Higher, due to inter-region replication.</td><td>Lower, since replication occurs within the same region.</td></tr>
+      <tr><td>Compliance & DR</td><td>Meets compliance standards requiring geographic separation (e.g., GDPR).</td><td>Does not satisfy cross-regional compliance requirements.</td></tr>
+      <tr><td>Common Use Cases</td><td><ul><li>Global data distribution</li><li>Geo redundancy</li><li>Compliance archiving</li></ul></td>
+          <td><ul><li>Data protection within same region</li><li>Access isolation between environments</li><li>Audit and log replication</li></ul></td></tr>
+    </table>
+  </div>
+
+  <!-- Key Requirements -->
+  <h2>Key Requirements for CRR Setup</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Requirement</th><th>Details</th></tr>
+      <tr><td>Versioning</td><td>Must be enabled on both source and destination buckets.</td></tr>
+      <tr><td>Permissions</td><td>Source bucket owner must have permission to replicate to the destination bucket.</td></tr>
+      <tr><td>IAM Role</td><td>A replication IAM role must be defined with <span class="highlight">s3:ReplicateObject</span> and related permissions.</td></tr>
+      <tr><td>Encryption</td><td>Supports replication for both SSE-S3 and SSE-KMS encrypted objects (requires KMS permissions).</td></tr>
+      <tr><td>Destination Bucket Ownership</td><td>Destination bucket can be in the same or different AWS account.</td></tr>
+      <tr><td>Replication Time Control (RTC)</td><td>Optional feature to ensure replication completes within 15 minutes (for premium workloads).</td></tr>
+    </table>
+  </div>
+
+  <!-- Benefits -->
+  <h2>Benefits of Using Cross-Region Replication</h2>
+  <div class="table-container">
+    <table>
+      <tr><th>Benefit</th><th>Explanation</th></tr>
+      <tr><td>Disaster Recovery</td><td>Automatic duplication of data to a remote region ensures business continuity.</td></tr>
+      <tr><td>Data Sovereignty</td><td>Meet regulations requiring data storage in specific regions.</td></tr>
+      <tr><td>Improved Access</td><td>Serve users from geographically closer regions with replicated copies.</td></tr>
+      <tr><td>Backup & Archive</td><td>Acts as an automatic backup for long-term data durability.</td></tr>
+      <tr><td>Multi-Account Architecture</td><td>Supports replication between AWS accounts for separation of duties or organizational boundaries.</td></tr>
+    </table>
+  </div>
+
+  <!-- Architecture Image Placeholder -->
+  <div class="image-container">
+    <img src="crr-architecture.png" alt="S3 Cross-Region Replication Architecture Diagram">
+  </div>
+
+  <p style="text-align:center; font-size:18px;">
+    🌍 <span class="highlight">Summary:</span>  
+    <strong>Cross-Region Replication (CRR)</strong> enhances durability and compliance by replicating data across regions,  
+    while <strong>Same-Region Replication (SRR)</strong> focuses on intra-region redundancy and segregation.
+  </p>
+
+</body>
+</html>
