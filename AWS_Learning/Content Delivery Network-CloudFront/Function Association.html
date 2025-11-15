@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Function Associations - Comparisonia</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    /* Comparisonia theme */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 10px;
+    }
+    p {
+      text-align: center;
+      color: #dbe9f3;
+      font-size: 17px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 18px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1300px;
+      table-layout: fixed;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    ul { padding-left: 18px; margin: 0; }
+    li { margin: 6px 0; }
+    section { margin-top: 36px; }
+    .img-slot {
+      width: 140px;
+      height: 80px;
+      margin: 10px auto 8px;
+      border: 2px dashed #415a77;
+      border-radius: 6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#dbe9f3;
+      background:#0f2333;
+      font-size:13px;
+    }
+    .section-intro { max-width:1100px; margin:0 auto; color:#dbe9f3; font-size:15px; text-align:center; }
+    .note { color:#bfcbd9; font-size:14px; margin-top:8px; }
+    @media (max-width:860px){
+      .img-slot { width:90%; height:110px; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Function Associations</h1>
+  
+
+  <!-- Introduction -->
+<section id="function-associations-intro">
+  <h2>Introduction</h2>
+  <div class="img-slot">PNG slot</div>
+
+  <div class="table-container">
+    <table>
+      <tr><th>Description</th></tr>
+
+      <tr>
+        <td>
+          Function associations allow you to execute custom code to modify requests and responses as they pass through the CloudFront distribution.
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Enabling more personalized and dynamic content delivery.
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          There are four main points in the CloudFront request/response lifecycle where you can associate functions:<br><br>
+          1. Viewer Request<br>
+          2. Origin Request<br>
+          3. Origin Response<br>
+          4. Viewer Response
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</section>
+
+  <!-- Function Association Points -->
+  <section id="function-association-points">
+    <h2>Function Association Points</h2>
+    <div class="img-slot">PNG slot</div>
+
+    <!-- Viewer Request -->
+    <div class="table-container">
+      <table>
+        <tr><th>Field</th><th>Description</th></tr>
+        <tr>
+          <td>Viewer Request — When It Runs</td>
+          <td>Executes when CloudFront receives a request from a viewer</td>
+        </tr>
+        <tr>
+          <td>Viewer Request — Use Cases</td>
+          <td>
+            <ol>
+              <li>URL rewrites</li>
+              <li>Redirects</li>
+              <li>Request validation</li>
+              <li>Adding custom headers</li>
+            </ol>
+          </td>
+        </tr>
+        <tr>
+          <td>Viewer Request — Example</td>
+          <td>
+            You want to redirect users to different versions of your website based on their geographic location.
+            For instance, users from Germany should be redirected to the German version of the site, and users from India should be redirected to the Indian version of the site.
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Origin Request -->
+    <div class="table-container">
+      <table>
+        <tr><th>Field</th><th>Description</th></tr>
+        <tr>
+          <td>Origin Request — When It Runs</td>
+          <td>Executes only when CloudFront forwards a request to the origin</td>
+        </tr>
+        <tr>
+          <td>Origin Request — Use Cases</td>
+          <td>
+            <ol>
+              <li>Modifying headers before reaching the origin</li>
+              <li>Adding authentication tokens</li>
+              <li>Routing requests to different origins</li>
+            </ol>
+          </td>
+        </tr>
+        <tr>
+          <td>Origin Request — Example</td>
+          <td>
+            You have an origin server that requires an authentication token in the request header for security reasons.
+            This token is used to validate that the request is coming from a trusted source (CloudFront).
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Origin Response -->
+    <div class="table-container">
+      <table>
+        <tr><th>Field</th><th>Description</th></tr>
+        <tr>
+          <td>Origin Response — When It Runs</td>
+          <td>Executes after CloudFront receives a response from the origin but before it caches the response or forwards it to the viewer</td>
+        </tr>
+        <tr>
+          <td>Origin Response — Use Cases</td>
+          <td>
+            <ol>
+              <li>Modifying headers</li>
+              <li>Altering response status codes</li>
+              <li>Custom caching logic</li>
+            </ol>
+          </td>
+        </tr>
+        <tr>
+          <td>Origin Response — Example</td>
+          <td>
+            You want to control how long certain types of content are cached by CloudFront.
+            For example, you might want to cache images for a longer duration but cache HTML files for a shorter period to ensure that updates are reflected more quickly.
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Viewer Response -->
+    <div class="table-container">
+      <table>
+        <tr><th>Field</th><th>Description</th></tr>
+        <tr>
+          <td>Viewer Response — When It Runs</td>
+          <td>Executes after CloudFront retrieves the content (either from the cache or the origin) but before it sends the response to the viewer.</td>
+        </tr>
+        <tr>
+          <td>Viewer Response — Use Cases</td>
+          <td>
+            <ol>
+              <li>Adding security headers</li>
+              <li>Customizing error messages</li>
+              <li>Modifying response headers</li>
+            </ol>
+          </td>
+        </tr>
+        <tr>
+          <td>Viewer Response — Example</td>
+          <td>
+            You want to enhance the security of your website by adding Content Security Policy (CSP) headers to all responses.
+            CSP headers help prevent cross-site scripting (XSS), clickjacking, and other code injection attacks.
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </section>
+
+  <!-- Types of Functions -->
+  <section id="types-of-functions">
+    <h2>Types of Functions</h2>
+    <div class="img-slot">PNG slot</div>
+
+    <!-- CloudFront Functions -->
+    <div class="table-container">
+      <table>
+        <tr><th>Field</th><th>Description</th></tr>
+
+        <tr>
+          <td>CloudFront Functions — Designed For</td>
+          <td>Lightweight, High-performance operations.</td>
+        </tr>
+
+        <tr>
+          <td>CloudFront Functions — Execution Time</td>
+          <td>Millisecond-level latency</td>
+        </tr>
+
+        <tr>
+          <td>CloudFront Functions — Cost</td>
+          <td>Generally more cost-effective for simple operations</td>
+        </tr>
+
+        <tr>
+          <td>CloudFront Functions — Languages Supported</td>
+          <td>JavaScript (limited runtime)</td>
+        </tr>
+
+        <tr>
+          <td>CloudFront Functions — Common Use Cases</td>
+          <td>
+            <ol>
+              <li>Header manipulations</li>
+              <li>URL rewrites</li>
+              <li>Redirects</li>
+              <li>Request validation</li>
+            </ol>
+          </td>
+        </tr>
+
+      </table>
+    </div>
+
+    <!-- Lambda@Edge -->
+    <div class="table-container">
+      <table>
+        <tr><th>Field</th><th>Description</th></tr>
+
+        <tr>
+          <td>Lambda@Edge — Designed For</td>
+          <td>More complex and comprehensive operations</td>
+        </tr>
+
+        <tr>
+          <td>Lambda@Edge — Execution Time</td>
+          <td>Higher latency compared to CloudFront Functions</td>
+        </tr>
+
+        <tr>
+          <td>Lambda@Edge — Cost</td>
+          <td>More expensive; suitable for complex tasks</td>
+        </tr>
+
+        <tr>
+          <td>Lambda@Edge — Languages Supported</td>
+          <td>
+            <ol>
+              <li>Node.js</li>
+              <li>Python</li>
+              <li>Java</li>
+              <li>C#</li>
+            </ol>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Lambda@Edge — Common Use Cases</td>
+          <td>
+            <ol>
+              <li>Authentication and authorization</li>
+              <li>Generating dynamic content</li>
+              <li>Advanced decision-making</li>
+              <li>Integration with other AWS services</li>
+            </ol>
+          </td>
+        </tr>
+
+      </table>
+    </div>
+
+  </section>
+
+</body>
+</html>
