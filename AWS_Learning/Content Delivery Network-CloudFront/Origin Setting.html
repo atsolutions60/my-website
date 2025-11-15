@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CloudFront Origin Settings - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 10px;
+    }
+    p {
+      text-align: center;
+      color: #dbe9f3;
+      font-size: 17px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1300px;
+      table-layout: fixed;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+    li {
+      margin: 6px 0;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    section {
+      margin-top: 60px;
+    }
+    .image-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin: 20px auto;
+      flex-wrap: wrap;
+      width: 95%;
+      max-width: 1400px;
+    }
+    .image-card {
+      background-color: #1b263b;
+      border: 1px solid #415a77;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 45%;
+      min-width: 320px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+    .image-card img {
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #415a77;
+      background: #ffffff;
+    }
+    .image-card .caption {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #dbe9f3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>CloudFront Origin Settings</h1>
+  <p>Understanding key configurations such as Origin Domain, Origin Path, Custom Headers, and Origin Shield.</p>
+
+  <!-- Table Section -->
+  <section>
+    <h2>Origin Settings Overview</h2>
+
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Feature</th>
+          <th>Description</th>
+        </tr>
+
+        <tr>
+          <td>Origin Domain Name</td>
+          <td>
+            The DNS name or endpoint from which CloudFront fetches content.  
+            Example: <span class="highlight">your-bucket.s3.amazonaws.com</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Origin Path</td>
+          <td>
+            A directory or path within your origin which CloudFront uses as the root.  
+            Useful to point CloudFront to <span class="highlight">/static</span> or <span class="highlight">/assets</span> folders.
+          </td>
+        </tr>
+
+        <tr>
+          <td>Add Custom Header</td>
+          <td>
+            CloudFront can send additional headers to your origin such as:  
+            <ul>
+              <li>Authentication details</li>
+              <li>API keys</li>
+              <li>Debug metadata</li>
+              <li>Versioning information</li>
+            </ul>
+            Example use case:  
+            <span class="highlight">Sending an API key</span> to backend servers.
+          </td>
+        </tr>
+
+        <tr>
+          <td>Origin Shield</td>
+          <td>
+            A chargeable feature providing an additional caching layer that reduces load on your origin.  
+            Requests first pass through a centralized <span class="highlight">shield location</span>, improving cache hit ratio.
+          </td>
+        </tr>
+
+      </table>
+    </div>
+  </section>
+
+  <!-- Image Section (Two PNGs Side-by-Side) -->
+  <section>
+    <h2>Origin Shield Architecture Comparison</h2>
+
+    <div class="image-section">
+
+      <div class="image-card">
+        <img src="without-origin-shield.png" alt="Without Origin Shield">
+        <div class="caption">Without Origin Shield – Each edge location can hit your origin directly.</div>
+      </div>
+
+      <div class="image-card">
+        <img src="with-origin-shield.png" alt="With Origin Shield">
+        <div class="caption">With Origin Shield – A centralized layer reduces origin load.</div>
+      </div>
+
+    </div>
+
+    <p style="text-align:center; margin-top:10px; font-size:18px;">
+      🛡️ <span class="highlight">Origin Shield dramatically improves cache efficiency</span> by routing requests through a single optimized region.
+    </p>
+
+  </section>
+
+</body>
+</html>
