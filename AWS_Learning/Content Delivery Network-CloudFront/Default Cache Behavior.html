@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CloudFront – Default Cache Behavior & Custom HTTPS (Detailed) - Comparisonia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 10px;
+    }
+    p {
+      text-align: center;
+      color: #dbe9f3;
+      font-size: 17px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1300px;
+      table-layout: fixed;
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      font-weight: bold;
+      font-size: 17px;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+    li {
+      margin: 6px 0;
+    }
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+    section {
+      margin-top: 60px;
+    }
+    .image-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin: 20px auto;
+      flex-wrap: wrap;
+      width: 95%;
+      max-width: 1400px;
+    }
+    .image-card {
+      background-color: #1b263b;
+      border: 1px solid #415a77;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 45%;
+      min-width: 320px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+    .image-card img {
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #415a77;
+      background: #ffffff;
+    }
+    .image-card .caption {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #dbe9f3;
+    }
+    .note {
+      color: #bfcbd9;
+      font-size: 15px;
+      margin-top: 8px;
+    }
+    .example {
+      color: #dbe9f3;
+      background: #0c2233;
+      border-left: 3px solid #90ee90;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin-top: 8px;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>CloudFront – Default Cache Behavior & Custom HTTPS (Detailed)</h1>
+  <p>Detailed explanations, practical notes and examples for each important CloudFront configuration.</p>
+
+  <!-- Section 1: Default Cache Behavior Settings -->
+  <section>
+    <h2>Default Cache Behavior Settings</h2>
+
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Setting</th>
+          <th>Detailed Explanation & Practical Notes</th>
+        </tr>
+
+        <tr>
+          <td>Path Pattern</td>
+          <td>
+            Defines the URL pattern that maps requests to this behavior. The default behavior normally uses <code>*</code> and will catch any request that doesn't match a more specific pattern.
+            <div class="note">Order matters: CloudFront evaluates path patterns in the distribution and uses the first matching behavior.</div>
+            <div class="example"><strong>Example:</strong> Use <code>/images/*</code> for image-specific caching rules (long TTLs), and <code>/api/*</code> for dynamic API endpoints (no-cache or short TTLs).</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Viewer Protocol Policy</td>
+          <td>
+            Controls how CloudFront accepts requests from viewers: accept both HTTP & HTTPS, redirect HTTP→HTTPS, or require HTTPS only.
+            <ul>
+              <li><strong>redirect-to-https</strong> (recommended) — automatically redirects insecure requests to HTTPS.</li>
+              <li><strong>https-only</strong> — refuses HTTP requests (safer but may break legacy links).</li>
+            </ul>
+            <div class="note">If you use a custom domain with HTTPS, you must attach a certificate (ACM) to the distribution.</div>
+            <div class="example"><strong>Tip:</strong> Use redirect-to-https to ensure users always end up on a secure connection while maintaining backward compatibility.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Allowed HTTP Methods</td>
+          <td>
+            Determines which HTTP methods CloudFront forwards to the origin. Common choices:
+            <ul>
+              <li><strong>GET, HEAD</strong> — for static sites (best cacheability).</li>
+              <li><strong>GET, HEAD, OPTIONS</strong> — include for CORS preflight requests.</li>
+              <li><strong>All methods</strong> — include if the origin supports uploads/updates (PUT/POST/PATCH/DELETE).</li>
+            </ul>
+            <div class="note">Forwarding write methods typically reduces cache hits and may require custom origin handling.</div>
+            <div class="example"><strong>Example:</strong> For a SPA that uploads via API Gateway, set GET/HEAD for static assets and separate behavior for <code>/api/*</code> allowing POST/PUT.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Cached HTTP Methods</td>
+          <td>
+            Which methods' responses CloudFront caches (usually GET and HEAD). Caching OPTIONS is useful to avoid origin load for CORS preflight.
+            <div class="note">Don't cache methods that change server state (POST, PUT, DELETE) unless your origin implements idempotency/versioned responses.</div>
+            <div class="example"><strong>Example:</strong> Cache GET/HEAD responses for static assets with long TTLs; do not cache API POST responses.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Cache Key Fields</td>
+          <td>
+            The cache key decides when two requests are considered the same for caching (hostname, path, query strings, headers, cookies).
+            <ul>
+              <li><strong>Include minimal elements</strong> for maximum cache hit ratio.</li>
+              <li><strong>Include headers/cookies</strong> only if content varies by them (e.g., language header).</li>
+            </ul>
+            <div class="note">Use Cache Policy and Origin Request Policy to separate what is used for caching vs what is sent to origin.</div>
+            <div class="example"><strong>Example:</strong> For language-specific content, include the <code>Accept-Language</code> header in the cache key (or better, use separate paths like <code>/en/</code>).</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Object TTLs (Min / Default / Max)</td>
+          <td>
+            Time-To-Live values control how long CloudFront retains an object in the edge cache before revalidating:
+            <ul>
+              <li><strong>Minimum TTL</strong> — protects origin from too-frequent revalidation.</li>
+              <li><strong>Default TTL</strong> — used when origin does not specify caching headers.</li>
+              <li><strong>Maximum TTL</strong> — upper bound even if origin's headers request longer.</li>
+            </ul>
+            <div class="note">Balance TTL to trade off freshness vs origin load. Use short TTLs for frequently changing content and long TTLs for static assets (images, JS, CSS).</div>
+            <div class="example"><strong>Example:</strong> Static assets: Default TTL = 7 days; Dynamic content: Default TTL = 0 (no-cache) or use Cache-Control headers from origin.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Forwarding Headers</td>
+          <td>
+            Choose which headers CloudFront forwards to the origin. Forwarding more headers increases origin traffic and reduces cacheability.
+            <ul>
+              <li><strong>None/Whitelist</strong> — preferred for improved cache hit ratio.</li>
+              <li><strong>All headers</strong> — required if origin logic depends on many headers (rare).</li>
+            </ul>
+            <div class="note">Prefer whitelisting only the required header(s) such as <code>Authorization</code> or <code>Accept-Language</code>.</div>
+            <div class="example"><strong>Example:</strong> For personalized content, forward <code>Cookie</code> and \or an <code>X-User-ID</code> header to the origin and tailor cache policy accordingly.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Compress Objects Automatically</td>
+          <td>
+            CloudFront can return compressed (gzip/brotli) versions of text-based assets when the viewer supports it.
+            <div class="note">Compression saves bandwidth and improves load times; ensure origin doesn't already serve compressed responses inconsistently.</div>
+            <div class="example"><strong>Example:</strong> Enable for CSS/JS/JSON; the viewer indicates <code>Accept-Encoding</code> header and CloudFront serves compressed content if available.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Lambda@Edge & CloudFront Functions</td>
+          <td>
+            Small compute at edge to modify requests/responses: rewrite URLs, add headers, A/B testing, bot mitigation.
+            <div class="note">CloudFront Functions are lighter and cheaper for simple request/response manipulations; Lambda@Edge is more powerful for complex logic.</div>
+            <div class="example"><strong>Example:</strong> Use CloudFront Function to normalize incoming cookie names before cache key evaluation.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Origin Request Policy</td>
+          <td>
+            Controls which headers, cookies, and query strings CloudFront includes when forwarding to the origin (may differ from cache key).
+            <div class="note">Optimize origin request policy to include only the elements origin needs for generating the right response.</div>
+            <div class="example"><strong>Example:</strong> Cache key excludes sensitive headers, but origin request policy forwards them for origin-side checks (e.g., <code>Authorization</code>).</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Response Headers Policy</td>
+          <td>
+            Enables inserting security or custom headers at the edge without changing origin code (HSTS, CSP, CORS).
+            <div class="note">Use response headers policy for centralized security hardening across distributions.</div>
+            <div class="example"><strong>Example:</strong> Add <code>Strict-Transport-Security: max-age=31536000; includeSubDomains</code> to all HTTPS responses.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Restrict Viewer Access (Signed URLs / Cookies)</td>
+          <td>
+            Protect private content using signed URLs or cookies validated by CloudFront using key groups or trusted signers.
+            <div class="note">Signed URLs are ideal for single-resource access; signed cookies for multiple resources in a session.</div>
+            <div class="example"><strong>Example:</strong> Distribute a time-limited signed URL to a paying customer to download a file.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>CORS (Cross-Origin Resource Sharing)</td>
+          <td>
+            Configure AllowedOrigins / AllowedMethods / AllowedHeaders so browsers can safely call resources from another domain.
+            <div class="note">Cache preflight (OPTIONS) responses if origins allow — reduces origin load.</div>
+            <div class="example"><strong>Example:</strong> Add <code>AllowedOrigins: ['https://app.example.com']</code> and cache OPTIONS for 600s for better performance.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Field-Level Encryption</td>
+          <td>
+            Encrypt sensitive fields at the edge before sending to origin (e.g., PII), using CloudFront's field-level encryption feature.
+            <div class="note">Useful for protecting data in transit when origin-side processing must not have access to raw values.</div>
+            <div class="example"><strong>Example:</strong> Encrypt credit card numbers before they reach the payment processing origin.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>IPv6 Support</td>
+          <td>
+            CloudFront accepts IPv6 viewer requests at edge locations; origin may still be IPv4—CloudFront will handle translation.
+            <div class="note">Enable IPv6 if your audience requires it; monitor logs for client IP format changes.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Logging & Metrics</td>
+          <td>
+            Enable CloudFront access logs and CloudWatch metrics for traffic, cache hit ratio, error rates, latency, and origin health.
+            <div class="note">Use logs for troubleshooting, billing analysis, and cache tuning.</div>
+            <div class="example"><strong>Example:</strong> Track 4xx/5xx spikes after deployment to identify origin or configuration issues quickly.</div>
+          </td>
+        </tr>
+
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 2: Custom HTTPS Settings -->
+  <section>
+    <h2>Custom HTTPS – SSL/TLS Settings (Detailed)</h2>
+
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Setting</th>
+          <th>Detailed Explanation & Practical Notes</th>
+        </tr>
+
+        <tr>
+          <td>SSL Certificate (ACM vs Imported)</td>
+          <td>
+            CloudFront can use ACM certificates (recommended — managed and free) or uploaded certificates from other CAs.
+            <ul>
+              <li><strong>ACM (us-east-1):</strong> When using ACM with CloudFront, request the certificate in <code>us-east-1</code>.</li>
+              <li><strong>Imported certs:</strong> Upload to IAM or use custom certificate manager if needed.</li>
+            </ul>
+            <div class="note">ACM automates renewal; imported certs must be renewed and reuploaded manually.</div>
+            <div class="example"><strong>Example:</strong> Use ACM for <code>cdn.example.com</code>, validated via DNS in Route 53 for easy automation.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Minimum TLS Version & Security Policy</td>
+          <td>
+            Choose minimum TLS version (TLSv1.2 recommended) and security policy (cipher suites and protocol support).
+            <div class="note">Selecting a modern policy (TLSv1.2+) improves security but may exclude very old clients; choose based on audience requirements.</div>
+            <div class="example"><strong>Tip:</strong> Use <em>TLSv1.2_2019</em> or equivalent modern policy for balance of compatibility and security.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>SNI (Server Name Indication) vs Dedicated IP</td>
+          <td>
+            SNI allows multiple certificates on a single IP address (default and efficient). Dedicated IPs were used for legacy clients that do not support SNI.
+            <div class="note">Most clients support SNI; only enable dedicated IP if you have a specific legacy client requirement (rare).</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>HTTP/2 & HTTP/3 Support</td>
+          <td>
+            CloudFront supports HTTP/2 (multiplexed streams) and HTTP/3/QUIC (lower latency over unreliable networks). Enable by default if supported.
+            <div class="note">HTTP/3 adoption increases performance for lossy networks; monitor metrics after enabling.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Certificate Validation & DNS</td>
+          <td>
+            For ACM, perform DNS validation (fast, automated) or email validation (manual). Use Route 53 alias records to map custom domain to CloudFront distribution.
+            <div class="note">Ensure ACM certificate is issued in us-east-1 and the domain names match the distribution's alternate domain names (CNAMEs).</div>
+            <div class="example"><strong>Example:</strong> Create Route 53 Alias record: <code>cdn.example.com → CloudFront Distribution</code>.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Custom Domain (CNAME / Alternate Domain Names)</td>
+          <td>
+            Add your custom domain names in CloudFront's Alternate Domain Names (CNAMEs) and attach the certificate for each domain.
+            <div class="note">Do not forget to add CNAMEs in CloudFront before requesting/attaching the cert to avoid mismatch errors.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Certificate Rotation & Renewal</td>
+          <td>
+            ACM handles rotation and automatic renewal for ACM-managed certs. For imported certs, track expiration and re-upload new certs proactively.
+            <div class="note">Test reissued certificates in a staging distribution first if possible to avoid production outages.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Client Compatibility Considerations</td>
+          <td>
+            If you serve legacy clients (very old browsers or IoT devices), you may need less strict TLS policies; otherwise prefer modern secure policies.
+            <div class="note">Check analytics to see the distribution of client TLS support before lowering security settings.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>OCSP / CRL and Revocation</td>
+          <td>
+            Certificate revocation checks (OCSP / CRL) are performed by clients and intermediaries. Ensure your CA provides timely revocation info.
+            <div class="note">ACM certificates come from AWS-managed CAs which handle OCSP/CRL behavior transparently in most cases.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Edge Caching & TLS Session Resumption</td>
+          <td>
+            CloudFront handles TLS termination at edge; session resumption reduces handshake overhead for repeat viewers. This improves TLS performance.
+            <div class="note">No extra config needed; session resumption is managed by CloudFront for supported clients.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Testing HTTPS & Troubleshooting</td>
+          <td>
+            Test using browser devtools, <code>curl --tlsv1.2</code>, SSL labs, and site-specific checks. Verify certificate chain and SNI behavior.
+            <div class="example"><strong>Example:</strong> Use <code>curl -I https://cdn.example.com</code> to inspect headers and certificate presented by CloudFront.</div>
+          </td>
+        </tr>
+
+      </table>
+    </div>
+  </section>
+
+
+
+</body>
+</html>

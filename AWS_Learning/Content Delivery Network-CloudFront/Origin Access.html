@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Origin Access Settings - Comparisonia</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 10px;
+    }
+    p.lead {
+      text-align: center;
+      color: #dbe9f3;
+      font-size: 16px;
+      margin-top: 0;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1300px;
+      table-layout: fixed;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    ul { padding-left: 18px; margin: 0; }
+    li { margin: 6px 0; }
+    .highlight { color: #90ee90; font-weight: bold; }
+    .section { margin-top: 50px; }
+    .image-section {
+      display:flex;
+      justify-content:center;
+      gap:30px;
+      flex-wrap:wrap;
+      margin:18px auto 40px auto;
+      max-width:1200px;
+    }
+    .img-card {
+      background:#1b263b;
+      border:1px solid #415a77;
+      padding:14px;
+      border-radius:8px;
+      width:48%;
+      min-width:280px;
+      text-align:center;
+    }
+    .img-card img {
+      width:100%;
+      border-radius:6px;
+      border:2px solid #415a77;
+      background:#ffffff;
+    }
+    .img-card .caption { color:#dbe9f3; margin-top:10px; font-size:15px; }
+    .note { color:#bfcbd9; font-size:15px; margin-top:8px; }
+    pre.json {
+      background:#0b1623;
+      border:1px solid #415a77;
+      color:#90ee90;
+      padding:12px;
+      border-radius:6px;
+      font-family: "Courier New", monospace;
+      white-space:pre-wrap;
+    }
+    footer { text-align:center; color:#bfcbd9; margin-top:30px; font-size:13px; }
+  </style>
+</head>
+<body>
+
+  <h1>Origin Access Settings</h1>
+  <p class="lead">Mechanisms and configurations that determine how and from where an origin can be accessed (applicable to S3 origins).</p>
+
+  <!-- Overview -->
+  <div class="section">
+    <h2>Introduction</h2>
+    <div class="table-container">
+      <table>
+        <tr><th>Topic</th><th>Summary</th></tr>
+        <tr>
+          <td>Purpose</td>
+          <td>Control who can access the origin directly and who can access it via CloudFront. Applies especially to S3 buckets used as origins.</td>
+        </tr>
+        <tr>
+          <td>Applicability</td>
+          <td>Primarily relevant for S3 origins, but concepts (restricting direct origin access vs CloudFront access) apply to other origin types too.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Types of Origin Access -->
+  <div class="section">
+    <h2>Types of Origin Access</h2>
+    <div class="table-container">
+      <table>
+        <tr><th>Type</th><th>Definition / Use Cases</th></tr>
+
+        <tr>
+          <td>Public</td>
+          <td>
+            Definition: The origin (e.g., S3 bucket) is publicly accessible without restrictions.<br>
+            Use Cases: Suitable for purely public content (no sensitive data).<br>
+            Example: An S3 bucket configured with public read permissions to host a static website.
+          </td>
+        </tr>
+
+        <tr>
+          <td>Origin Access Control (OAC)</td>
+          <td>
+            Definition: A modern, CloudFront-integrated mechanism that restricts origin access so only CloudFront can fetch objects.<br>
+            Benefits: Enhanced security and simplified management; better integration with CloudFront features.<br>
+            When to use: Recommended for new setups that require private S3 origins accessed only through CloudFront.
+          </td>
+        </tr>
+
+        <tr>
+          <td>Legacy Access Identities (OAI)</td>
+          <td>
+            Definition: Older method using a special CloudFront identity (OAI) to restrict origin access.<br>
+            Use Cases: Suitable if you have existing infrastructures already using OAI; supported but superseded by OAC for new deployments.
+          </td>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+
+  <!-- OAC Details -->
+  <div class="section">
+    <h2>Origin Access Control (OAC) — Quick Guide</h2>
+
+    <div class="table-container">
+      <table>
+        <tr><th>Item</th><th>Details</th></tr>
+
+        <tr>
+          <td>Definition</td>
+          <td>OAC is a configuration that ensures only CloudFront can access the origin (S3) by updating origin policy and CloudFront settings.</td>
+        </tr>
+
+        <tr>
+          <td>Benefits</td>
+          <td>Improves security by preventing direct public access to the origin, simplifies management, and integrates tightly with CloudFront features.</td>
+        </tr>
+
+        <tr>
+          <td>Steps to Configure OAC</td>
+          <td>
+            1. Create or update a CloudFront distribution.<br>
+            2. Configure the distribution's origin settings to use OAC.<br>
+            3. Update the S3 bucket policy or origin policy to allow access only from CloudFront (OAC) principals.
+            <div class="note">Follow your account’s CloudFront console prompts which create the necessary origin access policies; confirm bucket policy reflects CloudFront OAC principal.</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Practical Note</td>
+          <td>OAC is the modern recommended approach; migrate OAI setups to OAC when convenient for consistent security and improved feature support.</td>
+        </tr>
+
+      </table>
+    </div>
+
+    <!-- OAC Diagram placeholder -->
+    <div class="image-section" style="margin-top:14px;">
+      <div class="img-card">
+        <img src="oac-diagram.png" alt="Origin Access Control diagram placeholder">
+        <div class="caption">OAC diagram </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OAI Details -->
+  <div class="section">
+    <h2>Legacy: Origin Access Identity (OAI)</h2>
+
+    <div class="table-container">
+      <table>
+        <tr><th>Item</th><th>Details</th></tr>
+
+        <tr>
+          <td>Definition</td>
+          <td>OAI uses a special CloudFront user identity to grant CloudFront permission to access S3 bucket objects while keeping the bucket private to the public.</td>
+        </tr>
+
+        <tr>
+          <td>Use Cases</td>
+          <td>Appropriate for existing setups that already use OAI. Supported but considered legacy; OAC is the newer recommended approach.</td>
+        </tr>
+
+        <tr>
+          <td>How it works</td>
+          <td>CloudFront is associated with an OAI. The S3 bucket policy is updated to allow access to that OAI’s principal, denying public access.</td>
+        </tr>
+
+        <tr>
+          <td>Migrate to OAC</td>
+          <td>Assessment: If you rely on OAI, plan migration to OAC for better integration with modern CloudFront features. Migration typically involves creating OAC and adjusting bucket policies accordingly.</td>
+        </tr>
+
+      </table>
+    </div>
+
+    <!-- OAI Diagram placeholder -->
+    <div class="image-section" style="margin-top:14px;">
+      <div class="img-card">
+        <img src="oai-diagram.png" alt="Origin Access Identity diagram placeholder">
+        <div class="caption">OAI diagram</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Example bucket policy snippet -->
+  <div class="section">
+    <h2>Example S3 Bucket Policy (CloudFront Access)</h2>
+
+    <div class="table-container">
+      <table>
+        <tr><th>Purpose</th><th>Policy snippet</th></tr>
+        <tr>
+          <td>Allow CloudFront origin access (example)</td>
+          <td>
+            <pre class="json">{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "cloudfront.amazonaws.com"
+      },
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::example-bucket/*",
+      "Condition": {
+        "StringEquals": {
+          "AWS:SourceArn": "arn:aws:cloudfront::ACCOUNT_ID:distribution/DIST_ID"
+        }
+      }
+    }
+  ]
+}</pre>
+            <div class="note">Replace <code>ACCOUNT_ID</code> and <code>DIST_ID</code> with your values. When using OAC, CloudFront will advise the precise principal or origin policy to use.</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    Source: Origin access (Public / OAC / OAI) — content taken from the uploaded PDF. :contentReference[oaicite:1]{index=1}
+  </footer>
+
+</body>
+</html>
