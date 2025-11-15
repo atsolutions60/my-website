@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CloudFront Hands-On Lab - Comparisonia</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    h1, h2, h3 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 12px;
+    }
+
+    p {
+      text-align: center;
+      color: #dbe9f3;
+    }
+
+    .section {
+      margin-top: 55px;
+    }
+
+    .diagram-container {
+      display: flex;
+      justify-content: center;
+      margin: 35px 0;
+    }
+
+    .diagram-container img {
+      width: 85%;
+      max-width: 900px;
+      border: 2px solid #415a77;
+      border-radius: 10px;
+      background-color: #ffffff;
+      padding: 10px;
+    }
+
+    .table-container {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      margin-top: 25px;
+    }
+
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1300px;
+      table-layout: fixed;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    th, td {
+      border: 1px solid #415a77;
+      padding: 12px;
+      vertical-align: top;
+      word-wrap: break-word;
+      text-align: left;
+    }
+
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .highlight {
+      color: #90ee90;
+      font-weight: bold;
+    }
+
+    .json-box {
+      background-color: #243447;
+      border: 1px solid #415a77;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      font-size: 15px;
+      color: #90ee90;
+    }
+
+    .card {
+      background-color: #1b263b;
+      border: 1px solid #415a77;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px auto;
+      width: 95%;
+      max-width: 1200px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    }
+
+    .card h3 {
+      text-align: left;
+      margin-bottom: 10px;
+      color: #ffd580;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>CloudFront Hands-On Lab</h1>
+  <p>Learn how to host a static website on Amazon S3 and distribute it globally using CloudFront.</p>
+
+  <!-- Architecture Image -->
+  <div class="diagram-container">
+    <img src="CloudFrontBasic.png" alt="CloudFront Lab Architecture Diagram">
+  </div>
+
+  <!-- Mission Section -->
+  <div class="section">
+    <h2>Mission Statement</h2>
+    <div class="card">
+      <p>In this hands-on lab, you will:</p>
+      <ul>
+        <li>Host a static website on Amazon S3</li>
+        <li>Create and configure an Amazon CloudFront distribution</li>
+      </ul>
+      <p>By the end, you will understand how to deploy fast, scalable, globally distributed static websites.</p>
+    </div>
+  </div>
+
+  <!-- Task 1 -->
+  <div class="section">
+    <h2>Task 1 – Host a Static Website on Amazon S3</h2>
+
+    <div class="card">
+      <h3>Steps</h3>
+      <ul>
+        <li>Create an S3 bucket</li>
+        <li>Upload website files</li>
+        <li>Enable static website hosting</li>
+        <li>Make the bucket public</li>
+      </ul>
+
+      <h3>Bucket Policy</h3>
+      <div class="json-box">
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "<Bucket ARN>/*"
+    }
+  ]
+}
+      </div>
+
+      <h3>Test Your Website</h3>
+      <ul>
+        <li>https://geopeeker.com/</li>
+        <li>https://www.webpagetest.org/</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Task 2 -->
+  <div class="section">
+    <h2>Task 2 – Create a CloudFront Distribution</h2>
+
+    <div class="card">
+      <h3>Steps</h3>
+      <ul>
+        <li>Create a new distribution from CloudFront Console</li>
+        <li>Origin Domain Name → enter S3 static website endpoint</li>
+        <li>Origin Path → optional subdirectory path</li>
+      </ul>
+
+      <h3>Access Your Website with CloudFront</h3>
+      <ul>
+        <li>Test using CloudFront URL</li>
+        <li>Performance tools:
+          <ul>
+            <li>https://geopeeker.com/</li>
+            <li>https://www.webpagetest.org/</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="section">
+    <h2>Lab Summary</h2>
+    <div class="card">
+      <ul>
+        <li>You deployed a static website using Amazon S3</li>
+        <li>You configured CloudFront for global distribution</li>
+        <li>You tested performance from multiple regions</li>
+      </ul>
+      <p style="margin-top:10px; font-size:18px;">
+        🚀 <span class="highlight">Your website is now globally accelerated and production-ready!</span>
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>
