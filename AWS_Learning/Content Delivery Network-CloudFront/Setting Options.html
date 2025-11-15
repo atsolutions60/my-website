@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CloudFront — Setting Options (Comparisonia)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 10px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 18px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1300px;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    tr:nth-child(even) { background-color: #243447; }
+    section { margin-top: 36px; }
+
+    .img-slot {
+      width: 140px;
+      height: 80px;
+      margin: 10px auto 8px;
+      border: 2px dashed #415a77;
+      border-radius: 6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#dbe9f3;
+      background:#0f2333;
+      font-size:13px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>CloudFront — Setting Options</h1>
+
+
+
+<!-- ======================================== -->
+<!-- Supported HTTP Versions -->
+<!-- ======================================== -->
+<section id="supported-http-versions">
+  <h2>Supported HTTP versions</h2>
+
+
+
+  <div class="table-container">
+    <table>
+      <tr><th>Description</th></tr>
+
+      <tr>
+        <td>
+          • When configuring a CloudFront distribution, you have the option to specify which versions of the HTTP protocol you want to support
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          • HTTP/1.0 and HTTP/1.1 are supported by default.
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          • The options typically include HTTP/2 and HTTP/3, both of which offer significant performance and security benefits over the older HTTP/1.1 protocol
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          • CloudFront will automatically use the best version supported by the viewer's browser or client
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          • HTTP/2  
+          <br><br>
+          • HTTP/2 is an upgrade over HTTP/1.1 and is widely supported by modern browsers  
+          • It improves speed and efficiency by enabling multiplexing and header compression.
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          • HTTP/3  
+          <br><br>
+          • Takes these improvements further by using QUIC and UDP  
+          • Offers lower latency and improved performance, especially on unstable networks.
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</section>
+
+
+
+<!-- ======================================== -->
+<!-- Default Root Object -->
+<!-- ======================================== -->
+<section id="default-root-object">
+  <h2>Default root object</h2>
+
+
+
+  <div class="table-container">
+    <table>
+      <tr><th>Description</th></tr>
+
+      <tr>
+        <td>
+          • Allows you to specify a default file (usually an HTML file) that CloudFront will serve when a user accesses the root URL of your distribution
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          • Example  
+          <br><br>
+          • When users visit your CloudFront distribution without specifying a file  
+            (https://www.example.com/ instead of https://www.example.com/index.html)
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</section>
+
+
+
+<!-- ======================================== -->
+<!-- Standard Logging -->
+<!-- ======================================== -->
+<section id="standard-logging">
+  <h2>Standard logging</h2>
+
+
+
+  <div class="table-container">
+    <table>
+      <tr><th>Description</th></tr>
+
+      <tr>
+        <td>
+          • Standard logging in CloudFront enables you to log information about every request made to your distribution.
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          • These logs are stored in an Amazon S3 bucket that you specify
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          • Logs can include:  
+          <br><br>
+          • Date and Time of the request  
+          • Client IP Address  
+          • Request URL  
+          • Status Code  
+          • Bytes Transferred
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</section>
+
+
+
+<!-- ======================================== -->
+<!-- Cookie Logging -->
+<!-- ======================================== -->
+<section id="cookie-logging">
+  <h2>Cookie logging</h2>
+
+
+
+  <div class="table-container">
+    <table>
+      <tr><th>Description</th></tr>
+
+      <tr>
+        <td>
+          • This feature allows you to capture and log the name and value of cookies included in requests to your CloudFront distribution.
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          • The logged cookie data can be useful for understanding user behavior, session management, and customizing content delivery based on user-specific data.
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</section>
+
+
+
+<!-- ======================================== -->
+<!-- IPv6 -->
+<!-- ======================================== -->
+<section id="ipv6-support">
+  <h2>IPv6</h2>
+
+
+
+  <div class="table-container">
+    <table>
+      <tr><th>Description</th></tr>
+
+      <tr>
+        <td>
+          • The IPv6 setting in Amazon CloudFront allows you to enable or disable support for IPv6 addresses in your distribution.
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          • Use Case  
+          <br><br>
+          • Future-Proofing  
+          • Global Reach  
+          • Network Performance
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</section>
+
+
+</body>
+</html>
