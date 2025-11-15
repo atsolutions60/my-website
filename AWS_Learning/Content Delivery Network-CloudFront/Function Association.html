@@ -91,7 +91,7 @@
 <body>
 
   <h1>Function Associations</h1>
-  <p>Comparisonia theme — content reproduced exactly from the uploaded PDF.</p>
+  
 
   <!-- Introduction -->
 	<section id="function-associations-intro">
@@ -129,21 +129,26 @@
 </section>
 
 
-  <!-- Function Association Points -->
-  <section id="function-association-points">
-    <h2>Function Association Points</h2>
-    <div class="img-slot">PNG slot</div>
+<!-- Function Association Points -->
+<!-- Function Association Points -->
+<section id="function-association-points">
+  <h2>Function Association Points</h2>
+  
+  <!-- Viewer Request -->
+  <section>
+    <h3 style="text-align:center; color:#ff7b00; margin-bottom:10px;">Viewer Request</h3>
 
-    <!-- Viewer Request -->
     <div class="table-container">
       <table>
         <tr><th>Field</th><th>Description</th></tr>
+
         <tr>
-          <td>Viewer Request — When It Runs</td>
+          <td>When It Runs</td>
           <td>Executes when CloudFront receives a request from a viewer</td>
         </tr>
+
         <tr>
-          <td>Viewer Request — Use Cases</td>
+          <td>Use Cases</td>
           <td>
             <ol>
               <li>URL rewrites</li>
@@ -153,26 +158,37 @@
             </ol>
           </td>
         </tr>
+
         <tr>
-          <td>Viewer Request — Example</td>
+          <td>Example</td>
           <td>
-            You want to redirect users to different versions of your website based on their geographic location.
-            For instance, users from Germany should be redirected to the German version of the site, and users from India should be redirected to the Indian version of the site.
+            You want to redirect users to different versions of your website based on their
+            geographic location. For instance, users from Germany should be redirected to the
+            German version, and users from India should be redirected to the Indian version.
           </td>
         </tr>
+
       </table>
     </div>
+  </section>
 
-    <!-- Origin Request -->
+
+
+  <!-- Origin Request -->
+  <section>
+    <h3 style="text-align:center; color:#ff7b00; margin-bottom:10px;">Origin Request</h3>
+
     <div class="table-container">
       <table>
         <tr><th>Field</th><th>Description</th></tr>
+
         <tr>
-          <td>Origin Request — When It Runs</td>
+          <td>When It Runs</td>
           <td>Executes only when CloudFront forwards a request to the origin</td>
         </tr>
+
         <tr>
-          <td>Origin Request — Use Cases</td>
+          <td>Use Cases</td>
           <td>
             <ol>
               <li>Modifying headers before reaching the origin</li>
@@ -181,54 +197,81 @@
             </ol>
           </td>
         </tr>
+
         <tr>
-          <td>Origin Request — Example</td>
+          <td>Example</td>
           <td>
-            You have an origin server that requires an authentication token in the request header for security reasons.
-            This token is used to validate that the request is coming from a trusted source (CloudFront).
+            You have an origin server that requires an authentication token in the request
+            header for security reasons. This token validates that the request is from
+            CloudFront.
           </td>
         </tr>
+
       </table>
     </div>
+  </section>
 
-    <!-- Origin Response -->
+
+
+  <!-- Origin Response -->
+  <section>
+    <h3 style="text-align:center; color:#ff7b00; margin-bottom:10px;">Origin Response</h3>
+
     <div class="table-container">
       <table>
         <tr><th>Field</th><th>Description</th></tr>
+
         <tr>
-          <td>Origin Response — When It Runs</td>
-          <td>Executes after CloudFront receives a response from the origin but before it caches the response or forwards it to the viewer</td>
+          <td>When It Runs</td>
+          <td>
+            Executes after CloudFront receives a response from the origin but before it caches
+            or forwards it to the viewer.
+          </td>
         </tr>
+
         <tr>
-          <td>Origin Response — Use Cases</td>
+          <td>Use Cases</td>
           <td>
             <ol>
               <li>Modifying headers</li>
               <li>Altering response status codes</li>
-              <li>Custom caching logic</li>
+              <li>Applying custom caching logic</li>
             </ol>
           </td>
         </tr>
+
         <tr>
-          <td>Origin Response — Example</td>
+          <td>Example</td>
           <td>
-            You want to control how long certain types of content are cached by CloudFront.
-            For example, you might want to cache images for a longer duration but cache HTML files for a shorter period to ensure that updates are reflected more quickly.
+            Control cache duration for specific content types.  
+            Example: long cache for images, short cache for HTML.
           </td>
         </tr>
+
       </table>
     </div>
+  </section>
 
-    <!-- Viewer Response -->
+
+
+  <!-- Viewer Response -->
+  <section>
+    <h3 style="text-align:center; color:#ff7b00; margin-bottom:10px;">Viewer Response</h3>
+
     <div class="table-container">
       <table>
         <tr><th>Field</th><th>Description</th></tr>
+
         <tr>
-          <td>Viewer Response — When It Runs</td>
-          <td>Executes after CloudFront retrieves the content (either from the cache or the origin) but before it sends the response to the viewer.</td>
+          <td>When It Runs</td>
+          <td>
+            Executes after CloudFront retrieves the content (cache or origin) but before sending
+            it to the viewer.
+          </td>
         </tr>
+
         <tr>
-          <td>Viewer Response — Use Cases</td>
+          <td>Use Cases</td>
           <td>
             <ol>
               <li>Adding security headers</li>
@@ -237,50 +280,57 @@
             </ol>
           </td>
         </tr>
+
         <tr>
-          <td>Viewer Response — Example</td>
+          <td>Example</td>
           <td>
-            You want to enhance the security of your website by adding Content Security Policy (CSP) headers to all responses.
-            CSP headers help prevent cross-site scripting (XSS), clickjacking, and other code injection attacks.
+            Add CSP headers to enhance security and prevent injection attacks (XSS, clickjacking).
           </td>
         </tr>
+
       </table>
     </div>
-
   </section>
 
-  <!-- Types of Functions -->
-  <section id="types-of-functions">
-    <h2>Types of Functions</h2>
-    <div class="img-slot">PNG slot</div>
+</section>
+<!-- Types of Functions -->
+<section id="types-of-functions">
+  <h2>Types of Functions</h2>
+  <div class="img-slot">PNG slot</div>
 
-    <!-- CloudFront Functions -->
+
+  <!-- CloudFront Functions -->
+  <section>
+    <h3 style="text-align:center; color:#ff7b00; margin-bottom:10px;">
+      CloudFront Functions
+    </h3>
+
     <div class="table-container">
       <table>
         <tr><th>Field</th><th>Description</th></tr>
 
         <tr>
-          <td>CloudFront Functions — Designed For</td>
-          <td>Lightweight, High-performance operations.</td>
+          <td>Designed For</td>
+          <td>Lightweight, high-performance operations.</td>
         </tr>
 
         <tr>
-          <td>CloudFront Functions — Execution Time</td>
-          <td>Millisecond-level latency</td>
+          <td>Execution Time</td>
+          <td>Millisecond-level latency.</td>
         </tr>
 
         <tr>
-          <td>CloudFront Functions — Cost</td>
-          <td>Generally more cost-effective for simple operations</td>
+          <td>Cost</td>
+          <td>Generally more cost-effective for simple operations.</td>
         </tr>
 
         <tr>
-          <td>CloudFront Functions — Languages Supported</td>
+          <td>Languages Supported</td>
           <td>JavaScript (limited runtime)</td>
         </tr>
 
         <tr>
-          <td>CloudFront Functions — Common Use Cases</td>
+          <td>Common Use Cases</td>
           <td>
             <ol>
               <li>Header manipulations</li>
@@ -293,29 +343,37 @@
 
       </table>
     </div>
+  </section>
 
-    <!-- Lambda@Edge -->
+
+
+  <!-- Lambda@Edge -->
+  <section>
+    <h3 style="text-align:center; color:#ff7b00; margin-bottom:10px;">
+      Lambda@Edge
+    </h3>
+
     <div class="table-container">
       <table>
         <tr><th>Field</th><th>Description</th></tr>
 
         <tr>
-          <td>Lambda@Edge — Designed For</td>
-          <td>More complex and comprehensive operations</td>
+          <td>Designed For</td>
+          <td>More complex and comprehensive operations.</td>
         </tr>
 
         <tr>
-          <td>Lambda@Edge — Execution Time</td>
-          <td>Higher latency compared to CloudFront Functions</td>
+          <td>Execution Time</td>
+          <td>Higher latency compared to CloudFront Functions.</td>
         </tr>
 
         <tr>
-          <td>Lambda@Edge — Cost</td>
-          <td>More expensive; suitable for complex tasks</td>
+          <td>Cost</td>
+          <td>More expensive; suitable for complex tasks.</td>
         </tr>
 
         <tr>
-          <td>Lambda@Edge — Languages Supported</td>
+          <td>Languages Supported</td>
           <td>
             <ol>
               <li>Node.js</li>
@@ -327,7 +385,7 @@
         </tr>
 
         <tr>
-          <td>Lambda@Edge — Common Use Cases</td>
+          <td>Common Use Cases</td>
           <td>
             <ol>
               <li>Authentication and authorization</li>
@@ -340,8 +398,11 @@
 
       </table>
     </div>
-
   </section>
+
+</section>
+
+
 
 </body>
 </html>
