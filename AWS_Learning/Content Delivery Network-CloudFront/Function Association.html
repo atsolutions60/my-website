@@ -77,35 +77,44 @@
     @media (max-width:860px){
       .img-slot { width:90%; height:110px; }
     }
+			/* Centered section images */
+	.section-img {
+	  display: block;
+	  margin: 14px auto;        /* Centers the image */
+	  max-width: 95%;           /* Responsive, never overflows */
+	  border-radius: 10px;      /* Comparisonia theme */
+	  border: 2px solid #415a77;
+	  background: #ffffff;
+	}
   </style>
 </head>
 <body>
 
   <h1>Function Associations</h1>
-  
+  <p>Comparisonia theme — content reproduced exactly from the uploaded PDF.</p>
 
   <!-- Introduction -->
-<section id="function-associations-intro">
-  <h2>Introduction</h2>
-  <div class="img-slot">PNG slot</div>
+	<section id="function-associations-intro">
+	<h2>Introduction</h2>
+	<img class="section-img" src="Function_association_intro.png" alt="section image">
 
-  <div class="table-container">
-    <table>
-      <tr><th>Description</th></tr>
+	<div class="table-container">
+		<table>
+		<tr><th>Description</th></tr>
 
-      <tr>
+		<tr>
         <td>
           Function associations allow you to execute custom code to modify requests and responses as they pass through the CloudFront distribution.
         </td>
-      </tr>
+		</tr>
 
-      <tr>
+		<tr>
         <td>
           Enabling more personalized and dynamic content delivery.
         </td>
-      </tr>
+		</tr>
 
-      <tr>
+		<tr>
         <td>
           There are four main points in the CloudFront request/response lifecycle where you can associate functions:<br><br>
           1. Viewer Request<br>
@@ -113,11 +122,12 @@
           3. Origin Response<br>
           4. Viewer Response
         </td>
-      </tr>
+		</tr>
 
     </table>
   </div>
 </section>
+
 
   <!-- Function Association Points -->
   <section id="function-association-points">
