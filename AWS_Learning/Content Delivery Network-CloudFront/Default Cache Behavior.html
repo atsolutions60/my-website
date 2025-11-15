@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <title>CloudFront — Default Cache Behavior & Custom HTTPS - Comparisonia</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
@@ -79,7 +79,8 @@
     @media (max-width:860px){
       .img-slot { width:90%; height:110px; }
     }
-		/* Centered section images */.section-img {
+		/* Centered section images */
+	.section-img {
 	  display: block;
 	  margin: 14px auto;        /* Centers the image */
 	  max-width: 95%;           /* Responsive, never overflows */
@@ -87,472 +88,414 @@
 	  border: 2px solid #415a77;
 	  background: #ffffff;
 	}
-
   </style>
 </head>
 <body>
 
   <h1>CloudFront — Default Cache Behavior &amp; Custom HTTPS</h1>
-  <p>Strictly aligned to the uploaded PDFs. Each sub-topic is presented as a separate Comparisonia table and contains a small PNG placeholder.</p>
+  
 
-  <!-- ===== Default Cache Behavior: Overview ===== -->
-  <section id="overview">
-    <h2>Default Cache Behavior — Overview</h2>
-    <div class="table-container">
-      <table>
-        <tr><th>Feature</th><th>Notes</th></tr>
-        <tr>
-          <td>Scope</td>
-          <td>The default cache behavior defines how CloudFront handles requests that don't match other behaviors: path matching, caching, forwarding, and security settings are configured here.</td>
-        </tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- ===== Path Pattern ===== -->
+  <!-- Path Pattern -->
   <section id="path-pattern">
     <h2>Path Pattern</h2>
     <img class="section-img" src="Path Pattern.png" alt="section image">
     <div class="table-container">
       <table>
-        <tr><th>Setting</th><th>Explanation & Example</th></tr>
+        <tr><th>Field</th><th>Description</th></tr>
         <tr>
-          <td>Path Pattern</td>
+          <td>What it does</td>
+          <td>Specifies which content to cache.</td>
+        </tr>
+        <tr>
+          <td>Example</td>
           <td>
-            Specifies which content is matched by the cache behavior (for example <code>*</code> meaning all website content; <code>images/*</code> for files in the images folder). CloudFront evaluates path patterns in order and uses the first match.
+            <ol>
+              <li><code>*</code> means all the content of your website.</li>
+              <li><code>images/*</code> means cache the content from the images folder only.</li>
+            </ol>
           </td>
         </tr>
       </table>
     </div>
   </section>
 
-  <!-- ===== Viewer Protocol Policy ===== -->
-  <section id="viewer-protocol">
-    <h2>Viewer Protocol Policy</h2>
-	<img class="section-img" src="Viewer Protocol Policy.png" alt="section image">
-    <div class="table-container">
-      <table>
-        <tr><th>Policy</th><th>Details</th></tr>
-        <tr>
-          <td>Viewer Protocol Policy</td>
-          <td>
-            Determines how CloudFront accepts requests: <strong>HTTP and HTTPS</strong>, <strong>Redirect HTTP to HTTPS</strong>, or <strong>HTTPS Only</strong>. Using a custom domain with HTTPS requires attaching a certificate.
-          </td>
-        </tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- ===== Allowed HTTP Methods & Cached Methods ===== -->
-  <section id="http-methods">
-    <h2>Allowed HTTP Methods &amp; Cached HTTP Methods</h2>
-    <div class="table-container">
-      <table>
-        <tr><th>Setting</th><th>Details / Use cases</th></tr>
-        <tr>
-          <td>Allowed HTTP Methods</td>
-          <td>
-            Choices include:
-            <ul>
-              <li><strong>GET, HEAD</strong> — retrieval only; best for static content.</li>
-              <li><strong>GET, HEAD, OPTIONS</strong> — includes CORS preflight support.</li>
-              <li><strong>All Methods</strong> — full CRUD for dynamic APIs or interactive apps.</li>
-            </ul>
-          </td>
-        </tr>
-        <tr>
-          <td>Cached HTTP Methods</td>
-          <td>
-            CloudFront caches responses to <strong>GET</strong> and <strong>HEAD</strong>. Caching <strong>OPTIONS</strong> helps reduce origin load for frequent CORS preflight requests. Avoid caching POST/PUT/DELETE unless specially designed.
-          </td>
-        </tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- ===== Cache Key and Origin Requests ===== -->
-  <section id="cache-key">
-    <h2>Cache Key &amp; Origin Request Policy</h2>
+  <!-- Compress Objects Automatically -->
+  <section id="compress-objects">
+    <h2>Compress Objects Automatically</h2>
     
     <div class="table-container">
       <table>
-        <tr><th>Concept</th><th>Explanation</th></tr>
+        <tr><th>Field</th><th>Description</th></tr>
         <tr>
-          <td>Cache Key</td>
+          <td>What it does</td>
+          <td>This option allows CloudFront to automatically compress files that are sent to users.</td>
+        </tr>
+        <tr>
+          <td>Example</td>
+          <td>If you have a CSS file that is 100 KB in size, enabling automatic compression might reduce it to 30 KB.</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- Viewer Protocol Policy -->
+  <section id="viewer-protocol">
+    <h2>Viewer Protocol Policy</h2>
+    <img class="section-img" src="Viewer Protocol Policy.png" alt="section image">
+    <div class="table-container">
+      <table>
+        <tr><th>Field</th><th>Description</th></tr>
+        <tr>
+          <td>What it does</td>
           <td>
-            Determines when two requests are treated the same (hostname, path, query strings, headers, cookies). Use minimal elements in the cache key for a higher cache hit ratio.
+            This setting determines how CloudFront handles HTTP and HTTPS requests from users (viewers). It controls whether users are allowed to access your content over HTTP, HTTPS, or both.
           </td>
         </tr>
+        <tr>
+          <td>Example</td>
+          <td>
+            <ol>
+              <li><strong>HTTP and HTTPS</strong> — CloudFront will accept both HTTP and HTTPS requests.</li>
+              <li><strong>Redirect HTTP to HTTPS</strong> — CloudFront will automatically redirect HTTP requests to HTTPS.</li>
+              <li><strong>HTTPS Only</strong> — CloudFront will only accept HTTPS requests.</li>
+            </ol>
+          </td>
+        </tr>
+        <tr>
+          <td>Important note</td>
+          <td>
+            <ol>
+              <li>If you use the default CloudFront domain (example: <code>d123456.cloudfront.net</code>), HTTPS works without extra DNS setup.</li>
+              <li>To use a custom domain, configure DNS (CNAME/Alias) and attach a certificate for HTTPS.</li>
+            </ol>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- Allowed HTTP Methods -->
+  <section id="allowed-http-methods">
+    <h2>Allowed HTTP Methods</h2>
+    
+    <div class="table-container">
+      <table>
+        <tr><th>Field</th><th>Description</th></tr>
+
+        <tr>
+          <td>What it does</td>
+          <td>Specify which HTTP methods CloudFront should accept from clients and forward to the origin server.</td>
+        </tr>
+
+        <tr>
+          <td>GET, HEAD</td>
+          <td>
+            <strong>Purpose</strong><br>
+            Retrieval methods only — typical for static content.<br>
+            <strong>Use case</strong><br>
+            Static websites or assets.
+          </td>
+        </tr>
+
+        <tr>
+          <td>GET, HEAD, OPTIONS</td>
+          <td>
+            <strong>Purpose</strong><br>
+            Includes CORS preflight handling via OPTIONS.<br>
+            <strong>Use case</strong><br>
+            APIs and browsers performing CORS preflight.
+          </td>
+        </tr>
+
+        <tr>
+          <td>GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE</td>
+          <td>
+            <strong>Purpose</strong><br>
+            Full CRUD support for dynamic applications.<br>
+            <strong>Use case</strong><br>
+            APIs and interactive applications needing write operations.
+          </td>
+        </tr>
+
+        <tr>
+          <td>Cache HTTP methods</td>
+          <td>
+            <ol>
+              <li>By default, CloudFront caches responses to GET and HEAD requests.</li>
+              <li>Caching OPTIONS can reduce origin load for frequent CORS preflights.</li>
+              <li>Avoid caching state-changing methods (POST/PUT/DELETE) unless the origin is designed for it.</li>
+            </ol>
+          </td>
+        </tr>
+
+      </table>
+    </div>
+  </section>
+
+  <!-- Restrict viewer access -->
+  <section id="restrict-viewer-access">
+    <h2>Restrict viewer access</h2>
+    
+    <div class="table-container">
+      <table>
+        <tr><th>Field</th><th>Description</th></tr>
+
+        <tr>
+          <td>Introduction</td>
+          <td>Restrict viewer access to secure your content so only specific users can view it. Achieved via Signed URLs and Signed Cookies.</td>
+        </tr>
+
+        <tr>
+          <td>Signed URLs</td>
+          <td>A URL with a signature that grants temporary access to a single resource.</td>
+        </tr>
+
+        <tr>
+          <td>Signed Cookies</td>
+          <td>Cookies used to allow access to multiple resources during a session; requires cookie management on the client.</td>
+        </tr>
+
+        <tr>
+          <td>Signed URLs — details</td>
+          <td>
+            <ol>
+              <li>Single resource access</li>
+              <li>Temporary, URL-based</li>
+              <li>Useful for direct downloads to specific users</li>
+            </ol>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Signed Cookies — details</td>
+          <td>
+            <ol>
+              <li>Multiple resource access</li>
+              <li>User sessions</li>
+              <li>Seamless access across many files</li>
+            </ol>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Trusted Key Groups</td>
+          <td>Collections of public keys CloudFront uses to verify signed URLs/cookies; manage which keys can sign requests.</td>
+        </tr>
+
+        <tr>
+          <td>Trusted Signers</td>
+          <td>AWS accounts authorized to create signed URLs and signed cookies for a distribution.</td>
+        </tr>
+
+      </table>
+    </div>
+  </section>
+
+  <!-- Cache key and origin requests -->
+  <section id="cache-key-origin">
+    <h2>Cache key and origin requests</h2>
+    <div class="img-slot">PNG slot</div>
+    <div class="table-container">
+      <table>
+        <tr><th>Field</th><th>Description</th></tr>
+
+        <tr>
+          <td>Scenario 1 — Cache Hit (user flow)</td>
+          <td>
+            A user requests a specific asset (e.g., Inception in Hindi 4K). DNS/latency-based routing sends the request to the nearest edge location. CloudFront checks cache (using cache key) and delivers the asset if present.
+          </td>
+        </tr>
+
+        <tr>
+          <td>Edge routing</td>
+          <td>DNS and latency determine the nearest edge location (example: Edge Location-2).</td>
+        </tr>
+
+        <tr>
+          <td>Cache check</td>
+          <td>CloudFront uses the cache key (path, hostname, query strings, headers, cookies) to determine if the requested object exists in the edge cache.</td>
+        </tr>
+
+        <tr>
+          <td>Scenario 2 — Cache Miss</td>
+          <td>
+            If the requested variant is not present, CloudFront forwards the request to the origin based on the origin request policy. The origin returns the content and CloudFront caches it at the edge for future requests.
+          </td>
+        </tr>
+
         <tr>
           <td>Origin Request Policy</td>
-          <td>
-            Controls which headers, cookies, and query strings CloudFront forwards to the origin. Optimize to forward only necessary elements.
-          </td>
+          <td>Defines which headers, cookies, and query strings are forwarded to the origin to retrieve the correct version.</td>
         </tr>
+
+        <tr>
+          <td>Caching at the edge</td>
+          <td>After fetching from origin, CloudFront caches the object at the edge location for subsequent requests.</td>
+        </tr>
+
+        <tr>
+          <td>Delivery</td>
+          <td>Content is delivered to the user from the edge once cached or immediately after the origin response on a miss.</td>
+        </tr>
+
       </table>
     </div>
   </section>
 
-  <!-- ===== Object TTLs ===== -->
-  <section id="ttls">
-    <h2>Object TTLs (Minimum / Default / Maximum)</h2>
-    <div class="img-slot">PNG slot</div>
+  <!-- Response headers policy -->
+  <section id="response-headers-policy">
+    <h2>Response headers policy</h2>
+    <img class="section-img" src="Response headers policy.png" alt="section image">
     <div class="table-container">
       <table>
-        <tr><th>TTL Setting</th><th>Description & Guidance</th></tr>
+        <tr><th>Field</th><th>Description</th></tr>
+
         <tr>
-          <td>Minimum / Default / Maximum TTL</td>
-          <td>
-            TTL values control how long CloudFront retains objects at the edge. Use long TTLs for static assets and short/zero TTLs for frequently changing content.
-          </td>
+          <td>Response header</td>
+          <td>An HTTP response header sent from the server to the client; provides metadata about the response.</td>
         </tr>
+
+        <tr>
+          <td>Response Header Policy</td>
+          <td>Allows adding, removing, or modifying HTTP response headers at the CloudFront edge without changing origin code.</td>
+        </tr>
+
+        <tr>
+          <td>CORS</td>
+          <td>Cross-Origin Resource Sharing settings to control access from other origins.</td>
+        </tr>
+
+        <tr>
+          <td>Security headers</td>
+          <td>Headers such as HSTS, X-Content-Type-Options, X-Frame-Options, X-XSS-Protection, Referrer-Policy, Content-Security-Policy to harden client behavior.</td>
+        </tr>
+
+        <tr>
+          <td>Strict-Transport-Security</td>
+          <td>Forces HTTPS usage: example <code>Strict-Transport-Security: max-age=31536000; includeSubDomains</code>.</td>
+        </tr>
+
+        <tr>
+          <td>X-Content-Type-Options</td>
+          <td>Prevents MIME-type sniffing: <code>nosniff</code>.</td>
+        </tr>
+
+        <tr>
+          <td>X-Frame-Options</td>
+          <td>Controls iframe embedding: <code>DENY</code> prevents embedding.</td>
+        </tr>
+
+        <tr>
+          <td>X-XSS-Protection</td>
+          <td>Enables browser XSS protection: <code>1; mode=block</code>.</td>
+        </tr>
+
+        <tr>
+          <td>Referrer-Policy</td>
+          <td>Controls referrer information (example: <code>no-referrer</code>).</td>
+        </tr>
+
+        <tr>
+          <td>Content-Security-Policy</td>
+          <td>Restricts allowable sources for scripts, styles, images, etc., e.g., <code>default-src 'self'</code>.</td>
+        </tr>
+
+        <tr>
+          <td>Custom headers / Remove headers</td>
+          <td>Include additional security or operational headers and remove headers that leak server internals.</td>
+        </tr>
+
+        <tr>
+          <td>Server-Timing</td>
+          <td>Expose performance metrics to clients for diagnostics.</td>
+        </tr>
+
       </table>
     </div>
   </section>
 
-  <!-- ===== Forwarding Headers & Cookies ===== -->
-  <section id="forwarding-headers">
-    <h2>Forwarding Headers &amp; Cookies</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Setting</th><th>Guidance</th></tr>
-        <tr>
-          <td>Forwarding Headers</td>
-          <td>
-            Forward as few headers as possible. Forwarding many headers reduces cacheability and increases origin load.
-          </td>
-        </tr>
-        <tr>
-          <td>Cookies</td>
-          <td>
-            Forward cookies only when needed for personalization. Cookies significantly reduce cache hit ratio.
-          </td>
-        </tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- ===== Compression ===== -->
-  <section id="compression">
-    <h2>Compress Objects Automatically</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Feature</th><th>Details</th></tr>
-        <tr>
-          <td>Automatic Compression</td>
-          <td>
-            CloudFront can serve compressed versions of text-based assets (gzip/brotli) when supported by the viewer. Reduces bandwidth and improves load times.
-          </td>
-        </tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- ===== Edge Compute ===== -->
-  <section id="edge-compute">
-    <h2>Lambda@Edge &amp; CloudFront Functions</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Option</th><th>When to use</th></tr>
-        <tr>
-          <td>CloudFront Functions</td>
-          <td>Best for lightweight request/response modifications (header changes, URL normalization).</td>
-        </tr>
-        <tr>
-          <td>Lambda@Edge</td>
-          <td>Use for complex rewrites or advanced authentication logic.</td>
-        </tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- ===== Response Headers ===== -->
-  <section id="response-headers">
-    <h2>Response Headers Policy &amp; Security Headers</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Header / Policy</th><th>Purpose</th></tr>
-        <tr><td>Response Headers Policy</td><td>Add or modify headers at edge (CORS, HSTS, CSP, etc.).</td></tr>
-        <tr><td>Strict-Transport-Security</td><td>Forces browsers to use HTTPS.</td></tr>
-        <tr><td>X-Content-Type-Options</td><td>Prevents MIME-type sniffing.</td></tr>
-        <tr><td>X-Frame-Options</td><td>Protects against clickjacking.</td></tr>
-        <tr><td>Content-Security-Policy</td><td>Restricts allowed sources for loaded content.</td></tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- ===== CORS ===== -->
-  <section id="cors">
-    <h2>CORS (Cross-Origin Resource Sharing)</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Setting</th><th>Guidance</th></tr>
-        <tr>
-          <td>CORS Config</td>
-          <td>Configure AllowedOrigins, AllowedMethods, AllowedHeaders. Cache OPTIONS responses when possible.</td>
-        </tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- ===== Signed Access ===== -->
-  <section id="signed-access">
-    <h2>Restrict Viewer Access — Signed URLs &amp; Cookies</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Feature</th><th>Details</th></tr>
-        <tr><td>Signed URLs</td><td>Grants temporary access to a single resource.</td></tr>
-        <tr><td>Signed Cookies</td><td>Allows session-based access to multiple resources.</td></tr>
-        <tr><td>Trusted Key Groups</td><td>Manage which keys are allowed to sign requests.</td></tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- ===== Field-Level Encryption ===== -->
-  <section id="field-encryption">
-    <h2>Field-Level Encryption</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Feature</th><th>When to use</th></tr>
-        <tr>
-          <td>Field-Level Encryption</td>
-          <td>Encrypts sensitive fields at the edge before sending to origin.</td>
-        </tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- ===== IPv6 Support ===== -->
-  <section id="ipv6">
-    <h2>IPv6 Support</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Feature</th><th>Note</th></tr>
-        <tr>
-          <td>IPv6</td>
-          <td>CloudFront accepts IPv6 viewer requests and translates to IPv4 for the origin if required.</td>
-        </tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- ===== Logging ===== -->
-  <section id="logging">
-    <h2>Logging &amp; Metrics</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Feature</th><th>Why</th></tr>
-        <tr>
-          <td>Access Logs & CloudWatch</td>
-          <td>Monitor cache hit ratio, errors, latency, and origin activity. Useful for debugging and tuning.</td>
-        </tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- ===== Custom HTTPS Sections from PDF ===== -->
-
+  <!-- Custom HTTPS intro -->
   <section id="custom-https-intro">
-    <h2>Custom HTTPS — Lab Overview</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="section-intro">
-      <p>Lab objective: set up CloudFront to deliver an S3-hosted static website with a custom domain and HTTPS.</p>
-    </div>
-  </section>
-
-  <section id="s3-site">
-    <h2>Static Website on S3</h2>
+    <h2>Custom HTTPS — Introduction</h2>
     <div class="img-slot">PNG slot</div>
     <div class="table-container">
       <table>
-        <tr><th>Step</th><th>Notes</th></tr>
+        <tr><th>Field</th><th>Description</th></tr>
         <tr>
-          <td>Host on S3</td>
-          <td>Host the static site in an S3 bucket configured for website hosting.</td>
+          <td>Objective</td>
+          <td>Set up CloudFront to deliver an S3-hosted static website with a custom domain and HTTPS.</td>
         </tr>
       </table>
     </div>
   </section>
 
-  <section id="custom-domain">
-    <h2>Custom Domain</h2>
+  <!-- Lab Implementation -->
+  <section id="lab-implementation">
+    <h2>Lab Implementation</h2>
     <div class="img-slot">PNG slot</div>
     <div class="table-container">
       <table>
-        <tr><th>Step</th><th>Guidance</th></tr>
+        <tr><th>Field</th><th>Description</th></tr>
+
         <tr>
-          <td>Domain & DNS</td>
-          <td>Purchase a domain and create DNS records (CNAME/Alias) pointing to the CloudFront distribution.</td>
+          <td>Step-1</td>
+          <td>Static Website Hosted On S3 — We already have a website hosted on Amazon S3.</td>
         </tr>
+
+        <tr>
+          <td>Step-2: Custom Domain Name</td>
+          <td>
+            <ol>
+              <li>Purchase a domain name.</li>
+              <li>You can use AWS Route 53, GoDaddy, Namecheap, or any other registrar.</li>
+              <li>For this lab, we are using Route 53.</li>
+            </ol>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Step-3: SSL/TLS Certificate</td>
+          <td>
+            <ol>
+              <li>Obtain an SSL/TLS certificate for your custom domain.</li>
+              <li>You can use AWS Certificate Manager, Let's Encrypt, or another provider.</li>
+              <li>For this lab, we are using AWS Certificate Manager.</li>
+            </ol>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Step-4: CloudFront Distribution</td>
+          <td>Access AWS CloudFront to create and configure a distribution.</td>
+        </tr>
+
       </table>
     </div>
   </section>
 
-  <section id="ssl-tls">
-    <h2>SSL/TLS Certificate — ACM vs Imported</h2>
+  <!-- Lab Testing -->
+  <section id="lab-testing">
+    <h2>Lab Testing</h2>
     <div class="img-slot">PNG slot</div>
     <div class="table-container">
       <table>
-        <tr><th>Option</th><th>Notes</th></tr>
-        <tr>
-          <td>ACM (recommended)</td>
-          <td>Use AWS Certificate Manager. Request certificates for CloudFront in <code>us-east-1</code>.</td>
-        </tr>
-        <tr>
-          <td>Imported Certificates</td>
-          <td>Imported certs require manual upload and renewal.</td>
-        </tr>
-      </table>
-    </div>
-  </section>
+        <tr><th>Field</th><th>Description</th></tr>
 
-  <section id="distribution-setup">
-    <h2>CloudFront Distribution: Setup</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Action</th><th>Steps</th></tr>
         <tr>
-          <td>Create Distribution</td>
-          <td>Create distribution, add CNAMEs, and attach certificate.</td>
+          <td>Testing goal</td>
+          <td>Ensure website is accessible via custom domain name.</td>
         </tr>
-        <tr>
-          <td>Testing</td>
-          <td>Test that the site loads correctly via the custom domain.</td>
-        </tr>
-      </table>
-    </div>
-  </section>
 
-  <section id="tls-policy">
-    <h2>Minimum TLS Version &amp; Security Policy</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Setting</th><th>Guidance</th></tr>
         <tr>
-          <td>Minimum TLS & Policy</td>
-          <td>Select TLS 1.2 and a modern policy such as TLSv1.2_2019 for better security.</td>
+          <td>Observed issue</td>
+          <td>The site can still be accessed using the S3 URL — to be addressed in next lab session.</td>
         </tr>
-      </table>
-    </div>
-  </section>
 
-  <section id="sni-ip">
-    <h2>SNI vs Dedicated IP</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Choice</th><th>Note</th></tr>
         <tr>
-          <td>SNI</td>
-          <td>Default; supported by most clients.</td>
+          <td>Next steps</td>
+          <td>Address S3 direct access restriction in follow-up lab.</td>
         </tr>
-        <tr>
-          <td>Dedicated IP</td>
-          <td>Use only for rare legacy clients lacking SNI support.</td>
-        </tr>
-      </table>
-    </div>
-  </section>
 
-  <section id="http2-3">
-    <h2>HTTP/2 &amp; HTTP/3 Support</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Protocol</th><th>Guidance</th></tr>
-        <tr>
-          <td>HTTP/2 & HTTP/3</td>
-          <td>Enable both to improve performance; HTTP/3 helps on lossy networks.</td>
-        </tr>
-      </table>
-    </div>
-  </section>
-
-  <section id="cert-validation">
-    <h2>Certificate Validation &amp; DNS</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Step</th><th>Notes</th></tr>
-        <tr>
-          <td>Validation</td>
-          <td>Validate ACM certs using DNS validation.</td>
-        </tr>
-      </table>
-    </div>
-  </section>
-
-  <section id="cert-rotation">
-    <h2>Certificate Rotation &amp; Renewal</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Type</th><th>Guidance</th></tr>
-        <tr>
-          <td>ACM</td>
-          <td>Rotates automatically.</td>
-        </tr>
-        <tr>
-          <td>Imported</td>
-          <td>Requires manual upload and testing.</td>
-        </tr>
-      </table>
-    </div>
-  </section>
-
-  <section id="compatibility">
-    <h2>Client Compatibility &amp; Revocation</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Topic</th><th>Notes</th></tr>
-        <tr>
-          <td>Compatibility</td>
-          <td>Use analytics to decide whether to relax TLS policies for older clients.</td>
-        </tr>
-        <tr>
-          <td>Revocation (OCSP/CRL)</td>
-          <td>Certificate revocation checks are handled by CAs and clients.</td>
-        </tr>
-      </table>
-    </div>
-  </section>
-
-  <section id="tls-resumption">
-    <h2>Edge Caching &amp; TLS Session Resumption</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Topic</th><th>Notes</th></tr>
-        <tr>
-          <td>TLS Session Resumption</td>
-          <td>CloudFront manages TLS session resumption automatically.</td>
-        </tr>
-      </table>
-    </div>
-  </section>
-
-  <section id="testing">
-    <h2>Testing HTTPS &amp; Troubleshooting</h2>
-    <div class="img-slot">PNG slot</div>
-    <div class="table-container">
-      <table>
-        <tr><th>Checks</th><th>Recommendations</th></tr>
-        <tr>
-          <td>Testing</td>
-          <td>Use browser devtools, curl, and SSL testing tools to verify certificate chain and settings.</td>
-        </tr>
       </table>
     </div>
   </section>
