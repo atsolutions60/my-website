@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Origin Group - Comparisonia</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 12px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 18px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1300px;
+      table-layout: fixed;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    tr:nth-child(even) { background-color: #243447; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; }
+    section { margin-top: 40px; }
+
+     .section-intro { max-width:1100px; margin:0 auto; color:#dbe9f3; font-size:15px; text-align:center; }
+    .note { color:#bfcbd9; font-size:14px; margin-top:8px; }
+    @media (max-width:860px){
+      .img-slot { width:90%; height:110px; }
+    }
+			/* Centered section images */
+	.section-img {
+	  display: block;
+	  margin: 14px auto;        /* Centers the image */
+	  max-width: 95%;           /* Responsive, never overflows */
+	  border-radius: 10px;      /* Comparisonia theme */
+	  border: 2px solid #415a77;
+	  background: #ffffff;
+	}
+  </style>
+</head>
+
+<body>
+
+  <h1>CloudFront Origin Group</h1>
+  
+
+
+  <!-- INTRODUCTION -->
+  <section id="introduction">
+    <h2>Introduction</h2>
+  
+
+    <div class="table-container">
+      <table>
+        <tr><th>Description</th></tr>
+
+        <tr>
+          <td>
+            <ul>
+              <li>CloudFront Origin Group</li>
+              <li>A CloudFront Origin Group is a collection of multiple origins</li>
+              <li>It provides reliability for your content delivery</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>Multiple Origins</strong>
+            <ul>
+              <li>You can add multiple origins to the group</li>
+              <li>These origins can be defined as:</li>
+              <ul>
+                <li>Primary Origin</li>
+                <li>Secondary Origin</li>
+              </ul>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>Primary Origin</strong>
+            <ul>
+              <li>The primary origin is the main source for your content</li>
+              <li>CloudFront sends all requests to the primary origin first.</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>Secondary Origin</strong>
+            <ul>
+              <li>The secondary origin acts as a backup</li>
+              <li>If the primary origin fails, CloudFront switches to the secondary origin</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>Automatic Failover</strong>
+            <ul>
+              <li>CloudFront automatically checks the health of both origins</li>
+              <li>It automatically switches to the secondary origin if the primary is unavailable</li>
+            </ul>
+          </td>
+        </tr>
+
+      </table>
+    </div>
+  </section>
+
+
+
+  <!-- LAB SCENARIO 1 -->
+  <section id="lab-scenario-1">
+    <h2>Basic Scenario: EC2 and S3 Failover</h2>
+    <img class="section-img" src="Origin_group_lab_1.png" alt="section image">
+
+    <div class="table-container">
+      <table>
+        <tr><th>Description</th></tr>
+
+        <tr>
+          <td>
+            <strong>Scenario Explanation</strong>
+            <ul>
+              <li>In this scenario, the goal is to ensure continuous availability of your website even if the primary server (EC2 instance) goes down</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>Why We Are Creating This Setup ?</strong>
+            <ul>
+              <li><strong>User Experience</strong></li>
+              <ul>
+                <li>If the primary EC2 instance hosting your website goes down, we don’t want users to see an error or have no response.</li>
+                <li>Instead, we want to give users a friendly message that the site will be back soon, or provide them with a basic version of the website.</li>
+              </ul>
+
+              <li><strong>Business Continuity</strong></li>
+              <ul>
+                <li>This setup ensures that your website remains accessible, even if it's in a limited capacity.</li>
+              </ul>
+
+              <li><strong>Temporary Solution</strong></li>
+              <ul>
+                <li>The S3 bucket will serve as a temporary, backup website</li>
+                <li>It could display a "maintenance" message or basic information until the EC2 instance is back.</li>
+              </ul>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>Hands-On Steps</strong>
+            <ul>
+              <li>Step-1 Create an EC2 Instance and Configure it as web server</li>
+              <li>Step-2 Set Up an S3 Bucket and configure static web hosting</li>
+              <li>Step-3 Create a CloudFront Distribution</li>
+              <li>Step-4 Setup Origin Group</li>
+              <li>Step-5 Test the Setup</li>
+            </ul>
+          </td>
+        </tr>
+
+      </table>
+    </div>
+  </section>
+
+
+
+  <!-- LAB SCENARIO 2 -->
+  <section id="lab-scenario-2">
+    <h2>Geographical Failover with Load Balancers</h2>
+    <img class="section-img" src="Origin_group_lab_2.png" alt="section image">
+
+    <div class="table-container">
+      <table>
+        <tr><th>Description</th></tr>
+
+        <tr>
+          <td>
+            <strong>Scenario Explanation</strong>
+            <ul>
+              <li>In this advanced scenario, the goal is to ensure your website remains highly available and resilient, even in the event of a regional failure.</li>
+              <li>This setup uses CloudFront with a geographically dispersed failover strategy.</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>Why We Are Creating This Setup ?</strong>
+            <ul>
+              <li><strong>Global Reliability</strong></li>
+              <ul>
+                <li>If the primary load balancer in the India region goes down, we want users to still access the website.</li>
+                <li>Failover to N. Virginia ensures site availability even if a whole region is down.</li>
+              </ul>
+
+              <li><strong>Business Continuity on a Global Scale</strong></li>
+              <ul>
+                <li>For global businesses, redundancy across regions is essential.</li>
+                <li>This scenario ensures operations continue uninterrupted.</li>
+              </ul>
+            </ul>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>Hands-On Steps</strong>
+            <ul>
+              <li>Step-1 Create EC2 Instances in both regions and configure as web servers</li>
+              <li>Step-2</li>
+              <ul>
+                <li>Set up a load balancer in the India region</li>
+                <li>Set up a load balancer in the N. Virginia region</li>
+              </ul>
+              <li>Step-3 Create a CloudFront Distribution</li>
+              <li>Step-4 Setup Origin Group</li>
+              <li>Step-5 Test the Setup</li>
+            </ul>
+          </td>
+        </tr>
+
+      </table>
+    </div>
+  </section>
+
+</body>
+</html>
