@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Database Comparison - On-Premises vs EC2 vs RDS</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 20px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      margin-top: 25px;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 98%;
+      max-width: 1400px;
+      font-size: 16px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .param-col {
+      width: 18%;
+      font-weight: bold;
+      color: #ffd27f;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>On-Premises vs EC2 Instance vs RDS</h1>
+
+<div class="table-container">
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>On-Premises</th>
+    <th>EC2 Instance</th>
+    <th>RDS</th>
+  </tr>
+
+  <tr>
+    <td class="param-col">Control</td>
+    <td>Full control over hardware, network, software</td>
+    <td>Full control over OS, database, and configurations</td>
+    <td>Limited control over database settings and configurations (predefined instance types)</td>
+  </tr>
+
+  <tr>
+    <td class="param-col">Management</td>
+    <td>Manual management for hardware, scaling, backups, and patching</td>
+    <td>Manual for backups, patching, scaling, and security</td>
+    <td>Automated backups, patching, scaling, and software updates</td>
+  </tr>
+
+  <tr>
+    <td class="param-col">Customization</td>
+    <td>Complete customization of hardware and software</td>
+    <td>High customization for OS and database configurations</td>
+    <td>Limited customization (cannot access underlying OS, limited database settings)</td>
+  </tr>
+
+  <tr>
+    <td class="param-col">Cost</td>
+    <td>High initial CapEx for hardware, software, and maintenance</td>
+    <td>Pay-as-you-go pricing, but responsible for instance and storage costs</td>
+    <td>Pay-as-you-go pricing with built-in costs for managed services</td>
+  </tr>
+
+  <tr>
+    <td class="param-col">Scaling</td>
+    <td>Requires manual intervention (buying more hardware, downtime for upgrades)</td>
+    <td>Requires manual scaling (changing instance types or storage manually)</td>
+    <td>Automatic scaling options (up/down with minimal or no downtime)</td>
+  </tr>
+
+  <tr>
+    <td class="param-col">Backup & Recovery</td>
+    <td>Manual setup for backups and disaster recovery</td>
+    <td>Manual configuration for backups and replication</td>
+    <td>Automated backups, Multi-AZ replication, and point-in-time recovery available</td>
+  </tr>
+
+  <tr>
+    <td class="param-col">High Availability</td>
+    <td>Requires complex setup, often costly</td>
+    <td>Requires manual setup for clustering, failover, and replication</td>
+    <td>Built-in Multi-AZ deployments for high availability with minimal setup</td>
+  </tr>
+
+  <tr>
+    <td class="param-col">Security</td>
+    <td>You are fully responsible for physical and network security</td>
+    <td>Full control over security configurations (OS and database-level)</td>
+    <td>Managed security features with encryption at rest and in transit, VPC integration</td>
+  </tr>
+
+  <tr>
+    <td class="param-col">Maintenance</td>
+    <td>High—manual patching, hardware maintenance, software updates</td>
+    <td>Manual software patching, instance updates</td>
+    <td>Low—automated patching and maintenance</td>
+  </tr>
+
+  <tr>
+    <td class="param-col">Performance Tuning</td>
+    <td>Full control over hardware tuning (CPU, RAM, I/O)</td>
+    <td>Full control over instance type and storage optimizations</td>
+    <td>Limited control—can select instance types, but less control over deep tuning</td>
+  </tr>
+
+  <tr>
+    <td class="param-col">Time to Deploy</td>
+    <td>Long—requires hardware procurement, network setup, installation</td>
+    <td>Medium—requires instance provisioning and database setup</td>
+    <td>Short—automated setup, ready-to-use databases in minutes</td>
+  </tr>
+
+  <tr>
+    <td class="param-col">Compliance</td>
+    <td>Full control to meet local and industry compliance</td>
+    <td>Requires configuration to meet compliance</td>
+    <td>AWS handles major compliance (SOC, PCI, HIPAA) with minor user setup</td>
+  </tr>
+
+  <tr>
+    <td class="param-col">Disaster Recovery</td>
+    <td>Manual DR planning and management</td>
+    <td>Requires setting up replication and backups</td>
+    <td>Built-in DR features like Multi-AZ and automated snapshots</td>
+  </tr>
+
+  <tr>
+    <td class="param-col">Network Latency</td>
+    <td>Depends on physical location and network setup</td>
+    <td>Depends on instance region and VPC configuration</td>
+    <td>Lower latency with built-in AWS infrastructure optimization</td>
+  </tr>
+
+  <tr>
+    <td class="param-col">Initial Setup Complexity</td>
+    <td>High—requires infrastructure setup, networking, and database software installation</td>
+    <td>Medium—instance provisioning and DB installation</td>
+    <td>Low—simple launch with minimal setup</td>
+  </tr>
+
+</table>
+</div>
+
+</body>
+</html>
