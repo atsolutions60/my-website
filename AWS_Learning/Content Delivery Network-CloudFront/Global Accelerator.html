@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Global Accelerator - Comparisonia</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 12px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 18px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1300px;
+      table-layout: fixed;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    tr:nth-child(even) { background-color: #243447; }
+
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; }
+
+    .img-slot {
+      width: 160px;
+      height: 90px;
+      margin: 10px auto;
+      border: 2px dashed #415a77;
+      border-radius: 6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#dbe9f3;
+      background:#0f2333;
+      font-size:13px;
+    }
+
+    section { margin-top: 40px; }
+	
+		/* Center the text for Key Features table */
+	.center-table td {
+	  text-align: center;
+	  font-weight: 500;
+	}
+	.center-table th {
+	  text-align: center;
+	}
+		
+		/* Center the table container */
+	.auto-center {
+	  display: flex;
+	  justify-content: center;
+	}
+
+	/* Table width adapts to content but remains responsive */
+	.auto-width-table {
+	  width: auto;
+	  min-width: 280px;
+	  max-width: 95%;
+	}
+
+	/* Center-align text */
+	.center-table td, 
+	.center-table th {
+	  text-align: center;
+	  font-weight: 500;
+	}
+  </style>
+</head>
+
+<body>
+
+<h1>AWS Global Accelerator</h1>
+
+
+
+<!-- SECTION 1: KEY FEATURES -->
+<section id="ga-key-features">
+  <h2>Key Features of AWS Global Accelerator</h2>
+
+  <div class="table-container auto-center">
+    <table class="center-table auto-width-table">
+      <tr>
+        <th>Key Feature</th>
+        <th>Explanation</th>
+      </tr>
+
+      <tr>
+        <td>Static IP Addresses</td>
+        <td>Provides two static anycast IPs that act as a fixed entry point for your application.</td>
+      </tr>
+
+      <tr>
+        <td>Health Checks</td>
+        <td>Continuously monitors endpoint health and redirects traffic to healthy endpoints.</td>
+      </tr>
+
+      <tr>
+        <td>Multi-Region Support</td>
+        <td>Routes users to the nearest healthy AWS Region for low latency and high availability.</td>
+      </tr>
+
+      <tr>
+        <td>Support for TCP/UDP</td>
+        <td>Accelerates both TCP and UDP traffic through the AWS global network.</td>
+      </tr>
+
+      <tr>
+        <td>Security Integration</td>
+        <td>Works seamlessly with AWS Shield, WAF, and other security services.</td>
+      </tr>
+
+      <tr>
+        <td>Traffic Dials</td>
+        <td>Allows fine-grained percentage-based traffic control across regions.</td>
+      </tr>
+
+      <tr>
+        <td>Custom Routing</td>
+        <td>Enables sending traffic directly to EC2 instances for specialized workloads.</td>
+      </tr>
+
+      <tr>
+        <td>Seamless AWS Integration</td>
+        <td>Tightly integrated with AWS networking and compute services for smooth operations.</td>
+      </tr>
+
+    </table>
+  </div>
+</section>
+
+
+
+
+<!-- SECTION 2: COMPARISON TABLE -->
+<section id="ga-comparison">
+  <h2>Global Accelerator vs Load Balancer vs Route 53</h2>
+  
+
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Parameter</th>
+        <th>Global Accelerator</th>
+        <th>Load Balancer</th>
+        <th>Route 53</th>
+      </tr>
+
+      <tr>
+        <td>Primary Purpose</td>
+        <td>Improves global application performance with static IPs and regional failover</td>
+        <td>Distributes traffic across EC2, containers, Lambda, IPs</td>
+        <td>DNS-based routing and domain-level traffic control</td>
+      </tr>
+
+      <tr>
+        <td>Routing Type</td>
+        <td>Anycast routing over AWS global network</td>
+        <td>Layer 4/7 traffic routing</td>
+        <td>DNS routing, latency/geo/weighted policies</td>
+      </tr>
+
+      <tr>
+        <td>Failover Speed</td>
+        <td>Instant (sub-second)</td>
+        <td>Fast but health-check based</td>
+        <td>Slow (depends on DNS TTL)</td>
+      </tr>
+
+      <tr>
+        <td>Supported Protocols</td>
+        <td>TCP & UDP</td>
+        <td>HTTP, HTTPS, TCP, UDP (depending on ALB/NLB)</td>
+        <td>DNS only</td>
+      </tr>
+
+      <tr>
+        <td>IP Type</td>
+        <td>Static Global IPs</td>
+        <td>Dynamic (changes per load balancer)</td>
+        <td>No IP — DNS only</td>
+      </tr>
+
+      <tr>
+        <td>Use Case</td>
+        <td>Low-latency global routing, gaming, VoIP, multi-region apps</td>
+        <td>Scaling backend services</td>
+        <td>Domain management, global traffic steering</td>
+      </tr>
+
+    </table>
+  </div>
+</section>
+
+
+</body>
+</html>
