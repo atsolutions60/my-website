@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Availability & Durability - Comparisonia</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 20px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 10px;
+    }
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 18px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      background-color: #1b263b;
+      width: 95%;
+      max-width: 1600px;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #415a77;
+      padding: 14px;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background-color: #ff7b00;
+      color: #0d1b2a;
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+    }
+    tr:nth-child(even) {
+      background-color: #243447;
+    }
+    .img-slot {
+      width: 160px;
+      height: 90px;
+      margin: 12px auto 14px;
+      border: 2px dashed #415a77;
+      border-radius: 8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#dbe9f3;
+      background:#0f2333;
+      font-size:13px;
+    }
+    section { margin-top: 40px; }
+	
+				/* Centered section images */
+	.section-img {
+	  display: block;
+	  margin: 14px auto;        /* Centers the image */
+	  max-width: 95%;           /* Responsive, never overflows */
+	  border-radius: 10px;      /* Comparisonia theme */
+	  border: 2px solid #415a77;
+	  background: #ffffff;
+	}
+  </style>
+</head>
+<body>
+
+<h1>Availability & Durability — RDS</h1>
+
+<!-- ================= SECTION 1 : HORIZONTAL COMPARISON TABLE ================= -->
+<section id="horizontal-comparison">
+  <h2>RDS Deployment Options — Horizontal Comparison</h2>
+  <img class="section-img" src="Multi-AZ DB Cluster.png" alt="section image">
+
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Parameter</th>
+        <th>Single DB Instance</th>
+        <th>Multi-AZ DB Instance</th>
+        <th>Multi-AZ DB Cluster</th>
+      </tr>
+
+      <tr>
+        <td>Description</td>
+        <td>
+          A standalone database instance running in a single Availability Zone without standby replicas or automatic failover.<br><br>
+          Ideal for non-critical applications that do not require high availability.<br><br>
+          Lower cost compared to Multi-AZ deployments.
+        </td>
+
+        <td>
+          Two DB instances deployed in two different AZs (Primary + Standby).<br><br>
+          Provides high availability via synchronous replication.<br><br>
+          Automatic failover typically within ~60 seconds.
+        </td>
+
+        <td>
+          High-availability cluster with 1 writer + 2 readers placed across 3 AZs.<br><br>
+          Semi-synchronous replication, improved write latency, and increased read capacity.<br><br>
+          Automatic failover promotes a reader to writer.
+        </td>
+      </tr>
+
+      <tr>
+        <td>Architecture</td>
+        <td>
+          • Single instance in one AZ<br>
+          • No standby replica<br>
+          • No automated failover
+        </td>
+
+        <td>
+          • Primary + standby instance<br>
+          • Separate AZs<br>
+          • Synchronous replication<br>
+          • Failover handled automatically
+        </td>
+
+        <td>
+          • 1 Writer + 2 Readers<br>
+          • Readers serve read traffic<br>
+          • Multi-AZ cluster design<br>
+          • Instant failover to reader
+        </td>
+      </tr>
+
+      <tr>
+        <td>Use Cases</td>
+        <td>
+          • Development environments<br>
+          • Low-priority apps<br>
+          • Non-critical workloads
+        </td>
+
+        <td>
+          • Production workloads<br>
+          • Business-critical apps<br>
+          • High uptime needed
+        </td>
+
+        <td>
+          • Read-heavy applications<br>
+          • Latency-sensitive writes<br>
+          • High availability + scalability
+        </td>
+      </tr>
+
+      <tr>
+        <td>Benefits</td>
+        <td>
+          • Low cost<br>
+          • Easy to manage
+        </td>
+
+        <td>
+          • High availability<br>
+          • Automatic failover<br>
+          • No data loss (sync replication)
+        </td>
+
+        <td>
+          • HA + read scaling<br>
+          • Lower write latency<br>
+          • Very fast failover (~35 sec)
+        </td>
+      </tr>
+
+      <tr>
+        <td>Limitations</td>
+        <td>
+          • No HA<br>
+          • Manual recovery only<br>
+          • Potential data loss during crash
+        </td>
+
+        <td>
+          • Higher cost<br>
+          • No performance boost<br>
+          • Slightly higher write latency
+        </td>
+
+        <td>
+          • Highest cost tier<br>
+          • More complex setup<br>
+          • No cross-region DR
+        </td>
+      </tr>
+
+      <tr>
+        <td>Supported Engines</td>
+        <td>
+          All RDS engines
+        </td>
+
+        <td>
+          All RDS engines
+        </td>
+
+        <td>
+          MySQL 8.0.28+ <br>
+          PostgreSQL 13.4+
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</section>
+
+<!-- ================= SECTION 2 : AVAILABILITY CHOOSING (TWO COLUMNS) ================= -->
+<section id="choosing-availability">
+  <h2>Choosing the Availability Option</h2>
+  
+
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Category</th>
+        <th>Explanation</th>
+      </tr>
+
+      <tr>
+        <td><strong>Introduction</strong></td>
+        <td>
+          AWS RDS offers three availability models:<br>
+          • Single Host<br>
+          • Multi-AZ<br>
+          • Multi-AZ Cluster
+        </td>
+      </tr>
+
+      <tr>
+        <td><strong>RPO (Recovery Point Objective)</strong></td>
+        <td>
+          • Measures acceptable data loss.<br>
+          • Backup frequency defines RPO.
+        </td>
+      </tr>
+
+      <tr>
+        <td><strong>RTO (Recovery Time Objective)</strong></td>
+        <td>
+          • Maximum allowable downtime.<br>
+          • Single Host → High RTO<br>
+          • Multi-AZ → Low RTO<br>
+          • Multi-AZ Cluster → Very low RTO
+        </td>
+      </tr>
+
+      <tr>
+        <td><strong>Availability Comparison — Single Host</strong></td>
+        <td>
+          • RPO: High (backup-based)<br>
+          • RTO: High
+        </td>
+      </tr>
+
+      <tr>
+        <td><strong>Availability Comparison — Multi-AZ</strong></td>
+        <td>
+          • RPO: Low<br>
+          • RTO: Low (~60 sec)
+        </td>
+      </tr>
+
+      <tr>
+        <td><strong>Availability Comparison — Multi-AZ Cluster</strong></td>
+        <td>
+          • RPO: Low<br>
+          • RTO: Very low (~35 sec)
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</section>
+
+
+</body>
+</html>
