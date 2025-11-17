@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RDS Proxy - Comparisonia Theme</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #0d1b2a;
+        color: #ffffff;
+        margin: 20px;
+        line-height: 1.7;
+        font-size: 17px;
+    }
+    h1, h2 {
+        text-align: center;
+        color: #ff7b00;
+        margin-bottom: 14px;
+    }
+    .image-box {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 18px;
+        margin-top: 8px;
+    }
+    .image-box img {
+        max-width: 500px;
+        border-radius: 8px;
+        border: 2px solid #ff7b00;
+    }
+    .table-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 18px;
+        overflow-x: auto;
+    }
+    table {
+        border-collapse: collapse;
+        background-color: #1b263b;
+        width: 95%;
+        max-width: 1400px;
+        font-size: 16px;
+        margin-bottom: 32px;
+    }
+    th, td {
+        border: 1px solid #415a77;
+        padding: 14px;
+        vertical-align: top;
+        text-align: left;
+        color: #dbe9f3;
+    }
+    th {
+        background-color: #1b263b;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 18px;
+        text-align: center;
+    }
+   .header-img {
+        width: 330px;   /* Increased size */
+        height: auto;
+        border-radius: 6px;
+        border: 2px solid #ffffff;
+    }
+    tr:nth-child(even) {
+        background-color: #243447;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Amazon RDS Proxy</h1>
+
+<!-- SECTION 1: INTRODUCTION -->
+<section id="intro">
+    <h2>Introduction</h2>
+
+
+
+    <div class="table-container">
+        <table>
+            <tr><th>Description</th></tr>
+
+            <tr>
+                <td>Amazon RDS Proxy is a service that acts like a helper between your application and your database.</td>
+            </tr>
+
+            <tr>
+                <td>It manages database connections, makes your application faster, handles more users at the same time, and keeps your database secure and reliable.</td>
+            </tr>
+
+            <tr>
+                <td>It’s especially useful for apps like AWS Lambda, which can have many users connecting to the database at once.</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<!-- SECTION 2 : COMPARISON TABLE -->
+<section id="comparison">
+    <h2>Without RDS Proxy vs With RDS Proxy</h2>
+
+    <div class="table-container">
+        <table>
+
+            <!-- HEADER WITH IMAGE SLOTS -->
+            <tr>
+                <th>Parameter</th>
+                <th>
+                    <img src="Without RDS Proxy.png" class="header-img" alt="Without Proxy">
+                    <br>Without RDS Proxy
+                </th>
+                <th>
+                    <img src="With RDS Proxy.png" class="header-img" alt="With Proxy">
+                    <br>With RDS Proxy
+                </th>
+            </tr>
+
+            <!-- PDF-CONTENT-STRICT ROWS -->
+            <tr>
+                <td>Connections</td>
+                <td>AWS Lambda, ECS, and EKS are all connecting directly to Amazon RDS. Each service manages its own database connections.</td>
+                <td>Amazon RDS Proxy sits between your application and the database. Applications connect to the proxy endpoint instead of the database.</td>
+            </tr>
+
+            <tr>
+                <td>Key Issue / Benefit</td>
+                <td>
+                    Direct connections can lead to performance bottlenecks, poor performance, and difficulty handling failover.
+                </td>
+                <td>
+                    The proxy manages connections efficiently and improves application performance by pooling and reusing connections.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Connection Pooling</td>
+                <td>No connection pooling. Each request may create a new connection, increasing load.</td>
+                <td>
+                    Proxy maintains a pool of pre-established connections and reuses them, reducing resource usage.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Failover Handling</td>
+                <td>Failover handling is inefficient, causing delays or failures.</td>
+                <td>
+                    Automatically switches connections to the standby database (Multi-AZ) during failover.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Security</td>
+                <td>Application directly handles database credentials.</td>
+                <td>
+                    Uses AWS Secrets Manager for secure authentication. Applications do not handle DB credentials directly.
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</section>
+
+</body>
+</html>
