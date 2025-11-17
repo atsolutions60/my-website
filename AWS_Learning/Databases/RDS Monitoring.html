@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Performance Insights vs Enhanced Monitoring vs CloudWatch Monitoring</title>
+
+<style>
+    body {
+        background-color: #0d1b2a;
+        color: white;
+        font-family: Arial, sans-serif;
+    }
+    h2 {
+        text-align: center;
+        color: #ff8c00;
+        margin-top: 40px;
+    }
+    .table-container {
+        width: 95%;
+        margin: 0 auto;
+        margin-top: 25px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 15px;
+        text-align: left;
+    }
+    th {
+        background-color: #ff8c00;
+        padding: 12px;
+        text-align: center;
+        color: #000;
+        font-weight: bold;
+        border: 1px solid #333;
+    }
+    td {
+        padding: 10px 12px;
+        border: 1px solid #2b3a55;
+        vertical-align: top;
+    }
+    tr:nth-child(even) {
+        background-color: #1b263b;
+    }
+    tr:nth-child(odd) {
+        background-color: #162232;
+    }
+    .png-slot {
+        height: 120px;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 14px;
+        color: #ccc;
+        border: 1px dashed #445;
+    }
+</style>
+</head>
+
+<body>
+
+<h2>Performance Insights vs Enhanced Monitoring vs CloudWatch Monitoring</h2>
+
+<div class="table-container">
+<table>
+
+    <!-- PNG SLOT ROW -->
+    <tr>
+       <td class="png-slot"><img src="Performance Insights.png" height="200"></td>  
+       <td class="png-slot"><img src="Enhanced Monitoring.png" height="200"></td>
+		<td class="png-slot"><img src="Cloudwatch.png" height="200"></td>      
+		
+    </tr>
+
+    <!-- HEADER ROW -->
+    <tr>
+        <th>Performance Insights</th>
+        <th>Enhanced Monitoring</th>
+        <th>CloudWatch Monitoring</th>
+    </tr>
+
+    <tr>
+        <td>Database engine performance</td>
+        <td>Operating system (OS) metrics</td>
+        <td>Overall RDS instance monitoring</td>
+    </tr>
+
+    <tr>
+        <td>Detailed (in-depth query and wait statistics)</td>
+        <td>Detailed (1-second intervals)</td>
+        <td>Basic (5-min) and Detailed (1-min)</td>
+    </tr>
+
+    <tr>
+        <td>DB load, query performance</td>
+        <td>CPU, RAM, disk I/O</td>
+        <td>CPU, memory, storage, I/O, logs</td>
+    </tr>
+
+    <tr>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>Supports logs (error, audit)</td>
+    </tr>
+
+    <tr>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>Custom alarms & automated responses</td>
+    </tr>
+
+    <tr>
+        <td>Analyze slow queries & bottlenecks in high-traffic DBs</td>
+        <td>Real-time OS metrics for critical workloads</td>
+        <td>Trend tracking & resource monitoring every 1–5 min</td>
+    </tr>
+
+    <tr>
+        <td>Free first 7 days/month, then paid</td>
+        <td>Paid — based on instance size</td>
+        <td>Free (5-min), paid (1-min), logs, custom metrics</td>
+    </tr>
+
+</table>
+</div>
+
+</body>
+</html>
