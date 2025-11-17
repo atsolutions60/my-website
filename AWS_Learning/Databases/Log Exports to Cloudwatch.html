@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RDS Log Exports - Comparisonia Theme</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background-color: #0d1b2a;
+        color: #ffffff;
+        margin: 20px;
+        line-height: 1.7;
+        font-size: 17px;
+    }
+
+    h1, h2 {
+        text-align: center;
+        color: #ff7b00;
+        margin-bottom: 14px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+    /* Fully improved container */
+    .table-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 18px;
+        overflow-x: auto;
+    }
+
+    /* Unified table styling */
+    table {
+        border-collapse: collapse;
+        background-color: #1b263b;
+        width: 100%;
+        max-width: 1300px;
+        table-layout: auto;     /* ← Auto column width */
+        font-size: 17px;
+        margin-bottom: 32px;
+    }
+
+    th, td {
+        border: 1px solid #415a77;
+        padding: 14px 18px;
+        vertical-align: top;
+        text-align: left;
+        color: #e2eaf3;
+        word-break: break-word;
+    }
+
+    th {
+        background-color: #ff7b00;
+        color: #0d1b2a;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    tr:nth-child(even) {
+        background-color: #243447;
+    }
+
+</style>
+</head>
+
+<body>
+
+<h1>RDS Log Exports</h1>
+
+<!-- SECTION 1 -->
+<section id="introduction">
+    <h2>Introduction of Logs</h2>
+    <div class="table-container">
+        <table>
+            <tr><th>Description</th></tr>
+            <tr>
+                <td>Logs are records of various database events and activities.</td>
+            </tr>
+            <tr>
+                <td>Logs capture information on queries, errors, connections, and access activities, helping track what’s happening inside the database.</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<!-- SECTION 2 -->
+<section id="types-of-logs">
+    <h2>Types of Logs</h2>
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Log Type</th>
+                <th>Description</th>
+            </tr>
+
+            <tr>
+                <td>Audit Logs (for security)</td>
+                <td>Track user activities for compliance and security purposes.</td>
+            </tr>
+
+            <tr>
+                <td>Error Log</td>
+                <td>Record errors that help in diagnosing issues.</td>
+            </tr>
+
+            <tr>
+                <td>General Log</td>
+                <td>Capture information about connections and commands.</td>
+            </tr>
+
+            <tr>
+                <td>Slow Query Log</td>
+                <td>Identify slow-running queries for performance tuning.</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<!-- SECTION 3 -->
+<section id="importance">
+    <h2>Why Logs Are Important</h2>
+    <div class="table-container">
+        <table>
+            <tr><th>Importance</th></tr>
+
+            <tr><td>Troubleshooting</td></tr>
+            <tr><td>Performance Tuning</td></tr>
+            <tr><td>Security and Compliance</td></tr>
+
+        </table>
+    </div>
+</section>
+
+<!-- SECTION 4 -->
+<section id="log-exports">
+    <h2>Log Exports in RDS</h2>
+
+    <div class="table-container">
+        <table>
+            <tr><th>Description</th></tr>
+            <tr>
+                <td>Log Exports in RDS allow you to centralize and store logs outside of the database, making it easier to retain, monitor, and analyze them over time.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2>Destinations & IAM Role</h2>
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Topic</th>
+                <th>Details</th>
+            </tr>
+
+            <tr>
+                <td>Default Destination</td>
+                <td>When you configure Log Exports in Amazon RDS, the destination for the logs is automatically set to Amazon CloudWatch Logs.</td>
+            </tr>
+
+            <tr>
+                <td>Destination Options</td>
+                <td>There is no option in RDS to choose a custom destination; by default, all exported logs always go to CloudWatch Logs.</td>
+            </tr>
+
+            <tr>
+                <td>Exporting to S3</td>
+                <td>If long-term archival is needed, logs can be exported from CloudWatch to Amazon S3.</td>
+            </tr>
+
+            <tr>
+                <td>IAM Role</td>
+                <td>An IAM role is required to allow Amazon RDS to publish log data into CloudWatch Logs.</td>
+            </tr>
+
+        </table>
+    </div>
+</section>
+
+</body>
+</html>
