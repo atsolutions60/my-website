@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Read Replicas - Comparisonia Theme</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #0d1b2a;
+        color: #ffffff;
+        margin: 20px;
+        line-height: 1.7;
+        font-size: 17px;
+    }
+    h1, h2 {
+        text-align: center;
+        color: #ff7b00;
+        margin-bottom: 14px;
+    }
+    .image-box {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 18px;
+        margin-top: 8px;
+    }
+    .image-box img {
+        max-width: 420px;
+        border-radius: 8px;
+        border: 2px solid #ff7b00;
+    }
+    .table-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 18px;
+        overflow-x: auto;
+    }
+    table {
+        border-collapse: collapse;
+        background-color: #1b263b;
+        width: 95%;
+        max-width: 1300px;
+        font-size: 16px;
+        margin-bottom: 32px;
+    }
+    th, td {
+        border: 1px solid #415a77;
+        padding: 14px;
+        vertical-align: top;
+        text-align: left;
+        color: #dbe9f3;
+        word-wrap: break-word;
+    }
+    th {
+        background-color: #ff7b00;
+        color: #0d1b2a;
+        font-weight: bold;
+        font-size: 17px;
+        text-align: center;
+    }
+    tr:nth-child(even) {
+        background-color: #243447;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Read Replicas</h1>
+
+<!-- SECTION 1 -->
+<section id="intro">
+    <h2>Introduction</h2>
+
+    <!-- IMAGE PLACEHOLDER ADDED HERE -->
+    <div class="image-box">
+        <img src="Read Replica.png" alt="Introduction Image">
+    </div>
+
+    <div class="table-container">
+        <table>
+            <tr><th>Description</th></tr>
+            <tr><td>A read replica is a copy of your main (or primary) database in Amazon RDS.</td></tr>
+            <tr><td>It stays in sync with the primary database, constantly updating itself with any new data.</td></tr>
+            <tr><td>But unlike the primary, a read replica is read-only, meaning it can only handle data reads, not changes like updates or deletions.</td></tr>
+        </table>
+    </div>
+</section>
+
+<!-- SECTION 2 -->
+<section id="why-use">
+    <h2>Why Use a Read Replica?</h2>
+    <div class="table-container">
+        <table>
+            <tr><th>Benefits</th></tr>
+            <tr><td>When your application has many users, the primary database can become slow due to too many requests.</td></tr>
+            <tr><td>To solve this, read replicas are used to reduce the load on the primary database by handling all the "read" requests.</td></tr>
+            <tr><td>This way, the primary database can focus on handling "write" requests, making the whole system faster and more efficient.</td></tr>
+        </table>
+    </div>
+</section>
+
+<!-- SECTION 3 -->
+<section id="how">
+    <h2>How Does It Work?</h2>
+    <div class="table-container">
+        <table>
+            <tr><th>Concept</th><th>Explanation</th></tr>
+            <tr>
+                <td>Data Syncing</td>
+                <td>The read replica automatically receives data updates from the primary database. This means any changes made to the primary database are reflected in the read replica.</td>
+            </tr>
+            <tr>
+                <td>Read Traffic Distribution</td>
+                <td>You can direct read requests from your application to the read replica instead of the primary database. This reduces load on the primary database.</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<!-- SECTION 4 -->
+<section id="benefits">
+    <h2>Benefits of Using Read Replicas</h2>
+    <div class="table-container">
+        <table>
+            <tr><th>Benefits</th></tr>
+            <tr><td>Improved Performance</td></tr>
+            <tr><td>High Scalability</td></tr>
+            <tr><td>Reliability and Backup</td></tr>
+
+            <tr>
+                <td>
+                    
+                    <span style="color: #ffeb3b; font-weight: bold;">Special Note</span><br>
+
+					<span style="color: #ffeb3b;">
+					Read replicas cannot automatically take over as the primary database if the primary fails.
+					<br><br>
+					Unlike Multi-AZ setups, which provide automatic failover, a read replica must be manually promoted to become the new primary if needed.
+					<br><br>
+					This means that read replicas are not a substitute for Multi-AZ configurations when high availability and automatic failover are required.
+					</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<!-- SECTION 5 -->
+<section id="regional">
+    <h2>Same Region Vs Cross-Region Read Replicas</h2>
+
+    <div class="table-container">
+        <table>
+            <tr><th>Type</th><th>Details</th></tr>
+
+            <tr>
+                <td>Same-Region Read Replicas</td>
+                <td>
+                    These replicas are created within the same AWS region as the primary database.<br><br>
+                    Useful for distributing read traffic locally and improving performance.<br><br>
+                    Choosing different AZs for your read replicas can improve fault tolerance.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Cross-Region Read Replicas</td>
+                <td>
+                    These replicas are created in a different AWS region from the primary database.<br><br>
+                    Ideal for:<br>
+                    • Reducing latency for global users<br>
+                    • Disaster recovery (replica can be promoted)<br>
+                    • Data migration across regions
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</section>
+
+</body>
+</html>
