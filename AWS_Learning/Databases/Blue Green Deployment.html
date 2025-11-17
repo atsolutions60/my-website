@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RDS Blue/Green Deployment - Comparisonia Theme</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #0d1b2a;
+        color: #ffffff;
+        margin: 20px;
+        line-height: 1.7;
+        font-size: 17px;
+    }
+    h1, h2 {
+        text-align: center;
+        color: #ff7b00;
+        margin-bottom: 14px;
+    }
+
+    .image-box {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 18px;
+        margin-top: 8px;
+    }
+    .image-box div {
+        width: 300px;
+        height: 150px;
+        border: 2px dashed #ff7b00;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #dbe9f3;
+        background: #0f2333;
+        font-size: 14px;
+    }
+
+    .table-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 18px;
+        overflow-x: auto;
+    }
+    table {
+        border-collapse: collapse;
+        background-color: #1b263b;
+        width: 95%;
+        max-width: 1300px;
+        font-size: 16px;
+        margin-bottom: 32px;
+    }
+    th, td {
+        border: 1px solid #415a77;
+        padding: 14px;
+        vertical-align: top;
+        text-align: left;
+        color: #dbe9f3;
+        word-wrap: break-word;
+    }
+    th {
+        background-color: #ff7b00;
+        color: #0d1b2a;
+        font-weight: bold;
+        font-size: 17px;
+        text-align: center;
+    }
+    tr:nth-child(even) {
+        background-color: #243447;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>RDS Blue/Green Deployment</h1>
+
+<!-- SECTION 1: INTRODUCTION -->
+<section id="intro">
+    <h2>Introduction</h2>
+
+    <!-- IMAGE SLOT AS REQUESTED -->
+    <div class="image-box">
+        <img class="section-img" src="Blue Green Deployment.png" alt="section image">
+    </div>
+
+    <div class="table-container">
+        <table>
+            <tr><th>Description</th></tr>
+
+            <tr><td>RDS Blue/Green Deployment lets you create two environments: "blue" (current database) and "green" (updated database).</td></tr>
+
+            <tr><td>The blue environment is your live database currently serving your applications.</td></tr>
+
+            <tr><td>The green environment is a duplicate where you can test updates like schema changes or engine upgrades.</td></tr>
+
+            <tr><td>Once the green environment is fully tested, traffic automatically switches from blue to green.</td></tr>
+
+            <tr><td>This ensures updates happen smoothly with minimal downtime and an option to roll back if needed.</td></tr>
+        </table>
+    </div>
+</section>
+
+
+<!-- SECTION 2: HOW IT WORKS -->
+<section id="how">
+    <h2>How Does Blue/Green Deployment Work?</h2>
+
+    <div class="table-container">
+        <table>
+            <tr><th>Step</th><th>Details</th></tr>
+
+            <tr>
+                <td>Current Production Database</td>
+                <td>A company is running their database on PostgreSQL 13 in the blue environment. This represents your current production database instance or cluster.</td>
+            </tr>
+
+            <tr>
+                <td>Upgrade Requirement</td>
+                <td>They want to upgrade to PostgreSQL 15 for new features and better performance.</td>
+            </tr>
+
+            <tr>
+                <td>Create Green Environment</td>
+                <td>The green environment is created with PostgreSQL 15, data is copied, and tests are performed.</td>
+            </tr>
+
+            <tr>
+                <td>Apply Updates</td>
+                <td>Updates, such as schema changes or application upgrades, are applied to the green environment.</td>
+            </tr>
+
+            <tr>
+                <td>Testing Phase</td>
+                <td>You can test the green environment by redirecting test traffic to it and verify behavior.</td>
+            </tr>
+
+            <tr>
+                <td>Switchover</td>
+                <td>Once testing is successful, RDS automatically redirects production traffic from blue to green.</td>
+            </tr>
+
+            <tr>
+                <td>Rollback Option</td>
+                <td>If the green environment fails or has issues, the system allows switching back to the blue environment.</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+
+
+<!-- SECTION 3: USE CASES -->
+<section id="usecases">
+    <h2>Use Cases</h2>
+
+    <div class="table-container">
+        <table>
+            <tr><th>Use Case</th></tr>
+
+            <tr><td>Database Engine Upgrades</td></tr>
+            <tr><td>Schema Changes</td></tr>
+            <tr><td>Testing New Features</td></tr>
+            <tr><td>Disaster Recovery and High Availability</td></tr>
+            <tr><td>Performance Testing</td></tr>
+        </table>
+    </div>
+</section>
+
+
+<!-- SECTION 4: LIMITATIONS -->
+<section id="limitations">
+    <h2>Limitations of RDS Blue/Green Deployment</h2>
+
+    <div class="table-container">
+        <table>
+            <tr><th>Limitations</th></tr>
+
+            <tr><td>Temporary Cost Increase</td></tr>
+
+            <tr><td>Limited Database Engines — Supported only for RDS for MariaDB, RDS for MySQL, and RDS for PostgreSQL.</td></tr>
+
+            <tr><td>Data Synchronization Overhead</td></tr>
+
+            <tr><td>Application Connection Handling</td></tr>
+
+            <tr><td>No Full Automation for Some Changes</td></tr>
+
+        </table>
+    </div>
+</section>
+
+</body>
+</html>
