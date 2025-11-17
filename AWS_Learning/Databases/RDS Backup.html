@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RDS Automated Backups - Comparisonia Theme</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #0d1b2a;
+        color: #ffffff;
+        margin: 20px;
+        line-height: 1.7;
+        font-size: 17px;
+    }
+
+    h1, h2 {
+        text-align: center;
+        color: #ff7b00;
+        margin-bottom: 10px;
+    }
+    .table-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 18px;
+        overflow-x: auto;
+    }
+    table {
+        border-collapse: collapse;
+        background-color: #1b263b;
+        width: 95%;
+        max-width: 1300px;
+        table-layout: fixed;
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+    th, td {
+        border: 1px solid #415a77;
+        padding: 14px;
+        vertical-align: top;
+        text-align: left;
+        color: #dbe9f3;
+    }
+    th {
+        background-color: #ff7b00;
+        color: #0d1b2a;
+        font-weight: bold;
+        text-align: center;
+        font-size: 17px;
+    }
+    tr:nth-child(even) { background-color: #243447; }
+
+    section { margin-top: 40px; }
+</style>
+</head>
+
+<body>
+
+<h1>RDS Automated Backups</h1>
+
+<!-- 1. Introduction -->
+<section id="intro">
+    <h2>Introduction</h2>
+    <div class="table-container">
+        <table>
+            <tr><th>Description</th></tr>
+
+            <tr><td>Automated backups enable RDS to take a daily, incremental snapshot of your database.</td></tr>
+            <tr><td>AWS manages these snapshots for you, ensuring they are protected and available for recovery.</td></tr>
+            <tr><td>The first backup is a full snapshot, and subsequent backups are incremental, meaning they only store changes made since the previous backup.</td></tr>
+            <tr><td>This approach saves storage space and reduces backup time.</td></tr>
+        </table>
+    </div>
+</section>
+
+<!-- 2. Location and Storage -->
+<section id="location">
+    <h2>Location & Storage</h2>
+
+    <div class="table-container">
+        <table>
+            <tr><th>Description</th></tr>
+
+            <tr><td>Automated backups are stored in Amazon S3 within the same AWS Region as your RDS instance.</td></tr>
+            <tr><td>AWS manages these backups transparently, and they aren’t directly accessible to users.</td></tr>
+            <tr><td>Instead, they are controlled through the RDS console, CLI, or API for ease of use and security.</td></tr>
+        </table>
+    </div>
+</section>
+
+<!-- 3. Backup Retention -->
+<section id="retention">
+    <h2>Backup Retention Period</h2>
+
+    <div class="table-container">
+        <table>
+            <tr><th>Description</th></tr>
+
+            <tr><td>The backup retention period determines how long your backups are stored.</td></tr>
+            <tr><td>You can set this retention period from 1 to 35 days (the default is usually 7 days).</td></tr>
+            <tr><td>If set to 0 days, automated backups are disabled.</td></tr>
+            <tr><td>AWS will automatically delete any backups older than the retention period, keeping only the most recent data available for restoration.</td></tr>
+        </table>
+    </div>
+</section>
+
+<!-- 4. Backup Window -->
+<section id="window">
+    <h2>Scheduled Backup Window</h2>
+
+    <div class="table-container">
+        <table>
+            <tr><th>Description</th></tr>
+
+            <tr><td>Automated backups are scheduled during a specified daily backup window.</td></tr>
+            <tr><td>You can define this window, or AWS will automatically assign one.</td></tr>
+            <tr><td>During this window, RDS takes a full snapshot if needed and performs any incremental backups.</td></tr>
+            <tr><td>The backup window is especially useful for minimizing performance impacts, as it lets you specify a low-traffic time when the database may experience minimal use.</td></tr>
+        </table>
+    </div>
+</section>
+
+<!-- 5. Replication -->
+<section id="replication">
+    <h2>Backup Replication</h2>
+
+    <div class="table-container">
+        <table>
+            <tr><th>Description</th></tr>
+
+            <tr><td>By default, automated backups remain in the original AWS Region.</td></tr>
+            <tr><td>You can replicate automated backups to another AWS Region to help with disaster recovery.</td></tr>
+            <tr><td>Snapshots and transaction logs are replicated immediately after they are available in the source.</td></tr>
+            <tr><td>Automated backup replication is not supported for Multi-AZ DB clusters.</td></tr>
+            <tr><td>There are no additional data transfer charges for backups stored within the same AWS Region, but charges apply for snapshot copies across regions.</td></tr>
+        </table>
+    </div>
+</section>
+
+<!-- 6. Costs -->
+<section id="costs">
+    <h2>Costs Associated with Automated Backups</h2>
+
+    <div class="table-container">
+        <table>
+            <tr><th>Description</th></tr>
+
+            <tr><td>RDS provides backup storage up to the size of the DB instance’s storage for free.</td></tr>
+            <tr><td>If your DB instance has 200 GB of storage, you get 200 GB of backup storage for free.</td></tr>
+            <tr><td>Additional storage beyond this free allocation incurs a charge, which includes both automated backups and manual snapshots.</td></tr>
+        </table>
+    </div>
+</section>
+
+<!-- 7. Restoration Options -->
+<section id="restore">
+    <h2>Restoration Options</h2>
+
+    <div class="table-container">
+        <table>
+            <tr><th>Restoration Type</th><th>Description</th></tr>
+
+            <tr>
+                <td>Restoring to Latest Backup</td>
+                <td>You can quickly restore your database to the latest backup available within your retention period. This recovery method is fast and typically suitable for instances where a recent copy of the database is needed.</td>
+            </tr>
+
+            <tr>
+                <td>Point-in-Time Recovery (PITR)</td>
+                <td>With automated backups enabled, RDS allows you to restore your database to any specific point in time within the backup retention period. PITR is useful for recovery from unexpected data changes or corruption. For example, if accidental deletions or modifications occur, you can restore the database to just before the event happened.</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<!-- 8. Manual Snapshots -->
+<section id="manual">
+    <h2>Manual Snapshots for Longer Retention</h2>
+
+    <div class="table-container">
+        <table>
+            <tr><th>Description</th></tr>
+
+            <tr><td>While automated backups have a limited retention period, you can create manual snapshots anytime.</td></tr>
+            <tr><td>These snapshots are user-initiated and are retained until explicitly deleted, making them useful for long-term backups or before significant changes to the database.</td></tr>
+        </table>
+    </div>
+</section>
+
+</body>
+</html>
