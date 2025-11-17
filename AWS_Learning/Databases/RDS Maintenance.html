@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RDS Maintenance - Comparisonia Theme</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #0d1b2a;
+        color: #ffffff;
+        margin: 20px;
+        line-height: 1.7;
+        font-size: 17px;
+    }
+
+    h1, h2 {
+        text-align: center;
+        color: #ff7b00;
+        margin-bottom: 14px;
+    }
+
+    .table-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 18px;
+        overflow-x: auto;
+    }
+
+    table {
+        border-collapse: collapse;
+        background-color: #1b263b;
+        width: 95%;
+        max-width: 1300px;
+        font-size: 16px;
+        margin-bottom: 32px;
+    }
+
+    th, td {
+        border: 1px solid #415a77;
+        padding: 14px;
+        vertical-align: top;
+        text-align: left;
+        color: #dbe9f3;
+        word-wrap: break-word;
+    }
+
+    th {
+        background-color: #ff7b00;
+        color: #0d1b2a;
+        font-weight: bold;
+        font-size: 17px;
+        text-align: center;
+    }
+
+    tr:nth-child(even) {
+        background-color: #243447;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>RDS Maintenance: Minor Updates only</h1>
+
+<!-- Section 1: Introduction -->
+<section id="introduction">
+    <h2>Introduction</h2>
+    <div class="table-container">
+        <table>
+            <tr><th>Description</th></tr>
+
+            <tr>
+                <td>The Maintenance Window in Amazon RDS is a set time for AWS to perform maintenance on your database.</td>
+            </tr>
+
+            <tr>
+                <td>During this time, AWS may apply security patches, software updates, and minor version upgrades.</td>
+            </tr>
+
+            <tr>
+                <td>This keeps your RDS instance secure and running smoothly.</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<!-- Section 2: Key Points -->
+<section id="key-points">
+    <h2>Key Points</h2>
+
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Topic</th>
+                <th>Details</th>
+            </tr>
+
+            <tr>
+                <td>Why It’s Important</td>
+                <td>Maintenance helps fix security issues, improve performance, and ensure the database is up-to-date.</td>
+            </tr>
+
+            <tr>
+                <td>Choosing a Maintenance Window</td>
+                <td>
+                    • You can pick a day, time, and duration (up to 8 hours) for maintenance.<br>
+                    • Best to select low-traffic hours to avoid disruption.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Automatic Minor Upgrades</td>
+                <td>
+                    • AWS can automatically apply minor updates during the window.<br>
+                    • Example: 5.6.1 → 5.6.2 is a minor update.<br>
+                    • Major updates (e.g., 5.6 → 5.7) are not automatic.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Major Version Upgrades</td>
+                <td>
+                    • These are larger updates that may change features or configurations.<br>
+                    • Must be triggered manually for compatibility testing.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Tasks Done During Maintenance</td>
+                <td>
+                    • Security patches<br>
+                    • Software updates<br>
+                    • Hardware maintenance
+                </td>
+            </tr>
+
+            <tr>
+                <td>Adjusting the Window</td>
+                <td>You can modify the maintenance window at any time in the RDS console.</td>
+            </tr>
+
+            <tr>
+                <td>Notifications</td>
+                <td>AWS sends notifications for upcoming maintenance so you can prepare.</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<!-- Section 3: Maintenance Considerations -->
+<section id="maintenance-considerations">
+    <h2>Maintenance Considerations</h2>
+
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>RDS Deployment Type</th>
+                <th>Behavior During Maintenance</th>
+            </tr>
+
+            <tr>
+                <td>Single-AZ</td>
+                <td>
+                    • Maintenance causes downtime.<br>
+                    • Best for non-critical workloads.<br>
+                    • Select low-traffic maintenance hours.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Multi-AZ</td>
+                <td>
+                    • Updates applied first to standby instance.<br>
+                    • RDS then performs a quick failover.<br>
+                    • Downtime is minimized.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Multi-AZ DB Cluster</td>
+                <td>
+                    • Updates are applied gradually across nodes.<br>
+                    • No downtime or service interruption.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Deletion Protection</td>
+                <td>
+                    • Prevents accidental deletion of your RDS instance.<br>
+                    • Must be turned off manually before deleting the instance.<br>
+                    • Recommended for production environments.
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</section>
+
+</body>
+</html>
