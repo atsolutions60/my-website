@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Parameter Group vs Option Group</title>
+
+<style>
+    /* ===== Unified Styling ===== */
+    body {
+        background-color: #0d1b2a;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: #e6e6e6;
+        line-height: 1.55;
+        font-size: 16px;
+    }
+
+    h2, h3 {
+        font-family: "Segoe UI", Arial, sans-serif;
+        font-weight: 600;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* ===== Section Title ===== */
+    h2 {
+        text-align: center;
+        color: #ff8c00;
+        margin-top: 40px;
+        margin-bottom: 25px;
+        font-size: 28px;
+    }
+
+    /* ===== Table Wrapper ===== */
+    .table-container {
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    /* ===== Comparison Table ===== */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #162232;
+        color: #e6e6e6;
+        font-size: 16px; /* unified */
+    }
+
+    th {
+        background-color: #ff8c00;
+        color: #000000;
+        padding: 14px;
+        font-weight: 700;
+        font-size: 17px;
+        border: 1px solid #333;
+        text-align: center;
+    }
+
+    td {
+        padding: 14px;
+        border: 1px solid #2b3a55;
+        vertical-align: top;
+        font-size: 16px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #1b263b;
+    }
+    tr:nth-child(odd) {
+        background-color: #162232;
+    }
+
+    /* ===== Example Section ===== */
+    .section-box {
+        width: 95%;
+        margin: 35px auto;
+        padding: 20px;
+        background-color: #162232;
+        border-left: 4px solid #ff8c00;
+        color: #e6e6e6;
+        font-size: 16px; /* unified */
+    }
+
+    .section-box h3 {
+        color: #ff8c00;
+        margin-bottom: 12px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .section-box p {
+        margin-bottom: 10px;
+        font-size: 16px; /* unified */
+        color: #e6e6e6;
+    }
+
+</style>
+</head>
+
+<body>
+
+<h2>Parameter Group vs Option Group</h2>
+
+<div class="table-container">
+<table>
+    <tr>
+        <th>Parameter Group</th>
+        <th>Option Group</th>
+    </tr>
+
+    <tr>
+        <td>
+            <b>Purpose</b><br>
+            Controls internal database engine settings like memory management, connection limits, and performance tuning.
+        </td>
+
+        <td>
+            <b>Purpose</b><br>
+            Adds extra features or extensions to the RDS instance beyond core DB engine capabilities.
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <b>Examples of Parameters</b><br>
+            • <b>max_connections</b> — Controls how many clients can connect<br>
+            • <b>query_cache_size</b> — Speeds performance by caching query results
+        </td>
+
+        <td>
+            <b>Examples of Options</b><br>
+            • Oracle OEM Plugin — Web-based DB monitoring<br>
+            • SQL Server TDE — Encrypts data at rest<br>
+            • MySQL MEMCACHED — In-memory caching extension
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <b>Use Case</b><br>
+            Modify DB engine behavior such as tuning performance or increasing connection capacity.
+        </td>
+
+        <td>
+            <b>Use Case</b><br>
+            Enable specialized add-ons or functionality not available through normal DB settings.
+        </td>
+    </tr>
+</table>
+</div>
+
+<div class="section-box">
+    <h3>Example Scenario</h3>
+
+    <p><b>Suppose you have a MySQL RDS instance:</b></p>
+
+    <p>
+        • Use a <b>Parameter Group</b> to increase <b>max_connections</b> during heavy traffic.<br><br>
+        • Use an <b>Option Group</b> to enable <b>MEMCACHED</b> for advanced caching capabilities.
+    </p>
+
+    <p><b>Summary:</b></p>
+
+    <p>
+        • <b>Parameter Groups:</b> Control internal DB behavior<br>
+        • <b>Option Groups:</b> Enable extra DB features and extensions
+    </p>
+</div>
+
+</body>
+</html>
