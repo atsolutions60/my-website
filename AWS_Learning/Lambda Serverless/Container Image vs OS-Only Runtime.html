@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>AWS Lambda Container Images - Comparisonia Theme</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #0d1b2a;
+        color: #ffffff;
+        margin: 20px;
+        line-height: 1.7;
+        font-size: 17px;
+    }
+    h1, h2 {
+        text-align: center;
+        color: #ff7b00;
+        margin-bottom: 14px;
+    }
+    .image-box {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 18px;
+        margin-top: 8px;
+    }
+    .image-box img {
+        max-width: 900px; /* Adjusted for wider image */
+        border-radius: 8px;
+        border: 2px solid #ff7b00;
+        /* Custom styling for white-background image on dark theme */
+        background-color: #ffffff;
+        padding: 20px;
+    }
+    .table-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 18px;
+        overflow-x: auto;
+    }
+    table {
+        border-collapse: collapse;
+        background-color: #1b263b;
+        width: 95%;
+        max-width: 1300px;
+        font-size: 16px;
+        margin-bottom: 32px;
+    }
+    th, td {
+        border: 1px solid #415a77;
+        padding: 14px;
+        vertical-align: top;
+        text-align: left;
+        color: #dbe9f3;
+        word-wrap: break-word;
+    }
+    th {
+        background-color: #ff7b00;
+        color: #0d1b2a;
+        font-weight: bold;
+        font-size: 17px;
+        text-align: center;
+    }
+    tr:nth-child(even) {
+        background-color: #243447;
+    }
+    .yellow {
+        color: #ffeb3b;
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>AWS Lambda Container Images</h1>
+
+
+<section id="introduction">
+    <h2>Introduction to Container Images in Lambda</h2>
+    <div class="table-container">
+        <table>
+            <tr><th>Step</th><th>Detail</th></tr>
+            <tr>
+                <td>1</td>
+                <td>AWS Lambda provides pre-configured runtimes for popular programming languages like <strong>Python</strong>, <strong>Node.js</strong>, and <strong>Java</strong>.</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>However, what if your framework or language is <strong>not officially supported</strong> by AWS Lambda?</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>In such cases, AWS allows you to run your Lambda function inside a container using <strong>two options</strong>.</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<section id="comparison">
+    <h2>Container Image vs. OS-Only Runtime Comparison</h2>
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Container Image Option</th>
+                <th>OS-Only Runtime Option</th>
+            </tr>
+            <tr>
+                <td><strong>Base OS</strong></td>
+                <td>Any OS (Alpine, Ubuntu, Amazon Linux, etc.)</td>
+                <td>Amazon Linux</td>
+            </tr>
+            <tr>
+                <td><strong>Runtime</strong></td>
+                <td>You must include the runtime inside the container image</td>
+                <td>You must install your own runtime inside Amazon Linux</td>
+            </tr>
+            <tr>
+                <td><strong>Control</strong></td>
+                <td><strong>Full control</strong> over OS, runtime, and dependencies</td>
+                <td>Control over runtime and dependencies, but fixed OS</td>
+            </tr>
+            <tr>
+                <td><strong>Best For</strong></td>
+                <td>Fully <strong>custom environments</strong>, large applications, unsupported languages</td>
+                <td><strong>Lightweight setups</strong>, custom runtimes on Amazon Linux</td>
+            </tr>
+            <tr>
+                <td><strong>Example Use Case</strong></td>
+                <td>Deploying a machine learning model with TensorFlow in a custom container</td>
+                <td>Running a custom Node.js version on Amazon Linux</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+</body>
+</html>
