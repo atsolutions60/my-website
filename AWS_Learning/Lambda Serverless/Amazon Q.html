@@ -11,42 +11,45 @@
         font-family: Arial, sans-serif;
         background-color: #0d1b2a;
         color: #ffffff;
-        margin: 10px; /* Reduced margin for mobile space */
-        line-height: 1.6;
-        font-size: 16px; /* Slightly reduced font size for mobile */
+        margin: 20px;
+        line-height: 1.7;
+        font-size: 17px;
     }
     h1, h2 {
         text-align: center;
         color: #ff7b00;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
     }
     .audio-player {
         display: flex;
         justify-content: center;
-        margin: 15px 0;
+        margin: 20px 0;
     }
+    /* --- Border Removal Applied Here --- */
     section {
-        margin-bottom: 30px;
-        padding: 5px 0;
+        margin-bottom: 40px;
+        /* Removed: border: 1px solid #415a77; */
+        padding: 10px 0;
         border-radius: 8px;
     }
+    /* ---------------------------------- */
     .table-container {
         display: flex;
         justify-content: center;
-        margin-top: 10px;
-        overflow-x: auto; /* Keeps horizontal scroll for very wide content, but less likely now */
+        margin-top: 18px;
+        overflow-x: auto;
     }
     table {
         border-collapse: collapse;
         background-color: #1b263b;
-        width: 100%; /* Ensure table uses available width */
+        width: 95%;
         max-width: 1300px;
-        font-size: 15px;
-        margin-bottom: 20px;
+        font-size: 16px;
+        margin-bottom: 32px;
     }
     th, td {
         border: 1px solid #415a77;
-        padding: 10px; /* Reduced padding for mobile space */
+        padding: 14px;
         vertical-align: top;
         text-align: left;
         color: #dbe9f3;
@@ -56,7 +59,7 @@
         background-color: #ff7b00;
         color: #0d1b2a;
         font-weight: bold;
-        font-size: 16px;
+        font-size: 17px;
         text-align: center;
     }
     tr:nth-child(even) {
@@ -69,47 +72,6 @@
     .main-feature {
         background-color: #313f56;
         font-weight: bold;
-    }
-
-    /* -------------------------------------------------------------------------- */
-    /* RESPONSIVE MEDIA QUERY FIX                         */
-    /* -------------------------------------------------------------------------- */
-    @media screen and (max-width: 600px) {
-        /* Hide original headers for the comparison table on small screens */
-        #comparison thead {
-            display: none;
-        }
-        /* Display table body as blocks for stacking */
-        #comparison table, #comparison tbody, #comparison tr, #comparison td {
-            display: block;
-            width: 100%;
-        }
-        /* Make each table row look like a block of data */
-        #comparison tr {
-            margin-bottom: 15px;
-            border: 1px solid #ff7b00; /* Highlight the new block structure */
-            background-color: #1b263b !important;
-        }
-        /* Style the cells to show the feature name before the value */
-        #comparison td {
-            text-align: right;
-            padding-left: 50%;
-            position: relative;
-            border: none;
-            border-bottom: 1px dotted #415a77;
-        }
-        /* Inject the header (Feature Name) label before the content in each cell */
-        #comparison td:before {
-            content: attr(data-label);
-            position: absolute;
-            left: 10px;
-            width: calc(50% - 20px);
-            padding-right: 10px;
-            white-space: nowrap;
-            text-align: left;
-            font-weight: bold;
-            color: #ff7b00;
-        }
     }
 </style>
 </head>
@@ -180,15 +142,15 @@
                 <td>AWS troubleshooting & debugging.</td>
             </tr>
             <tr>
-                <td>Infrastructure automation.</td>
+                <td>Infrastructure automation.</td>                
             </tr>
             <tr>
                 <td>Security analysis & vulnerability scanning.</td>
             </tr>
-            <tr>
+            <tr>                
                 <td>AWS CLI & SDK command assistance.</td>
             </tr>
-            <tr>
+            <tr>                
                 <td>Code suggestions & optimizations.</td>
             </tr>
         </table>
@@ -199,55 +161,51 @@
     <h2>Amazon Q Developer - Two Versions Comparison</h2>
     <div class="table-container">
         <table>
-            <thead>
-                <tr>
-                    <th>Feature</th>
-                    <th>Amazon Q Developer <span class="yellow">Free Tier</span></th>
-                    <th>Amazon Q Developer <span class="yellow">Pro ($19/user/month)</span></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td data-label="Feature"><strong>Price</strong></td>
-                    <td data-label="Free Tier"><span class="yellow">Free</span></td>
-                    <td data-label="Pro Tier"><span class="yellow">$19/user/month</span></td>
-                </tr>
-                <tr>
-                    <td data-label="Feature"><strong>AWS CLI & SDK Help</strong></td>
-                    <td data-label="Free Tier">Yes (Limited 25 AWS queries per month)</td>
-                    <td data-label="Pro Tier">Yes (Unlimited)</td>
-                </tr>
-                <tr>
-                    <td data-label="Feature"><strong>Code Suggestions</strong></td>
-                    <td data-label="Free Tier">Yes (Basic AI-powered code completions)</td>
-                    <td data-label="Pro Tier">Yes (Advanced, faster, and more optimized suggestions)</td>
-                </tr>
-                <tr>
-                    <td data-label="Feature"><strong>Security Scanning</strong></td>
-                    <td data-label="Free Tier">Yes (10 scans/month)</td>
-                    <td data-label="Pro Tier">Yes (Unlimited)</td>
-                </tr>
-                <tr>
-                    <td data-label="Feature"><strong>Code Transformations</strong></td>
-                    <td data-label="Free Tier">Yes (1,000 lines/month)</td>
-                    <td data-label="Pro Tier">Yes (Unlimited)</td>
-                </tr>
-                <tr>
-                    <td data-label="Feature"><strong>AI Chat Interactions</strong></td>
-                    <td data-label="Free Tier">Yes (50/month)</td>
-                    <td data-label="Pro Tier">Yes (Unlimited)</td>
-                </tr>
-                <tr>
-                    <td data-label="Feature"><strong>Integration with IDEs</strong></td>
-                    <td data-label="Free Tier">Yes</td>
-                    <td data-label="Pro Tier">Yes</td>
-                </tr>
-                <tr>
-                    <td data-label="Feature"><strong>Custom AI Learning</strong></td>
-                    <td data-label="Free Tier">No</td>
-                    <td data-label="Pro Tier">Yes</td>
-                </tr>
-            </tbody>
+            <tr>
+                <th>Feature</th>
+                <th>Amazon Q Developer <span class="yellow">Free Tier</span></th>
+                <th>Amazon Q Developer <span class="yellow">Pro ($19/user/month)</span></th>
+            </tr>
+            <tr>
+                <td><strong>Price</strong></td>
+                <td><span class="yellow">Free</span></td>
+                <td><span class="yellow">$19/user/month</span></td>
+            </tr>
+            <tr>
+                <td><strong>AWS CLI & SDK Help</strong></td>
+                <td>Yes (Limited 25 AWS queries per month)</td>
+                <td>Yes (Unlimited)</td>
+            </tr>
+            <tr>
+                <td><strong>Code Suggestions</strong></td>
+                <td>Yes (Basic AI-powered code completions)</td>
+                <td>Yes (Advanced, faster, and more optimized suggestions)</td>
+            </tr>
+            <tr>
+                <td><strong>Security Scanning</strong></td>
+                <td>Yes (10 scans/month)</td>
+                <td>Yes (Unlimited)</td>
+            </tr>
+            <tr>
+                <td><strong>Code Transformations</strong></td>
+                <td>Yes (1,000 lines/month)</td>
+                <td>Yes (Unlimited)</td>
+            </tr>
+            <tr>
+                <td><strong>AI Chat Interactions</strong></td>
+                <td>Yes (50/month)</td>
+                <td>Yes (Unlimited)</td>
+            </tr>
+            <tr>
+                <td><strong>Integration with IDEs</strong></td>
+                <td>Yes</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td><strong>Custom AI Learning</strong></td>
+                <td>No</td>
+                <td>Yes</td>
+            </tr>
         </table>
     </div>
 </section>
