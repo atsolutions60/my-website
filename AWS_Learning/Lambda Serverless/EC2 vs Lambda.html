@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>EC2 vs AWS Lambda - Comparisonia Theme</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #0d1b2a;
+        color: #ffffff;
+        margin: 20px;
+        line-height: 1.7;
+        font-size: 17px;
+    }
+    h1, h2 {
+        text-align: center;
+        color: #ff7b00;
+        margin-bottom: 14px;
+    }
+    .image-box {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 18px;
+        margin-top: 8px;
+    }
+    .image-box img {
+        max-width: 420px;
+        border-radius: 8px;
+        border: 2px solid #ff7b00;
+    }
+    .table-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 18px;
+        overflow-x: auto;
+    }
+    table {
+        border-collapse: collapse;
+        background-color: #1b263b;
+        width: 95%;
+        max-width: 1300px;
+        font-size: 16px;
+        margin-bottom: 32px;
+    }
+    th, td {
+        border: 1px solid #415a77;
+        padding: 14px;
+        vertical-align: top;
+        text-align: left;
+        color: #dbe9f3;
+        word-wrap: break-word;
+    }
+    th {
+        background-color: #ff7b00;
+        color: #0d1b2a;
+        font-weight: bold;
+        font-size: 17px;
+        text-align: center;
+    }
+    tr:nth-child(even) {
+        background-color: #243447;
+    }
+    .yellow {
+        color: #ffeb3b;
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>EC2 vs AWS Lambda</h1>
+
+<section id="intro">
+ 
+    <div class="image-box">
+        <img src="EC2_vs_Lambda.png" alt="EC2 vs Lambda Comparison Chart">
+    </div>
+</section>
+
+<section id="comparison">
+    <h2>Detailed Comparison</h2>
+
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>AWS EC2</th>
+                <th>AWS Lambda</th>
+            </tr>
+
+            <tr>
+                <td>Compute Model</td>
+                <td>Provisioned virtual machines</td>
+                <td>Fully managed, event-driven function execution</td>
+            </tr>
+
+            <tr>
+                <td>Use Case</td>
+                <td>Hosting applications, databases, long-running processes</td>
+                <td>Short-lived tasks, microservices, API backends, event-driven automation</td>
+            </tr>
+
+            <tr>
+                <td>Pricing</td>
+                <td>Pay per instance (hourly or per second)</td>
+                <td>Pay per execution and memory usage</td>
+            </tr>
+
+            <tr>
+                <td>Scaling</td>
+                <td>Requires manual setup (Auto Scaling Groups)</td>
+                <td>Auto-scales instantly based on load</td>
+            </tr>
+
+            <tr>
+                <td>Management</td>
+                <td>User responsible for OS, patches, scaling, and updates</td>
+                <td>Fully managed, no server maintenance required</td>
+            </tr>
+
+            <tr>
+                <td>Startup Time</td>
+                <td>Minutes (booting up an instance)</td>
+                <td>Milliseconds (except for cold starts)</td>
+            </tr>
+
+            <tr>
+                <td>Execution Time</td>
+                <td>Runs indefinitely</td>
+                <td>Max 15 minutes per execution</td>
+            </tr>
+
+            <tr>
+                <td>Networking</td>
+                <td>Full control over networking (Security Groups, Subnets, Elastic IPs)</td>
+                <td>Can run inside a VPC or access internet directly</td>
+            </tr>
+
+            <tr>
+                <td>Customizability</td>
+                <td>Full OS-level control, install any software</td>
+                <td>Limited (predefined runtimes)</td>
+            </tr>
+
+            <tr>
+                <td>Security</td>
+                <td>User responsible for patching, firewall setup</td>
+                <td>Fully managed security</td>
+            </tr>
+
+        </table>
+    </div>
+</section>
+
+</body>
+</html>
