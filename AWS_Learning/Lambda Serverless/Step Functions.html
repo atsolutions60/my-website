@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>AWS Step Functions Comparison</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #0d1b2a;
+        color: #ffffff;
+        margin: 20px;
+        line-height: 1.7;
+        font-size: 17px;
+    }
+    h1, h2 {
+        text-align: center;
+        color: #ff7b00;
+        margin-bottom: 14px;
+    }
+    .audio-player {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
+    /* --- Border Removal Applied Here --- */
+    section {
+        margin-bottom: 40px;
+        /* Removed: border: 1px solid #415a77; */
+        padding: 10px 0;
+        border-radius: 8px;
+    }
+    /* ---------------------------------- */
+    .table-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 18px;
+        overflow-x: auto;
+    }
+    table {
+        border-collapse: collapse;
+        background-color: #1b263b;
+        width: 95%;
+        max-width: 1300px;
+        font-size: 16px;
+        margin-bottom: 32px;
+    }
+    th, td {
+        border: 1px solid #415a77;
+        padding: 14px;
+        vertical-align: top;
+        text-align: left;
+        color: #dbe9f3;
+        word-wrap: break-word;
+    }
+    th {
+        background-color: #ff7b00;
+        color: #0d1b2a;
+        font-weight: bold;
+        font-size: 17px;
+        text-align: center;
+    }
+    tr:nth-child(even) {
+        background-color: #243447;
+    }
+    .yellow {
+        color: #ffeb3b;
+        font-weight: bold;
+    }
+    .main-feature {
+        background-color: #313f56;
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>AWS Step Functions: Workflow Orchestration</h1>
+
+<div class="audio-player">
+    <audio controls>
+        <source src="AWS Step Functions.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+<section id="introduction">
+    <h2>AWS Step Functions and State Machine Fundamentals</h2>
+    <div class="table-container">
+        <table>
+            <tr>
+                <th colspan="2">Introduction to Step Functions</th>
+            </tr>
+            <tr>
+                <td class="main-feature">What is it?</td>
+                <td>AWS Step Functions is a serverless service that helps you connect and manage multiple tasks in a proper flow.</td>
+            </tr>
+            <tr>
+                <td class="main-feature">Function</td>
+                <td>It lets you build a state machine—a step-by-step diagram where each step performs a specific action. You can control the order of steps, make decisions, and handle failures automatically without writing complex code.</td>
+            </tr>
+            <tr>
+                <td class="main-feature">Benefits</td>
+                <td>Helps connect multiple services like Lambda, ECS, SQS, reduces complex code (use flow instead of nested if-else), and provides a visual workflow that is easy to monitor and debug. Good for automation and microservice communication.</td>
+            </tr>
+            <tr>
+                <th colspan="2">The State Machine</th>
+            </tr>
+            <tr>
+                <td class="main-feature">Definition</td>
+                <td>A state machine is a type of workflow where you define steps (called states) and how they should run one after another.</td>
+            </tr>
+            <tr>
+                <td class="main-feature">Creation Methods</td>
+                <td>1. Using JSON or YAML (manual way).<br>2. Using AWS Console's visual workflow designer (GUI) - which is drag-and-drop and beginner-friendly.</td>
+            </tr>
+            <tr>
+                <td class="main-feature">Handling Failure</td>
+                <td>Even if something fails, it can take an alternate route or retry as per your logic, based on how you define the state machine.</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<section id="comparison">
+    <h2>Standard vs. Express Workflow Comparison</h2>
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>Standard Workflow <span class="yellow"> (Long Tasks)</span></th>
+                <th>Express Workflow <span class="yellow"> (Fast Tasks)</span></th>
+            </tr>
+            <tr>
+                <td class="main-feature">Use Case</td>
+                <td>Used when the process takes time or has many steps. Example: E-commerce order (Payment &rarr; Shipping &rarr; Delivery), which may take hours/days.</td>
+                <td>Used for fast and short tasks that happen very frequently. Example: Mobile app sends a form (&rarr; Validate &rarr; Store in DB &rarr; Return "Success").</td>
+            </tr>
+            <tr>
+                <td class="main-feature">Maximum Duration</td>
+                <td>Up to 1 year.</td>
+                <td>Only 5 minutes.</td>
+            </tr>
+            <tr>
+                <td class="main-feature">Execution Start Rate</td>
+                <td>2,000 per second.</td>
+                <td>100,000+ per second.</td>
+            </tr>
+            <tr>
+                <td class="main-feature">Pricing Model</td>
+                <td>You pay per step (each state transition). AWS charges per 1,000 transitions.</td>
+                <td>You pay per Requests, Duration, and Memory Usage.</td>
+            </tr>
+            <tr>
+                <td class="main-feature">Pricing Example (Standard)</td>
+                <td>A 3-step workflow (Verify Payment, Check Inventory, Send Confirmation Email) equals 3 state transitions. 1,000 orders equal 3,000 state transitions.</td>
+                <td>10,000 runs equal 10,000 requests (starting a workflow counts as 1 request). Duration is rounded up to the nearest 100ms (e.g., 350ms becomes 400ms).</td>
+            </tr>
+            <tr>
+                <td class="main-feature">Memory Billing (Express)</td>
+                <td>N/A</td>
+                <td>Billed in 64-MB chunks. If the workflow uses 90 MB, you are billed for 128 MB (the next 64MB chunk).</td>
+            </tr>
+            <tr>
+                <td class="main-feature">Execution History / Tracking</td>
+                <td>Full history stored for 90 days in Step Functions itself. Excellent detailed tracking of each step.</td>
+                <td>History not saved unless you send logs to CloudWatch. Basic unless you enable CloudWatch logging.</td>
+            </tr>
+            <tr>
+                <td class="main-feature">Retry & Error Handling</td>
+                <td>Full support (Retry, Catch, Timeout, etc.).</td>
+                <td>Limited support, still good for most simple flows.</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+</body>
+</html>
